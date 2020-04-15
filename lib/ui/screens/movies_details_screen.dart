@@ -6,16 +6,16 @@ import 'package:netflix_redesign/global.dart';
 import 'package:netflix_redesign/models/moviemodel.dart';
 import 'package:netflix_redesign/ui/widgets/hero.dart';
 
-class DetailsScreen extends StatefulWidget {
+class MoviesDetailsScreen extends StatefulWidget {
   final int id;
 
-  const DetailsScreen({Key key, this.id}) : super(key: key);
+  const MoviesDetailsScreen({Key key, this.id}) : super(key: key);
 
   @override
-  _DetailsScreenState createState() => _DetailsScreenState();
+  _MoviesDetailsScreenState createState() => _MoviesDetailsScreenState();
 }
 
-class _DetailsScreenState extends State<DetailsScreen> {
+class _MoviesDetailsScreenState extends State<MoviesDetailsScreen> {
   Api _api;
   Future<MovieModel> movieModel;
 

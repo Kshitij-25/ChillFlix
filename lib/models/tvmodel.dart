@@ -26,7 +26,7 @@ class TvModel {
       poster_path: json['poster_path'],
       id: json['id'],
       origin_country: json['production_companies'][0]['origin_country'],
-      first_air_date: json['release_date'],
+      first_air_date: json['first_air_date'],
       genre: json['genres'],
       rating: json['vote_average'],
     );

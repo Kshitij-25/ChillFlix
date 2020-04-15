@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_redesign/global.dart';
 import 'package:netflix_redesign/models/featuredmoviemodel.dart';
-import 'package:netflix_redesign/ui/screens/details_screen.dart';
+import 'package:netflix_redesign/ui/screens/movies_details_screen.dart';
 
 class MovieContainer extends StatelessWidget {
   final FeaturedMovieModel snapshot;
@@ -17,7 +17,7 @@ class MovieContainer extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (ctx) => DetailsScreen(id: snapshot.id),
+            builder: (ctx) => MoviesDetailsScreen(id: snapshot.id),
           ),
         );
       },

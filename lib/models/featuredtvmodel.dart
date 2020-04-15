@@ -16,12 +16,12 @@ class FeaturedTvModel {
   });
   factory FeaturedTvModel.fromJson(Map<String, dynamic> json) {
     return FeaturedTvModel(
-      original_title: json['original_title'],
+      original_title: json['original_name'],
       overview: json['overview'],
       poster_path: json['poster_path'],
       id: json['id'],
       // country: json['production_companies'][0]['origin_country'],
-      release_date: json['release_date'],
+      release_date: json['first_air_date'],
       // run_time: json['run_time'],
       // genre: json['genres'],
       rating: json['vote_average'],
