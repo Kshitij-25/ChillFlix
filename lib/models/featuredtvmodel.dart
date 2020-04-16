@@ -16,7 +16,7 @@ class FeaturedTvModel {
   });
   factory FeaturedTvModel.fromJson(Map<String, dynamic> json) {
     return FeaturedTvModel(
-      original_title: json['original_name'],
+      original_title: json['name'],
       overview: json['overview'],
       poster_path: json['poster_path'],
       id: json['id'],
