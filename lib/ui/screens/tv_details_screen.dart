@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:netflix_redesign/api.dart';
 import 'package:netflix_redesign/global.dart';
-import 'package:netflix_redesign/models/moviemodel.dart';
 import 'package:netflix_redesign/models/tvmodel.dart';
-import 'package:netflix_redesign/ui/widgets/hero.dart';
 
 class TvDetailsScreen extends StatefulWidget {
   final int id;
@@ -31,124 +29,217 @@ class _TvDetailsScreenState extends State<TvDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
-      body: FutureBuilder<TvModel>(
-        future: tvModel,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  MyHero(
-                    imgUrl: getPosterImage(snapshot.data.poster_path),
-                  ),
-                  SizedBox(
-                    height: 11,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          '${snapshot.data.original_name}',
-                          style: Theme.of(context).textTheme.headline,
-                        ),
-                        SizedBox(
-                          height: 7,
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            children: List.generate(
-                              snapshot.data.genre.length,
-                              (i) {
-                                return TextSpan(
-                                    text:
-                                        '${snapshot.data.genre[i]['name']}');
-                              },
+      backgroundColor: Colors.black,
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            primary: true,
+            expandedHeight: MediaQuery.of(context).size.height / 1.4,
+            backgroundColor: Colors.black,
+            flexibleSpace: FlexibleSpaceBar(
+              collapseMode: CollapseMode.pin,
+              background: Container(
+                child: FutureBuilder(
+                  future: tvModel,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Stack(
+                        fit: StackFit.loose,
+                        children: <Widget>[
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height / 1.4,
+                            child: Center(
+                              child: Container(
+                                height: 64,
+                                width: 64,
+                                child: OutlineButton(
+                                  padding: const EdgeInsets.all(0),
+                                  onPressed: () {},
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(32),
+                                    ),
+                                  ),
+                                  child: Container(
+                                    height: 64,
+                                    width: 64,
+                                    decoration: BoxDecoration(
+                                      color: Color.fromRGBO(0, 0, 0, 0.3),
+                                      borderRadius: BorderRadius.circular(32.0),
+                                    ),
+                                    child: Icon(
+                                      Icons.play_arrow,
+                                      color: Colors.white,
+                                      size: 48,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                            style: Theme.of(context).textTheme.caption,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                    getPosterImage(snapshot.data.poster_path),
+                                  ),
+                                  fit: BoxFit.fitWidth),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 9,
-                        ),
-                        RatingBar(
-                          initialRating: snapshot.data.rating,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 10,
-                          itemPadding:
-                              const EdgeInsets.symmetric(horizontal: 4),
-                          itemBuilder: (context, _) => Icon(
-                            Icons.star,
-                            color: Colors.amber,
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height / 1.4,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: FractionalOffset.topCenter,
+                                  end: FractionalOffset.bottomCenter,
+                                  stops: [0.1, 0.4, 1.0],
+                                  colors: [
+                                    Colors.black54,
+                                    Colors.transparent,
+                                    Colors.black
+                                  ],
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                  left: 8.0,
+                                  right: 8.0,
+                                  bottom:
+                                      MediaQuery.of(context).size.height / 4.6,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      "${snapshot.data.original_name}",
+                                      maxLines: 3,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 30.0,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
-                          itemSize: 25,
-                          onRatingUpdate: (rating) {
-                            print(rating);
-                          },
-                        ),
-                        SizedBox(
-                          height: 13,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Column(
-                              children: <Widget>[
-                                Text(
-                                  'Year',
-                                  style: Theme.of(context).textTheme.caption,
-                                ),
-                                Text(
-                                  '${DateTime.parse(snapshot.data.first_air_date).year}',
-                                  style: Theme.of(context).textTheme.subhead,
-                                ),
-                              ],
+                          Positioned(
+                            top: MediaQuery.of(context).size.height / 2,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  RichText(
+                                    text: TextSpan(
+                                      children: List.generate(
+                                        snapshot.data.genre.length,
+                                        (i) {
+                                          return TextSpan(
+                                              text:
+                                                  '${snapshot.data.genre[i]['name']}');
+                                        },
+                                      ),
+                                      style:
+                                          Theme.of(context).textTheme.caption,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  RatingBar(
+                                    initialRating: snapshot.data.rating,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 10,
+                                    itemPadding: const EdgeInsets.symmetric(
+                                        horizontal: 4),
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    itemSize: 25,
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: <Widget>[
+                                      Column(
+                                        children: <Widget>[
+                                          Text(
+                                            'Year',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .caption,
+                                          ),
+                                          Text(
+                                            '${DateTime.parse(snapshot.data.first_air_date).year}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subhead,
+                                          ),
+                                        ],
+                                      ),
+                                      Column(
+                                        children: <Widget>[
+                                          Text(
+                                            'Country',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .caption,
+                                          ),
+                                          Text(
+                                            '${snapshot.data.origin_country}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subhead,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    '${snapshot.data.overview}',
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .body1
+                                        .apply(fontSizeFactor: 1.2),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
+                                  ),
+                                ],
+                              ),
                             ),
-                            Column(
-                              children: <Widget>[
-                                Text(
-                                  'Country',
-                                  style: Theme.of(context).textTheme.caption,
-                                ),
-                                Text(
-                                  '${snapshot.data.origin_country}',
-                                  style: Theme.of(context).textTheme.subhead,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 13,
-                        ),
-                        Text(
-                          '${snapshot.data.overview}',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .body1
-                              .apply(fontSizeFactor: 1.2),
-                        ),
-                        SizedBox(
-                          height: 13,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 13,
-                  ),
-                ],
+                          ),
+                        ],
+                      );
+                    } else {
+                      Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
               ),
-            );
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+            ),
+          )
+        ],
       ),
     );
   }

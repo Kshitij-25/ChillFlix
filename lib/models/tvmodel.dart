@@ -21,7 +21,7 @@ class TvModel {
 
   factory TvModel.fromJson(Map<String, dynamic> json) {
     return TvModel(
-      original_name: json['original_name'],
+      original_name: json['name'],
       overview: json['overview'],
       poster_path: json['poster_path'],
       id: json['id'],
