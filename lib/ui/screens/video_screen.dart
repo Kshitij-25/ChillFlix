@@ -4,14 +4,21 @@ import 'package:video_player/video_player.dart';
 
 class VideoApp extends StatefulWidget {
   static const route = '/videoapp';
+<<<<<<< HEAD
 
   const VideoApp({Key? key}) : super(key: key);
+=======
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
   @override
   _VideoAppState createState() => _VideoAppState();
 }
 
 class _VideoAppState extends State<VideoApp> {
+<<<<<<< HEAD
   late VideoPlayerController _controller;
+=======
+  VideoPlayerController _controller;
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 
   @override
   void initState() {
@@ -37,7 +44,11 @@ class _VideoAppState extends State<VideoApp> {
       body: Stack(
         children: <Widget>[
           Positioned.fill(
+<<<<<<< HEAD
             child: _controller.value.isInitialized
+=======
+            child: _controller.value.initialized
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
                 ? AspectRatio(
                     aspectRatio: _controller.value.aspectRatio,
                     child: VideoPlayer(_controller),
@@ -62,7 +73,11 @@ class _VideoAppState extends State<VideoApp> {
           Align(
             alignment: Alignment.topRight,
             child: IconButton(
+<<<<<<< HEAD
                 icon: const Icon(
+=======
+                icon: Icon(
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
                   Icons.close,
                   color: Colors.white,
                 ),

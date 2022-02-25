@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 
 import '../screens/video_screen.dart';
+=======
+import 'package:netflix_redesign/ui/screens/video_screen.dart';
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 
 class MyHero extends StatelessWidget {
   final String imgUrl;
 
+<<<<<<< HEAD
   const MyHero({Key? key, required this.imgUrl}) : super(key: key);
+=======
+  const MyHero({Key key, this.imgUrl}) : super(key: key);
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +43,11 @@ class MyHero extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   IconButton(
+<<<<<<< HEAD
                     icon: const Icon(
+=======
+                    icon: Icon(
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
                       Icons.arrow_back_ios,
                       color: Colors.white,
                     ),
@@ -47,11 +59,19 @@ class MyHero extends StatelessWidget {
                     'ChillFlix',
                     style: Theme.of(context)
                         .textTheme
+<<<<<<< HEAD
                         .headline6!
                         .apply(color: Colors.white),
                   ),
                   IconButton(
                     icon: const Icon(
+=======
+                        .title
+                        .apply(color: Colors.white),
+                  ),
+                  IconButton(
+                    icon: Icon(
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
                       Icons.favorite_border,
                       color: Colors.white,
                     ),
@@ -68,7 +88,11 @@ class MyHero extends StatelessWidget {
                 Navigator.pushNamed(context, VideoApp.route);
               },
               child: Container(
+<<<<<<< HEAD
                 decoration: const BoxDecoration(
+=======
+                decoration: BoxDecoration(
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
                   shape: BoxShape.circle,
                   color: Colors.white,
                   boxShadow: [
@@ -80,7 +104,11 @@ class MyHero extends StatelessWidget {
                   ],
                 ),
                 padding: const EdgeInsets.all(15),
+<<<<<<< HEAD
                 child: const Icon(
+=======
+                child: Icon(
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
                   Icons.play_arrow,
                   color: Colors.red,
                 ),
@@ -95,11 +123,19 @@ class MyHero extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 IconButton(
+<<<<<<< HEAD
                   icon: const Icon(Icons.add),
                   onPressed: () {},
                 ),
                 IconButton(
                   icon: const Icon(Icons.share),
+=======
+                  icon: Icon(Icons.add),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: Icon(Icons.share),
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
                   onPressed: () {},
                 ),
               ],

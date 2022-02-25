@@ -8,12 +8,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+<<<<<<< HEAD
 import 'package:chillflix/main.dart';
+=======
+import 'package:netflix_redesign/main.dart';
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
+<<<<<<< HEAD
     await tester.pumpWidget(const MyApp());
+=======
+    await tester.pumpWidget(MyApp());
+>>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
