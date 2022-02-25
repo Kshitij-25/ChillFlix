@@ -1,9 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
     package="com.example.chillflix">
-=======
-    package="com.example.netflix_redesign">
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
     <!-- Flutter needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->

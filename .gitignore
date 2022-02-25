@@ -22,10 +22,7 @@
 
 # Flutter/Dart/Pub related
 **/doc/api/
-<<<<<<< HEAD
 **/ios/Flutter/.last_build_id
-=======
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -37,7 +34,6 @@
 # Web related
 lib/generated_plugin_registrant.dart
 
-<<<<<<< HEAD
 # Symbolication related
 app.*.symbols
 
@@ -48,7 +44,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-=======
-# Exceptions to above rules.
-!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626

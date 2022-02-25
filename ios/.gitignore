@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 **/dgph
-=======
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 *.mode1v3
 *.mode2v3
 *.moved-aside
@@ -22,10 +19,7 @@ Flutter/App.framework
 Flutter/Flutter.framework
 Flutter/Flutter.podspec
 Flutter/Generated.xcconfig
-<<<<<<< HEAD
 Flutter/ephemeral/
-=======
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 Flutter/app.flx
 Flutter/app.zip
 Flutter/flutter_assets/

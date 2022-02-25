@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # chillflix
 
 A new Flutter project.
@@ -15,8 +14,3 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-=======
-# ChillFlix | Flutter
-
-<img height="480px" src="ss1.png" hspace='20'><img height="480px" src="ss2.png" hspace='20'><img height ="480px" src="ss3.png" hspace='20'>
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626

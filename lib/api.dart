@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -8,15 +7,6 @@ import 'models/featured_tv_model.dart';
 import 'models/genre_model.dart';
 import 'models/movie_model.dart';
 import 'models/tv_model.dart';
-=======
-import 'package:http/http.dart' as http;
-import 'package:netflix_redesign/models/featuredtvmodel.dart';
-import 'package:netflix_redesign/models/tvmodel.dart';
-import './models/featuredmoviemodel.dart';
-import 'dart:convert';
-import './models/genremodel.dart';
-import './models/moviemodel.dart';
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 
 class Api {
   var httpClient = http.Client();
@@ -24,12 +14,8 @@ class Api {
   static const apiKey = "36e64decb04bdc9dec07a8a14ebd2ce1";
 
   Future<List<GenreModel>> getGenreList() async {
-<<<<<<< HEAD
     final response =
         await http.get(Uri.parse('$url/genre/movie/list?api_key=$apiKey'));
-=======
-    final response = await http.get('$url/genre/movie/list?api_key=$apiKey');
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 
     if (response.statusCode == 200) {
       final parsed =
@@ -45,12 +31,8 @@ class Api {
   }
 
   Future<List<FeaturedMovieModel>> getFeaturedMovies() async {
-<<<<<<< HEAD
     final response =
         await http.get(Uri.parse('$url/trending/movie/day?api_key=$apiKey'));
-=======
-    final response = await http.get('$url/trending/movie/day?api_key=$apiKey');
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
     print(response.body);
     if (response.statusCode == 200) {
       final parsed =
@@ -65,12 +47,8 @@ class Api {
   }
 
   Future<List<FeaturedTvModel>> getFeaturedTv() async {
-<<<<<<< HEAD
     final response =
         await http.get(Uri.parse('$url/trending/tv/day?api_key=$apiKey'));
-=======
-    final response = await http.get('$url/trending/tv/day?api_key=$apiKey');
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
     print(response.body);
     if (response.statusCode == 200) {
       final parsed =
@@ -85,12 +63,8 @@ class Api {
   }
 
   Future<MovieModel> getMovieInfo(int movieId) async {
-<<<<<<< HEAD
     final response =
         await http.get(Uri.parse("$url/movie/$movieId?api_key=$apiKey"));
-=======
-    final response = await http.get("$url/movie/$movieId?api_key=$apiKey");
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 
     if (response.statusCode == 200) {
       return MovieModel.fromJson(json.decode(response.body));
@@ -100,11 +74,7 @@ class Api {
   }
 
   Future<TvModel> getTvInfo(int tvId) async {
-<<<<<<< HEAD
     final response = await http.get(Uri.parse("$url/tv/$tvId?api_key=$apiKey"));
-=======
-    final response = await http.get("$url/tv/$tvId?api_key=$apiKey");
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 
     if (response.statusCode == 200) {
       return TvModel.fromJson(json.decode(response.body));

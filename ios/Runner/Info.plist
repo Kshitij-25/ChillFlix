@@ -4,11 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-<<<<<<< HEAD
 	<key>CFBundleDisplayName</key>
 	<string>Chillflix</string>
-=======
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -16,11 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-<<<<<<< HEAD
 	<string>chillflix</string>
-=======
-	<string>netflix_redesign</string>
->>>>>>> 2ba981ebe713a8f7fb5456ed1fdbfbb1bd188626
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
