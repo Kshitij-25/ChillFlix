@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 class SectionContainer extends StatelessWidget {
   final Widget child;
   final String sectionTitle;
-  const SectionContainer(
-      {Key? key, required this.child, required this.sectionTitle})
-      : super(key: key);
+  final Widget widget;
+  const SectionContainer({
+    Key? key,
+    required this.child,
+    required this.sectionTitle,
+    required this.widget,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +24,7 @@ class SectionContainer extends StatelessWidget {
                     const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
               ),
               const Spacer(),
-              const Icon(Icons.arrow_forward_ios),
+              widget,
               const SizedBox(width: 15.0),
             ],
           ),

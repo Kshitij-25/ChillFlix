@@ -20,7 +20,7 @@ class FeaturedMovieModel {
       overview: json['overview'],
       poster_path: json['poster_path'],
       id: json['id'],
-      // country: json['production_companies'][0]['origin_country'],
+      // country: json['production_companies'][0]['origin_country'],?
       release_date: json['release_date'],
       // run_time: json['run_time'],
       // genre: json['genres'],

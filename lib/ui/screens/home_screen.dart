@@ -1,3 +1,5 @@
+import 'package:chillflix/ui/screens/movies_screen.dart';
+import 'package:chillflix/ui/screens/tv_shows_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../api.dart';
@@ -135,7 +137,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 15,
                     ),
                     SectionContainer(
-                      sectionTitle: "My List",
+                      widget: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (ctx) => const TVShowsScreen(),
+                            ),
+                          );
+                        },
+                        child: const Icon(Icons.arrow_forward_ios),
+                      ),
+                      sectionTitle: "TV Shows",
                       child: SizedBox(
                         height: MediaQuery.of(context).size.height / 3,
                         child: FutureBuilder<List<FeaturedTvModel>>(
@@ -144,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             if (snapshot.hasData) {
                               return ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: snapshot.data!.length,
+                                itemCount: 4,
                                 itemBuilder: (ctx, id) {
                                   return TvContainer(
                                       snapshot: snapshot.data![id]);
@@ -163,7 +176,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 15,
                     ),
                     SectionContainer(
-                      sectionTitle: "Popular on ChillFlix",
+                      widget: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (ctx) => const MoviesScreen(),
+                            ),
+                          );
+                        },
+                        child: const Icon(Icons.arrow_forward_ios),
+                      ),
+                      sectionTitle: "Movies",
                       child: SizedBox(
                         height: MediaQuery.of(context).size.height / 3,
                         child: FutureBuilder<List<FeaturedMovieModel>>(
@@ -172,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             if (snapshot.hasData) {
                               return ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: snapshot.data!.length,
+                                itemCount: 4,
                                 itemBuilder: (ctx, id) {
                                   return MovieContainer(
                                       snapshot: snapshot.data![id]);

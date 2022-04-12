@@ -11,7 +11,7 @@ import 'models/tv_model.dart';
 class Api {
   var httpClient = http.Client();
   static const url = "https://api.themoviedb.org/3";
-  static const apiKey = "YOUR_API_KEY";
+  static const apiKey = "36e64decb04bdc9dec07a8a14ebd2ce1";
 
   Future<List<GenreModel>> getGenreList() async {
     final response =
