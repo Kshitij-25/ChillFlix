@@ -1,26 +1,24 @@
-import 'package:chillflix/ui/screens/home_screen.dart';
-import 'package:chillflix/ui/screens/video_screen.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() => runApp(MyApp());
+import 'app.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
+  HttpOverrides.global = MyHttpOverrides();
+
+  await dotenv.load(fileName: "flutter.env");
+
+  runApp(const ProviderScope(child: MainApp()));
+}
+
+class MyHttpOverrides extends HttpOverrides {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.blue,
-        fontFamily: 'Raleway',
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (ctx) => const HomeScreen(),
-        VideoApp.route: (ctx) => const VideoApp(),
-      },
-    );
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }
