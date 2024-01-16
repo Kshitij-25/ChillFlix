@@ -1,18 +1,14 @@
 import 'package:chillflix2/core/usecases/popular_usecase.dart';
-import 'package:chillflix2/data/repository/popular_repo.dart';
-import 'package:chillflix2/data/sources/popular_api_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/models/movies.dart';
+import '../../data/repository/movies_repository.dart';
 import '../state_notifiers/popular_state_notifier.dart';
+import 'common_providers.dart';
 
-final popularApiServiceProvider = Provider<PopularApiService>((ref) {
-  return PopularApiService();
-});
-
-final popularRepositoryProvider = Provider<PopularRepository>((ref) {
-  final populargApiService = ref.read(popularApiServiceProvider);
-  return PopularRepository(populargApiService);
+final popularRepositoryProvider = Provider<MoviesRepository>((ref) {
+  final populargApiService = ref.read(moviesRemoteDataSourceProvider);
+  return MoviesRepository(populargApiService);
 });
 
 final popularUseCaseProvider = Provider<PopularUseCaseImpl>((ref) {

@@ -1,16 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/constants/api_constants.dart';
 import '../../data/models/movies.dart';
 
 class customGridView extends StatelessWidget {
   customGridView({
     super.key,
-    this.getPosterImage,
     this.scrollController,
     this.data,
   });
 
-  final String? getPosterImage;
   ScrollController? scrollController;
   List<Movies>? data;
 
@@ -31,8 +31,10 @@ class customGridView extends StatelessWidget {
             Positioned.fill(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15.0),
-                child: Image.network(
-                  "$getPosterImage${data![index].backdropPath}",
+                child: CachedNetworkImage(
+                  imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data![index].backdrop_path}",
+                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit: BoxFit.cover,
                 ),
               ),

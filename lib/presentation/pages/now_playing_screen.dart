@@ -53,12 +53,9 @@ class NowPlayingScreen extends ConsumerWidget {
   }
 
   bodyWidget(context, ScrollController scrollController, AsyncValue<List<Movies>?> nowPlayingAsyncValue) {
-    String? getPosterImage = dotenv.env['IMAGE_URL'];
-
     return nowPlayingAsyncValue.when(
       data: (nowPlaying) {
         return customGridView(
-          getPosterImage: getPosterImage,
           scrollController: scrollController,
           data: nowPlaying,
         );

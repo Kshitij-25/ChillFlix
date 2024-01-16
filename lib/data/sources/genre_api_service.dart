@@ -3,15 +3,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import '../../core/common/api.dart';
+import '../constants/api_client.dart';
+import '../constants/api_constants.dart';
 
 class GenreApiService {
-  String? apiKey = dotenv.env['API_KEY_AUTH'];
-  String? baseUrl = dotenv.env['API_URL'];
   final DioRequest dioRequest = DioRequest();
 
   Future<List<GenreList>?>? getMoviesGenre() async {
-    final url = "$baseUrl/genre/movie/list?api_key=$apiKey";
+    final url = "${ApiConstants.BASE_URL}/genre/movie/list?api_key=${ApiConstants.API_KEY}";
 
     try {
       Response response = await dioRequest.getReq(
@@ -22,6 +21,8 @@ class GenreApiService {
         List<GenreList> genres = jsonList.map((json) => GenreList.fromJson(json)).toList();
         print("GETMOVIESGENRE URL===> $url ====> $genres");
         return genres;
+      } else {
+        throw Exception(response.statusMessage);
       }
     } catch (e) {
       print(e);
@@ -31,7 +32,7 @@ class GenreApiService {
   }
 
   Future<List<GenreList>?>? getTvGenre() async {
-    final url = "$baseUrl/genre/tv/list?api_key=$apiKey";
+    final url = "${ApiConstants.BASE_URL}/genre/tv/list?api_key=${ApiConstants.API_KEY}";
 
     try {
       Response response = await dioRequest.getReq(
@@ -39,6 +40,8 @@ class GenreApiService {
       );
       if (response.statusCode == 200) {
         debugPrint(response.data.toString());
+      } else {
+        throw Exception(response.statusMessage);
       }
     } catch (e) {
       print(e);

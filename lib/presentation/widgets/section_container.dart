@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chillflix2/presentation/pages/now_playing_screen.dart';
 import 'package:chillflix2/presentation/providers/now_playing_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/constants/api_constants.dart';
 import '../../data/models/movies.dart';
 
 class SectionContainer extends ConsumerWidget {
@@ -16,10 +18,10 @@ class SectionContainer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dataAsyncValue = data;
-    String? getPosterImage = dotenv.env['IMAGE_URL'];
+
     return dataAsyncValue!.when(
       data: (data) {
-        List<Movies>? sortedData = data!.where((element) => element.originalTitle != null).toList();
+        List<Movies>? sortedData = data!.where((element) => element.original_title != null).toList();
         return Column(
           children: [
             Row(
@@ -42,7 +44,7 @@ class SectionContainer extends ConsumerWidget {
               height: MediaQuery.of(context).size.width * 0.6,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 4,
+                itemCount: sortedData.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {},
@@ -64,10 +66,16 @@ class SectionContainer extends ConsumerWidget {
                           Positioned.fill(
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(15.0),
-                              child: Image.network(
-                                "$getPosterImage${sortedData[index].posterPath}",
+                              child: CachedNetworkImage(
+                                imageUrl: "${ApiConstants.BASE_IMAGE_URL}${sortedData[index].poster_path}",
+                                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) => const Icon(Icons.error),
                                 fit: BoxFit.cover,
                               ),
+                              // Image.network(
+                              //   "$${sortedData[index].posterPath}",
+                              //   fit: BoxFit.cover,
+                              // ),
                             ),
                           ),
                           Positioned(

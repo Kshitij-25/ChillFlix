@@ -1,14 +1,13 @@
 import 'package:chillflix2/core/usecases/trending_usecase.dart';
 import 'package:chillflix2/data/models/movies.dart';
-import 'package:chillflix2/data/repository/trending_repo.dart';
-import 'package:chillflix2/data/sources/trending_api_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final trendingApiServiceProvider = Provider<TrendingApiService>((ref) => TrendingApiService());
+import '../../data/repository/movies_repository.dart';
+import 'common_providers.dart';
 
-final trendingRepositoryProvider = Provider<TrendingRepository>((ref) {
-  final trendingApiService = ref.read(trendingApiServiceProvider);
-  return TrendingRepository(trendingApiService);
+final trendingRepositoryProvider = Provider<MoviesRepository>((ref) {
+  final trendingApiService = ref.read(moviesRemoteDataSourceProvider);
+  return MoviesRepository(trendingApiService);
 });
 
 final trendingUseCaseProvider = FutureProvider<TrendingUseCaseImpl>((ref) {

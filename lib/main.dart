@@ -1,17 +1,21 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
 
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  unawaited(SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]));
 
   HttpOverrides.global = MyHttpOverrides();
 
-  await dotenv.load(fileName: "flutter.env");
+  unawaited(dotenv.load(fileName: "flutter.env"));
 
   runApp(const ProviderScope(child: MainApp()));
 }

@@ -51,12 +51,9 @@ class PopularScreen extends ConsumerWidget {
   }
 
   bodyWidget(context, ScrollController scrollController, AsyncValue<List<Movies>?> popularAsyncValue) {
-    String? getPosterImage = dotenv.env['IMAGE_URL'];
-
     return popularAsyncValue.when(
       data: (popular) {
         return customGridView(
-          getPosterImage: getPosterImage,
           scrollController: scrollController,
           data: popular,
         );

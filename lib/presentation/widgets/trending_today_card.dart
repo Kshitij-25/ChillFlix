@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chillflix2/core/utils/screen_util.dart';
 import 'package:chillflix2/presentation/providers/now_playing_provider.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../data/constants/api_constants.dart';
 import '../../data/models/movies.dart';
 
 class TrendingTodayCard extends ConsumerWidget {
@@ -15,13 +17,12 @@ class TrendingTodayCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final movieAsyncValue = ref.watch(trendingMovies);
-    String? getPosterImage = dotenv.env['IMAGE_URL'];
 
     return movieAsyncValue.when(
       data: (movie) {
-        List<Movies>? trendingMovies = movie!.where((element) => element.originalTitle != null).toList();
+        List<Movies>? trendingMovies = movie!.where((element) => element.original_title != null).toList();
         return Container(
-          height: ScreenSize.height(context) * 0.45,
+          height: ScreenSize.height(context) * 0.55,
           width: ScreenSize.width(context),
           margin: const EdgeInsets.all(15),
           decoration: BoxDecoration(
@@ -42,10 +43,16 @@ class TrendingTodayCard extends ConsumerWidget {
                   Positioned.fill(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: Image.network(
-                        "$getPosterImage${trendingMovies[index].posterPath}",
+                      child: CachedNetworkImage(
+                        imageUrl: "${ApiConstants.BASE_IMAGE_URL}${trendingMovies[index].poster_path}",
+                        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => const Icon(Icons.error),
                         fit: BoxFit.cover,
                       ),
+                      // child: Image.network(
+                      //   "$${trendingMovies[index].posterPath}",
+                      //   fit: BoxFit.cover,
+                      // ),
                     ),
                   ),
                   Positioned(
@@ -108,10 +115,13 @@ class TrendingTodayCard extends ConsumerWidget {
               );
             },
             options: CarouselOptions(
-              height: ScreenSize.height(context) * 0.5,
+              height: ScreenSize.height(context) * 0.55,
               viewportFraction: 1,
               initialPage: 0,
               enableInfiniteScroll: true,
+              onPageChanged: (index, reason) {
+                print("object");
+              },
               reverse: false,
               autoPlay: true,
               autoPlayInterval: const Duration(seconds: 20),
