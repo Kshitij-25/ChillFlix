@@ -1,3 +1,5 @@
+import 'package:chillflix2/data/models/movies_details.dart';
+
 import '../models/movies.dart';
 import '../sources/movies_remote_data_source.dart';
 
@@ -15,5 +17,13 @@ class MoviesRepository {
 
   Future<List<Movies>?> getPopular(page) async {
     return _moviesRemoteDataSource.getPopular(page);
+  }
+
+  Future<List<Movies>?> getUpcomingMovies(page) async {
+    return _moviesRemoteDataSource.getUpcomingMovies(page);
+  }
+
+  Future<MoviesDetails?> getMoviesDetails(movieId) async {
+    return _moviesRemoteDataSource.getMoviesDetails(movieId);
   }
 }

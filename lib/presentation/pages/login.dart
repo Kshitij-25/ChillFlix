@@ -1,25 +1,125 @@
+import 'package:chillflix2/core/utils/screen_util.dart';
+import 'package:chillflix2/data/sources/auth_data_source.dart';
+import 'package:chillflix2/presentation/pages/homepage.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
 
   static const route = "/loginScreen";
 
+  TextEditingController userNameCont = TextEditingController();
+  TextEditingController passwordCont = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Color(0xff0d253f),
-            Color(0xff01b4e4),
-            Color(0xff90cea1),
-          ],
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: bodyWidget(context),
+    );
+  }
+
+  bodyWidget(context) {
+    return Stack(
+      children: [
+        Positioned(
+          top: 0,
+          child: GestureDetector(
+            onTap: () {
+              userNameCont.text = "kshitij-22";
+              passwordCont.text = "Nishu@2201";
+            },
+            child: Container(
+              height: 100,
+              width: 100,
+              color: Colors.black,
+            ),
+          ),
         ),
-      ),
-      child: const Scaffold(
-        backgroundColor: Colors.transparent,
-      ),
+        Positioned(
+          bottom: 0,
+          child: Container(
+            decoration: BoxDecoration(
+              color: FlexThemeData.dark().canvasColor,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            height: ScreenSize.height(context) * 0.8,
+            width: ScreenSize.width(context),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextField(
+                    controller: userNameCont,
+                    decoration: const InputDecoration(
+                      alignLabelWithHint: true,
+                      prefixIcon: Icon(CupertinoIcons.person_fill),
+                      hintText: "Enter TMDB Username",
+                      label: Text("Enter TMDB Username"),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextField(
+                    controller: passwordCont,
+                    decoration: const InputDecoration(
+                      alignLabelWithHint: true,
+                      prefixIcon: Icon(CupertinoIcons.lock_fill),
+                      hintText: "Enter Password",
+                      label: Text("Enter Password"),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Consumer(
+                    builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                      return SizedBox(
+                        height: 50,
+                        width: ScreenSize.width(context),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                          ),
+                          onPressed: () async {
+                            // final bool? status = await ref.read(authUseCaseProvider).loginUser(userNameCont.text, passwordCont.text);
+                            final bool? status = await AuthDataSource().loginUser(userNameCont.text, passwordCont.text);
+                            if (status == true) {
+                              print("LOGIN STATUS: $status");
+                              userNameCont.clear();
+                              passwordCont.clear();
+                              Navigator.of(context).pushReplacementNamed(HomePage.route);
+                            }
+                          },
+                          child: Text(
+                            "LOGIN",
+                            style: GoogleFonts.raleway(fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:chillflix2/data/models/movies.dart';
 import 'package:chillflix2/data/repository/movies_repository.dart';
 import 'package:chillflix2/presentation/state_notifiers/now_playing_state_notifier.dart';
 
+import '../../main.dart';
 import '../error/failure.dart';
 
 abstract class NowPlayingUseCase {
@@ -22,9 +23,9 @@ class NowPlayingUseCaseImpl implements NowPlayingUseCase {
       } else if (e is NetworkFailure) {
         throw NetworkFailure(networkFailureMessage: e.message);
       } else {
-        // Optionally, log the error or handle it in some way
-        print('Unexpected error: $e');
+        logger.e('NowPlayingUseCase - getNowPlaying : $e');
       }
     }
+    return null;
   }
 }

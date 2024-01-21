@@ -1,5 +1,7 @@
 import 'package:chillflix2/presentation/pages/popular_screen.dart';
+import 'package:chillflix2/presentation/pages/upcoming_screen.dart';
 import 'package:chillflix2/presentation/providers/popular_provider.dart';
+import 'package:chillflix2/presentation/providers/upcoming_movies_provider.dart';
 import 'package:chillflix2/presentation/widgets/custom_sidebar.dart';
 import 'package:chillflix2/presentation/widgets/trending_today_card.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +68,18 @@ class HomePage extends StatelessWidget {
                         Navigator.of(context).pushNamed(
                           PopularScreen.route,
                           arguments: ref.watch(popular),
+                        );
+                      },
+                    ),
+                  ),
+                  Consumer(
+                    builder: (context, ref, child) => SectionContainer(
+                      data: ref.watch(upcomingMovies),
+                      title: "UPCOMING MOVIES",
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(
+                          UpcomingScreen.route,
+                          arguments: ref.watch(upcomingMovies),
                         );
                       },
                     ),

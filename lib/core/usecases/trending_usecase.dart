@@ -1,6 +1,7 @@
 import 'package:chillflix2/data/models/movies.dart';
 
 import '../../data/repository/movies_repository.dart';
+import '../../main.dart';
 import '../error/failure.dart';
 
 abstract class TrendingUseCase {
@@ -21,9 +22,9 @@ class TrendingUseCaseImpl implements TrendingUseCase {
       } else if (e is NetworkFailure) {
         throw NetworkFailure(networkFailureMessage: e.message);
       } else {
-        // Optionally, log the error or handle it in some way
-        print('Unexpected error: $e');
+        logger.e('TrendingUseCase - getAllTrending : $e');
       }
     }
+    return null;
   }
 }

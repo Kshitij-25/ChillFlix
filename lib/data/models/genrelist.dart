@@ -5,8 +5,10 @@ part 'genrelist.g.dart';
 
 @freezed
 class GenreList with _$GenreList {
-  factory GenreList({int? id, String? name}) = _GenreList;
+  factory GenreList({
+    int? id,
+    String? name,
+  }) = _GenreList;
 
-  factory GenreList.fromJson(Map<String, dynamic> json) =>
-      _$GenreListFromJson(json);
+  factory GenreList.fromJson(Map<String, dynamic> json) => _$GenreListFromJson(json);
 }

@@ -6,12 +6,12 @@ part 'image_attributes.g.dart';
 @freezed
 class ImageAttributes with _$ImageAttributes {
   factory ImageAttributes({
-    double? aspectRatio,
+    double? aspect_ratio,
     int? height,
-    String? iso6391,
-    String? filePath,
-    double? voteAverage,
-    int? voteCount,
+    String? iso_639_1,
+    String? file_path,
+    double? vote_average,
+    int? vote_count,
     int? width,
   }) = _ImageAttributes;
 

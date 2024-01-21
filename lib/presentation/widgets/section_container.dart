@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chillflix2/presentation/pages/now_playing_screen.dart';
-import 'package:chillflix2/presentation/providers/now_playing_provider.dart';
+import 'package:chillflix2/presentation/pages/details_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/constants/api_constants.dart';
@@ -47,7 +45,12 @@ class SectionContainer extends ConsumerWidget {
                 itemCount: sortedData.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        DetailsScreen.route,
+                        arguments: sortedData[index].id,
+                      );
+                    },
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.4,
                       margin: const EdgeInsets.all(15.0),
@@ -72,10 +75,6 @@ class SectionContainer extends ConsumerWidget {
                                 errorWidget: (context, url, error) => const Icon(Icons.error),
                                 fit: BoxFit.cover,
                               ),
-                              // Image.network(
-                              //   "$${sortedData[index].posterPath}",
-                              //   fit: BoxFit.cover,
-                              // ),
                             ),
                           ),
                           Positioned(

@@ -1,6 +1,7 @@
 import 'package:chillflix2/data/models/genrelist.dart';
 import 'package:chillflix2/data/repository/genre_repo.dart';
 
+import '../../main.dart';
 import '../error/failure.dart';
 
 abstract class GenreUseCase {
@@ -21,8 +22,7 @@ class GenreUseCaseImpl implements GenreUseCase {
       } else if (e is NetworkFailure) {
         throw NetworkFailure(networkFailureMessage: e.message);
       } else {
-        // Optionally, log the error or handle it in some way
-        print('Unexpected error: $e');
+        logger.e('GenreUseCase - getGenreList : $e');
       }
       return [];
     }

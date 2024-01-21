@@ -1,6 +1,5 @@
 import 'package:chillflix2/presentation/providers/popular_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,7 +13,7 @@ class PopularScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ScrollController _scrollController = ScrollController();
+    final ScrollController scrollController = ScrollController();
     int page = 1;
     // final List<Movies>? nowPlaying = ModalRoute.of(context)?.settings.arguments as List<Movies>?;
     final popularAsyncValue = ref.watch(popular);
@@ -46,7 +45,7 @@ class PopularScreen extends ConsumerWidget {
           ),
         ),
       ),
-      body: bodyWidget(context, _scrollController, popularAsyncValue),
+      body: bodyWidget(context, scrollController, popularAsyncValue),
     );
   }
 
