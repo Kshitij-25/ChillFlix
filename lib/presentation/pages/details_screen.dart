@@ -42,7 +42,7 @@ class DetailsScreen extends ConsumerWidget {
                   BigPosterWidget(dataAsyncValue: detailsAsyncValue),
                   const TabBar(
                     tabs: [
-                      Tab(text: 'Similar Movies'),
+                      Tab(text: 'More like this'),
                       Tab(text: 'Trailers & more'),
                     ],
                   ),
