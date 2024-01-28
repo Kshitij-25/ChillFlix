@@ -79,7 +79,7 @@ class BigPosterWidget extends StatelessWidget {
                                         child: Center(
                                           child: Text(
                                             data.genres![index].name!,
-                                            style: GoogleFonts.roboto(fontSize: 10),
+                                            style: GoogleFonts.roboto(fontSize: 13),
                                           ),
                                         ),
                                       ),

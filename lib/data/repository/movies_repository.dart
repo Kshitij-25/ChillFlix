@@ -1,4 +1,5 @@
 import 'package:chillflix2/data/models/movies_details.dart';
+import 'package:chillflix2/data/models/videos_model.dart';
 
 import '../models/movies.dart';
 import '../sources/movies_remote_data_source.dart';
@@ -25,5 +26,13 @@ class MoviesRepository {
 
   Future<MoviesDetails?> getMoviesDetails(movieId) async {
     return _moviesRemoteDataSource.getMoviesDetails(movieId);
+  }
+
+  Future<List<Movies>?> getSimilarMovies(movieId) async {
+    return _moviesRemoteDataSource.getSimilarMovies(movieId);
+  }
+
+  Future<List<VideosModel>?> getVideos(movieId) async {
+    return _moviesRemoteDataSource.getVideos(movieId);
   }
 }

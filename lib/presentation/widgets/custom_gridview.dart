@@ -9,14 +9,17 @@ class customGridView extends StatelessWidget {
     super.key,
     this.scrollController,
     this.data,
+    this.itemCount,
   });
 
   ScrollController? scrollController;
   List<Movies>? data;
+  int? itemCount;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      shrinkWrap: true,
       controller: scrollController,
       padding: const EdgeInsets.symmetric(horizontal: 10),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -24,7 +27,7 @@ class customGridView extends StatelessWidget {
         crossAxisSpacing: 10.0,
         mainAxisSpacing: 10.0,
       ),
-      itemCount: data?.length ?? 0,
+      itemCount: itemCount ?? data?.length ?? 0,
       itemBuilder: (context, index) {
         return Stack(
           children: [

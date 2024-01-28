@@ -1,4 +1,5 @@
 import 'package:chillflix2/data/models/movies_details.dart';
+import 'package:chillflix2/data/models/videos_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../main.dart';
@@ -107,5 +108,47 @@ class MoviesRemoteDataSource {
       logger.e('MoviesRemoteDataSource - getMoviesDetails: $e');
     }
     return null;
+  }
+
+  Future<List<Movies>?>? getSimilarMovies(movieId) async {
+    final url = "${ApiConstants.BASE_URL}/movie/$movieId/similar?api_key=${ApiConstants.API_KEY}";
+
+    try {
+      Response? response = await dioRequest.getReq(
+        url: url,
+      );
+      if (response!.statusCode == 200) {
+        List<dynamic> jsonList = response.data['results'];
+        List<Movies> similar = jsonList.map((json) => Movies.fromJson(json)).toList();
+        logger.d("GETSIMILARMOVIE URL===> $url ====> $similar");
+        return similar;
+      } else {
+        throw Exception(response.statusMessage);
+      }
+    } catch (e) {
+      logger.e('MoviesRemoteDataSource - getSimilarMovies: $e');
+      return [];
+    }
+  }
+
+  Future<List<VideosModel>?>? getVideos(movieId) async {
+    final url = "${ApiConstants.BASE_URL}/movie/$movieId/videos?api_key=${ApiConstants.API_KEY}";
+
+    try {
+      Response? response = await dioRequest.getReq(
+        url: url,
+      );
+      if (response!.statusCode == 200) {
+        List<dynamic> jsonList = response.data['results'];
+        List<VideosModel> videos = jsonList.map((json) => VideosModel.fromJson(json)).toList();
+        logger.d("GETVIDEOS URL===> $url ====> $videos");
+        return videos;
+      } else {
+        throw Exception(response.statusMessage);
+      }
+    } catch (e) {
+      logger.e('MoviesRemoteDataSource - getVideos: $e');
+      return [];
+    }
   }
 }
