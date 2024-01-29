@@ -71,7 +71,7 @@ class SectionContainer extends ConsumerWidget {
                               borderRadius: BorderRadius.circular(15.0),
                               child: CachedNetworkImage(
                                 imageUrl: "${ApiConstants.BASE_IMAGE_URL}${sortedData[index].poster_path}",
-                                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                                placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                                 errorWidget: (context, url, error) => const Icon(Icons.error),
                                 fit: BoxFit.cover,
                               ),
@@ -129,7 +129,34 @@ class SectionContainer extends ConsumerWidget {
           ],
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () {
+        return Column(
+          children: [
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Text(
+                    title!,
+                    style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.arrow_forward_ios),
+                  onPressed: onPressed,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.width * 0.6,
+              child: const Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
+            ),
+          ],
+        );
+      },
       error: (error, stackTrace) {
         return Center(child: Text('Error: $error'));
       },

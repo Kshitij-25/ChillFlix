@@ -54,7 +54,7 @@ class GenreListWidget extends StatelessWidget {
         );
       },
       loading: () {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator.adaptive());
       },
       error: (error, stackTrace) {
         return Center(child: Text('Error: $error'));

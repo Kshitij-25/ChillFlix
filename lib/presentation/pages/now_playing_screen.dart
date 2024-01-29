@@ -58,7 +58,9 @@ class NowPlayingScreen extends ConsumerWidget {
           data: nowPlaying,
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const Center(
+        child: CircularProgressIndicator.adaptive(),
+      ),
       error: (error, stackTrace) {
         return Center(child: Text('Error: $error'));
       },

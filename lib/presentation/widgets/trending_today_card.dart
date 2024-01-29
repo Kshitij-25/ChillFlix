@@ -50,7 +50,7 @@ class TrendingTodayCard extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(15),
                         child: CachedNetworkImage(
                           imageUrl: "${ApiConstants.BASE_IMAGE_URL}${trendingMovies[index].poster_path}",
-                          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                          placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                           errorWidget: (context, url, error) => const Icon(Icons.error),
                           fit: BoxFit.cover,
                         ),
@@ -138,7 +138,26 @@ class TrendingTodayCard extends ConsumerWidget {
           ),
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () {
+        return Container(
+          height: ScreenSize.height(context) * 0.55,
+          width: ScreenSize.width(context),
+          margin: const EdgeInsets.all(15),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: const [
+              BoxShadow(
+                blurRadius: 5,
+                color: Colors.black,
+                offset: Offset(0, 1),
+              ),
+            ],
+          ),
+          child: const Center(
+            child: CircularProgressIndicator.adaptive(),
+          ),
+        );
+      },
       error: (error, stackTrace) {
         return Center(child: Text('Error: $error'));
       },

@@ -44,7 +44,7 @@ class customGridView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                   child: CachedNetworkImage(
                     imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data![index].backdrop_path}",
-                    placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                    placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                     errorWidget: (context, url, error) => const Icon(Icons.error),
                     fit: BoxFit.cover,
                   ),
