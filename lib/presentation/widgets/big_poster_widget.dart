@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chillflix2/core/utils/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +23,7 @@ class BigPosterWidget extends StatelessWidget {
               children: [
                 CachedNetworkImage(
                   imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data!.poster_path}",
-                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                  placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit: BoxFit.cover,
                 ),
@@ -103,7 +104,14 @@ class BigPosterWidget extends StatelessWidget {
           ],
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () {
+        return SizedBox(
+          height: ScreenSize.height(context) / 1.4,
+          child: const Center(
+            child: CircularProgressIndicator.adaptive(),
+          ),
+        );
+      },
       error: (error, stackTrace) {
         return Center(child: Text('Error: $error'));
       },
