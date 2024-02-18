@@ -151,4 +151,46 @@ class MoviesRemoteDataSource {
       return [];
     }
   }
+
+  Future<List<Movies>?>? discoverMovies(genresId) async {
+    final url =
+        "${ApiConstants.BASE_URL}/discover/movie?include_adult=true&page=1&sort_by=popularity.desc&with_genres=$genresId&api_key=${ApiConstants.API_KEY}";
+
+    try {
+      Response? response = await dioRequest.getReq(
+        url: url,
+      );
+      if (response!.statusCode == 200) {
+        List<dynamic> jsonList = response.data['results'];
+        List<Movies> discoverMovies = jsonList.map((json) => Movies.fromJson(json)).toList();
+        logger.d("DISCOVERMOVIES URL===> $url ====> $discoverMovies");
+        return discoverMovies;
+      } else {
+        throw Exception(response.statusMessage);
+      }
+    } catch (e) {
+      logger.e('MoviesRemoteDataSource - discoverMovies: $e');
+      return [];
+    }
+  }
+
+  Future<List<Movies>?>? multiSearch(query) async {
+    final url = "${ApiConstants.BASE_URL}/search/multi?query=$query&include_adult=true&page=1&api_key=${ApiConstants.API_KEY}";
+    try {
+      Response? response = await dioRequest.getReq(
+        url: url,
+      );
+      if (response!.statusCode == 200) {
+        List<dynamic> jsonList = response.data['results'];
+        List<Movies> multiSearch = jsonList.map((json) => Movies.fromJson(json)).toList();
+        logger.d("multiSearch URL===> $url ====> $multiSearch");
+        return multiSearch;
+      } else {
+        throw Exception(response.statusMessage);
+      }
+    } catch (e) {
+      logger.e('SearchDataSource - multiSearch: $e');
+      return [];
+    }
+  }
 }

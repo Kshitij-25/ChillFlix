@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/models/genre_list.dart';
 import '../providers/genre_list_provider.dart';
 
 class GenreListWidget extends StatelessWidget {
-  GenreListWidget({super.key, this.ref});
+  GenreListWidget({super.key, this.ref, this.genreListAsyncValue});
 
   WidgetRef? ref;
+  AsyncValue<List<GenreList>?>? genreListAsyncValue;
 
   @override
   Widget build(BuildContext context) {
-    final genreListAsyncValue = ref!.watch(genreListProvider);
     final activeGenreIndex = ref!.watch(activeGenreIndexProvider);
-    return genreListAsyncValue.when(
+    return genreListAsyncValue!.when(
       data: (genreList) {
         return ListView.builder(
           shrinkWrap: true,
@@ -21,7 +22,7 @@ class GenreListWidget extends StatelessWidget {
             final genre = genreList![index];
             return GestureDetector(
               onTap: () {
-                ref!.read(activeGenreIndexProvider.notifier).state = index;
+                ref!.read(activeGenreIndexProvider.notifier).state = index + 3;
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -37,7 +38,7 @@ class GenreListWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (index == activeGenreIndex)
+                  if (index + 3 == activeGenreIndex)
                     Container(
                       height: 5,
                       width: 5,

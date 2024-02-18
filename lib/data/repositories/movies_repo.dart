@@ -2,7 +2,7 @@ import 'package:chillflix2/data/models/movies_details.dart';
 import 'package:chillflix2/data/models/videos_model.dart';
 
 import '../models/movies.dart';
-import '../sources/movies_remote_data_source.dart';
+import '../sources/movies_data_source.dart';
 
 class MoviesRepository {
   MoviesRepository(this._moviesRemoteDataSource);
@@ -34,5 +34,13 @@ class MoviesRepository {
 
   Future<List<VideosModel>?> getVideos(movieId) async {
     return _moviesRemoteDataSource.getVideos(movieId);
+  }
+
+  Future<List<Movies>?> discoverMovies(genresId) async {
+    return _moviesRemoteDataSource.discoverMovies(genresId);
+  }
+
+  Future<List<Movies>?> multiSearch(query) async {
+    return _moviesRemoteDataSource.multiSearch(query);
   }
 }

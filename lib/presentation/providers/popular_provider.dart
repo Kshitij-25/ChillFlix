@@ -1,13 +1,12 @@
-import 'package:chillflix2/core/usecases/popular_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/usecases/movies_usecase.dart';
 import '../../data/models/movies.dart';
-import '../state_notifiers/popular_state_notifier.dart';
 import 'common_providers.dart';
 
-final popularUseCaseProvider = Provider<PopularUseCaseImpl>((ref) {
+final popularUseCaseProvider = Provider<MoviesUseCase>((ref) {
   final popularRepository = ref.read(moviesDeatilsRepositoryProvider);
-  return PopularUseCaseImpl(popularRepository, ref.read(popularStateNotifierProvider.notifier));
+  return MoviesUseCaseImpl(popularRepository);
 });
 
 final popular = FutureProvider.autoDispose<List<Movies>?>((ref) async {

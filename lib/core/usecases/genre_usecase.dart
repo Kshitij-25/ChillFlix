@@ -1,5 +1,5 @@
-import 'package:chillflix2/data/models/genrelist.dart';
-import 'package:chillflix2/data/repository/genre_repo.dart';
+import 'package:chillflix2/data/models/genre_list.dart';
+import 'package:chillflix2/data/repositories/genre_repo.dart';
 
 import '../../main.dart';
 import '../error/failure.dart';
@@ -24,7 +24,7 @@ class GenreUseCaseImpl implements GenreUseCase {
       } else {
         logger.e('GenreUseCase - getGenreList : $e');
       }
-      return [];
+      return null;
     }
   }
 }

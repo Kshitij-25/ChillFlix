@@ -1,6 +1,6 @@
 import 'package:chillflix2/data/models/movies_details.dart';
 
-import '../../data/repository/movies_repository.dart';
+import '../../data/repositories/movies_repo.dart';
 import '../../main.dart';
 import '../error/failure.dart';
 
@@ -13,7 +13,7 @@ class MoviesDetailsUseCaseImpl implements MoviesDetailsUseCase {
   final MoviesRepository moviesRepository;
 
   @override
-  Future<MoviesDetails?>? getMoviesDetails(movieId) {
+  Future<MoviesDetails?>? getMoviesDetails(movieId) async {
     try {
       return moviesRepository.getMoviesDetails(movieId);
     } catch (e) {
@@ -26,6 +26,6 @@ class MoviesDetailsUseCaseImpl implements MoviesDetailsUseCase {
       }
     }
 
-    throw UnimplementedError();
+    return null;
   }
 }

@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chillflix2/core/utils/screen_util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/utils/screen_util.dart';
 import '../../data/constants/api_constants.dart';
 import '../../data/models/movies_details.dart';
 
@@ -53,10 +54,10 @@ class BigPosterWidget extends StatelessWidget {
                               data.title!,
                               maxLines: 2,
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
+                              style: GoogleFonts.raleway(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 30,
+                                fontSize: 35,
                               ),
                             ),
                             SizedBox(
@@ -80,7 +81,7 @@ class BigPosterWidget extends StatelessWidget {
                                         child: Center(
                                           child: Text(
                                             data.genres![index].name!,
-                                            style: GoogleFonts.roboto(fontSize: 13),
+                                            style: GoogleFonts.roboto(fontSize: 13, color: Colors.white),
                                           ),
                                         ),
                                       ),
@@ -89,9 +90,94 @@ class BigPosterWidget extends StatelessWidget {
                                 },
                               ),
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Consumer(
+                                  builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                                    return SizedBox(
+                                      height: 68,
+                                      child: Column(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(
+                                              CupertinoIcons.add,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Text(
+                                            "My List",
+                                            style: GoogleFonts.roboto(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                                Consumer(
+                                  builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                                    return SizedBox(
+                                      height: 68,
+                                      child: Column(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(
+                                              CupertinoIcons.square_stack_fill,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          Text(
+                                            "Watchlist",
+                                            style: GoogleFonts.roboto(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                            // Consumer(
+                            //   builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                            //     return SizedBox(
+                            //       height: 50,
+                            //       width: ScreenSize.width(context) * 0.7,
+                            //       child: ElevatedButton(
+                            //         style: ButtonStyle(
+                            //           backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            //           shape: MaterialStateProperty.all<OutlinedBorder>(
+                            //             RoundedRectangleBorder(
+                            //               borderRadius: BorderRadius.circular(10),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //         onPressed: () {},
+                            //         child: Text(
+                            //           "Play Trailer",
+                            //           style: GoogleFonts.raleway(
+                            //             fontWeight: FontWeight.w600,
+                            //             fontSize: 18,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     );
+                            //   },
+                            // ),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             Text(
                               data.overview!,
                               textAlign: TextAlign.center,
+                              style: GoogleFonts.roboto(
+                                color: Colors.white,
+                              ),
                             ),
                           ],
                         ),

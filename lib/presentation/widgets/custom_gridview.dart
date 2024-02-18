@@ -5,8 +5,8 @@ import '../../data/constants/api_constants.dart';
 import '../../data/models/movies.dart';
 import '../pages/details_screen.dart';
 
-class customGridView extends StatelessWidget {
-  customGridView({
+class CustomGridView extends StatelessWidget {
+  CustomGridView({
     super.key,
     this.scrollController,
     this.data,

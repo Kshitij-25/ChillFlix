@@ -53,7 +53,7 @@ class UpcomingScreen extends ConsumerWidget {
   bodyWidget(context, ScrollController scrollController, AsyncValue<List<Movies>?> upcomingAsyncValue) {
     return upcomingAsyncValue.when(
       data: (upcoming) {
-        return customGridView(
+        return CustomGridView(
           scrollController: scrollController,
           data: upcoming,
         );

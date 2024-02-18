@@ -14,7 +14,7 @@ class SimilarMoviesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return similarMoviesAsyncValue!.when(
       data: (similarMovies) {
-        return customGridView(
+        return CustomGridView(
           scrollController: controller,
           itemCount: 4,
           data: similarMovies,

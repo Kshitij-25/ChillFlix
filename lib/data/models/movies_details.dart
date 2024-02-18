@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'genrelist.dart';
+import 'genre_list.dart';
 
 part 'movies_details.freezed.dart';
 part 'movies_details.g.dart';

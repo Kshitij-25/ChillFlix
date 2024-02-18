@@ -1,7 +1,6 @@
-import 'package:chillflix2/main.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import 'main.dart';
 import 'presentation/pages/details_screen.dart';
 import 'presentation/pages/homepage.dart';
 import 'presentation/pages/login.dart';
@@ -25,13 +24,15 @@ class MainApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      darkTheme: FlexThemeData.dark(
-        darkIsTrueBlack: true,
+      // darkTheme: ThemeData.dark(),
+      darkTheme: ThemeData(
+        colorScheme: const ColorScheme.dark(background: Colors.black, primary: Colors.white),
       ),
-      theme: ThemeData.light(),
+      theme: ThemeData(
+        colorScheme: const ColorScheme.light(background: Colors.white, primary: Colors.black),
+      ),
       themeMode: ThemeMode.system,
       initialRoute: initialRoute,
-      // initialRoute: HomePage.route,
       routes: {
         LoginScreen.route: (context) => LoginScreen(),
         HomePage.route: (context) => const HomePage(),

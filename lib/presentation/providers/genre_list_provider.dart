@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/usecases/genre_usecase.dart';
-import '../../data/models/genrelist.dart';
-import '../../data/repository/genre_repo.dart';
+import '../../data/models/genre_list.dart';
+import '../../data/repositories/genre_repo.dart';
 import '../../data/sources/genre_api_service.dart';
 
 // Provider for GenreApiService
@@ -29,4 +29,4 @@ final genreListProvider = FutureProvider<List<GenreList>?>((ref) async {
 });
 
 // Define a provider to store the selected genre index
-final activeGenreIndexProvider = StateProvider<int?>((ref) => null);
+final activeGenreIndexProvider = StateProvider<int?>((ref) => 0);

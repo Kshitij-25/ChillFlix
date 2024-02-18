@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chillflix2/presentation/pages/details_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../data/constants/api_constants.dart';
 import '../../data/models/movies.dart';
+import '../pages/details_screen.dart';
 
 class SectionContainer extends ConsumerWidget {
   SectionContainer({super.key, this.data, this.title, this.onPressed});
