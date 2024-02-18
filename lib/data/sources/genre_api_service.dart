@@ -1,4 +1,4 @@
-import 'package:chillflix2/data/models/genrelist.dart';
+import 'package:chillflix2/data/models/genre_list.dart';
 import 'package:chillflix2/main.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:chillflix2/data/repository/movies_repository.dart';
+import 'package:chillflix2/data/repositories/movies_repo.dart';
 
 import '../../data/models/movies.dart';
 import '../../main.dart';
@@ -14,7 +14,7 @@ class DiscoverMoviesUseCaseImpl implements DiscoverMoviesUseCase {
   final MoviesRepository _moviesRepository;
 
   @override
-  Future<List<Movies>?>? discoverMovies(genresId) {
+  Future<List<Movies>?>? discoverMovies(genresId) async {
     try {
       return _moviesRepository.discoverMovies(genresId);
     } catch (e) {

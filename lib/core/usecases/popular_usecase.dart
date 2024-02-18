@@ -1,7 +1,7 @@
 import 'package:chillflix2/data/models/movies.dart';
 import 'package:chillflix2/presentation/state_notifiers/popular_state_notifier.dart';
 
-import '../../data/repository/movies_repository.dart';
+import '../../data/repositories/movies_repo.dart';
 import '../../main.dart';
 import '../error/failure.dart';
 

@@ -1,6 +1,9 @@
 import 'package:chillflix2/core/utils/screen_util.dart';
 import 'package:chillflix2/data/sources/auth_data_source.dart';
+import 'package:chillflix2/main.dart';
 import 'package:chillflix2/presentation/pages/homepage.dart';
+import 'package:chillflix2/presentation/providers/account_details_provider.dart';
+import 'package:chillflix2/presentation/providers/auth_providers.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -107,13 +110,24 @@ class LoginScreen extends StatelessWidget {
                               backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                             ),
                             onPressed: () async {
-                              // final bool? status = await ref.read(authUseCaseProvider).loginUser(userNameCont.text, passwordCont.text);
-                              final bool? status = await AuthDataSource().loginUser(userNameCont.text, passwordCont.text);
+                              final loginResult = await ref.watch(loginProvider({
+                                "username": userNameCont.text,
+                                "password": passwordCont.text,
+                              }).future);
+
+                              final bool? status = loginResult;
+
                               if (status == true) {
                                 print("LOGIN STATUS: $status");
                                 userNameCont.clear();
                                 passwordCont.clear();
                                 Navigator.of(context).pushReplacementNamed(HomePage.route);
+
+                                final accountDetails = await ref.watch(accountDeatilsProvider.future);
+
+                                await prefs!.setString("NAME", accountDetails!.name!);
+                                await prefs!.setString("USERNAME", accountDetails.username!);
+                                await prefs!.setInt("ACCOUNT_ID", accountDetails.id!);
                               }
                             },
                             child: Text(

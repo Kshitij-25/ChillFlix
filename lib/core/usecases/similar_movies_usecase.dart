@@ -1,5 +1,5 @@
 import '../../data/models/movies.dart';
-import '../../data/repository/movies_repository.dart';
+import '../../data/repositories/movies_repo.dart';
 import '../../main.dart';
 import '../error/failure.dart';
 
@@ -12,7 +12,7 @@ class SimilarMoviesUseCaseImpl implements SimilarMoviesUseCase {
   final MoviesRepository moviesRepository;
 
   @override
-  Future<List<Movies>?>? getSimilarMovies(movieId) {
+  Future<List<Movies>?>? getSimilarMovies(movieId) async {
     try {
       return moviesRepository.getSimilarMovies(movieId);
     } catch (e) {
@@ -25,6 +25,6 @@ class SimilarMoviesUseCaseImpl implements SimilarMoviesUseCase {
       }
     }
 
-    throw UnimplementedError();
+    return null;
   }
 }

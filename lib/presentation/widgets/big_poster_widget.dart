@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chillflix2/core/utils/screen_util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/utils/screen_util.dart';
 import '../../data/constants/api_constants.dart';
 import '../../data/models/movies_details.dart';
 
@@ -89,9 +90,44 @@ class BigPosterWidget extends StatelessWidget {
                                 },
                               ),
                             ),
-                            // const SizedBox(
-                            //   height: 10,
-                            // ),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Consumer(
+                                  builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                                    return SizedBox(
+                                      height: 65,
+                                      child: Column(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(CupertinoIcons.add),
+                                          ),
+                                          const Text("My List")
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                                Consumer(
+                                  builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                                    return SizedBox(
+                                      height: 65,
+                                      child: Column(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const Icon(CupertinoIcons.square_stack_fill),
+                                          ),
+                                          const Text("Watchlist")
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                             // Consumer(
                             //   builder: (BuildContext context, WidgetRef ref, Widget? child) {
                             //     return SizedBox(
@@ -106,9 +142,7 @@ class BigPosterWidget extends StatelessWidget {
                             //             ),
                             //           ),
                             //         ),
-                            //         onPressed: () {
-
-                            //         },
+                            //         onPressed: () {},
                             //         child: Text(
                             //           "Play Trailer",
                             //           style: GoogleFonts.raleway(
@@ -120,9 +154,9 @@ class BigPosterWidget extends StatelessWidget {
                             //     );
                             //   },
                             // ),
-                            // const SizedBox(
-                            //   height: 10,
-                            // ),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             Text(
                               data.overview!,
                               textAlign: TextAlign.center,

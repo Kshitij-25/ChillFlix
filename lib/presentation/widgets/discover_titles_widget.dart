@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../data/models/genrelist.dart';
+import '../../data/models/genre_list.dart';
 import '../../data/models/movies.dart';
 import 'custom_gridview.dart';
 

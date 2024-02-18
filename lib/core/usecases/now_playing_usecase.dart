@@ -1,5 +1,5 @@
 import 'package:chillflix2/data/models/movies.dart';
-import 'package:chillflix2/data/repository/movies_repository.dart';
+import 'package:chillflix2/data/repositories/movies_repo.dart';
 import 'package:chillflix2/presentation/state_notifiers/now_playing_state_notifier.dart';
 
 import '../../main.dart';

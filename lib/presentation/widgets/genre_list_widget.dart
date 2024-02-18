@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/models/genrelist.dart';
+import '../../data/models/genre_list.dart';
 import '../providers/genre_list_provider.dart';
 
 class GenreListWidget extends StatelessWidget {

@@ -1,5 +1,5 @@
 import '../../data/models/movies.dart';
-import '../../data/repository/movies_repository.dart';
+import '../../data/repositories/movies_repo.dart';
 import '../../main.dart';
 import '../error/failure.dart';
 
@@ -12,7 +12,7 @@ class UpcomingMoviesUseCaseImpl implements UpcomingMoviesUseCase {
   final MoviesRepository moviesRepository;
 
   @override
-  Future<List<Movies>?>? getUpcomingMovies(page) {
+  Future<List<Movies>?>? getUpcomingMovies(page) async {
     try {
       return moviesRepository.getUpcomingMovies(page);
     } catch (e) {
@@ -25,6 +25,6 @@ class UpcomingMoviesUseCaseImpl implements UpcomingMoviesUseCase {
       }
     }
 
-    throw UnimplementedError();
+    return null;
   }
 }

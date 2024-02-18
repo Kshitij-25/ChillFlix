@@ -1,6 +1,6 @@
 import 'package:chillflix2/data/models/movies.dart';
 
-import '../../data/repository/movies_repository.dart';
+import '../../data/repositories/movies_repo.dart';
 import '../../main.dart';
 import '../error/failure.dart';
 
@@ -13,7 +13,7 @@ class TrendingUseCaseImpl implements TrendingUseCase {
   final MoviesRepository moviesRepository;
 
   @override
-  Future<List<Movies>?>? getAllTrending() {
+  Future<List<Movies>?>? getAllTrending() async {
     try {
       return moviesRepository.getAllTrending();
     } catch (e) {

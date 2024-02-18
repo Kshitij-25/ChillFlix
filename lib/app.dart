@@ -1,7 +1,7 @@
-import 'package:chillflix2/main.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
+import 'main.dart';
 import 'presentation/pages/details_screen.dart';
 import 'presentation/pages/homepage.dart';
 import 'presentation/pages/login.dart';
@@ -28,10 +28,11 @@ class MainApp extends StatelessWidget {
       darkTheme: FlexThemeData.dark(
         darkIsTrueBlack: true,
       ),
-      theme: ThemeData.light(),
+      theme: FlexThemeData.light(
+        lightIsWhite: true,
+      ),
       themeMode: ThemeMode.system,
       initialRoute: initialRoute,
-      // initialRoute: HomePage.route,
       routes: {
         LoginScreen.route: (context) => LoginScreen(),
         HomePage.route: (context) => const HomePage(),

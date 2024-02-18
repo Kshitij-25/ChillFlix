@@ -1,14 +1,11 @@
-import 'package:chillflix2/core/utils/screen_util.dart';
-import 'package:chillflix2/data/sources/auth_data_source.dart';
-import 'package:chillflix2/presentation/pages/login.dart';
-import 'package:chillflix2/presentation/widgets/genre_list_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/models/genrelist.dart';
-import '../../main.dart';
+import '../../core/utils/screen_util.dart';
+import '../../data/models/genre_list.dart';
 import '../providers/genre_list_provider.dart';
+import 'genre_list_widget.dart';
 
 class CustomSidebar extends ConsumerWidget {
   CustomSidebar({super.key, this.genreListAsyncValue});
@@ -35,7 +32,6 @@ class CustomSidebar extends ConsumerWidget {
           IconButton(
             icon: const Icon(
               CupertinoIcons.home,
-              color: Colors.white,
             ),
             onPressed: () {
               ref.read(activeGenreIndexProvider.notifier).state = 0;
@@ -44,7 +40,6 @@ class CustomSidebar extends ConsumerWidget {
           IconButton(
             icon: const Icon(
               CupertinoIcons.search,
-              color: Colors.white,
             ),
             onPressed: () {
               ref.read(activeGenreIndexProvider.notifier).state = 1;
@@ -53,14 +48,8 @@ class CustomSidebar extends ConsumerWidget {
           IconButton(
             icon: const Icon(
               CupertinoIcons.person_solid,
-              color: Colors.white,
             ),
             onPressed: () async {
-              var sessionId = prefs!.getString("sessionId");
-              bool? status = await AuthDataSource().logoutUser(sessionId);
-              if (status == true) {
-                Navigator.of(context).pushReplacementNamed(LoginScreen.route);
-              }
               ref.read(activeGenreIndexProvider.notifier).state = 2;
             },
           ),

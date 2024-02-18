@@ -4,6 +4,7 @@ import 'package:chillflix2/presentation/providers/search_providers.dart';
 import 'package:chillflix2/presentation/widgets/custom_gridview.dart';
 import 'package:chillflix2/presentation/widgets/custom_sidebar.dart';
 import 'package:chillflix2/presentation/widgets/home_widgets.dart';
+import 'package:chillflix2/presentation/widgets/profile_widget.dart';
 import 'package:chillflix2/presentation/widgets/search_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -43,14 +44,17 @@ class HomePage extends StatelessWidget {
                   : activeGenreIndex == 1
                       ? SearchWidget(
                           onChanged: (value) {
+                            print(value);
                             ref.read(multiSearchProvider(value));
                           },
                         )
-                      : DiscoverTitlesWidget(
-                          discoverMovies: discoverMovies,
-                          genreListAsyncValue: genreListAsyncValue,
-                          activeGenreIndex: activeGenreIndex,
-                        )
+                      : activeGenreIndex == 2
+                          ? ProfileWidget()
+                          : DiscoverTitlesWidget(
+                              discoverMovies: discoverMovies,
+                              genreListAsyncValue: genreListAsyncValue,
+                              activeGenreIndex: activeGenreIndex,
+                            )
             ],
           );
         },

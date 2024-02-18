@@ -1,10 +1,10 @@
-import 'package:chillflix2/core/utils/screen_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../../core/utils/screen_util.dart';
 import '../../data/models/videos_model.dart';
 
 class TrailerVideosWidget extends StatelessWidget {

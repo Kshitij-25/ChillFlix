@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:chillflix2/core/utils/screen_util.dart';
-import 'package:chillflix2/presentation/providers/trending_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/utils/screen_util.dart';
 import '../../data/constants/api_constants.dart';
 import '../../data/models/movies.dart';
 import '../pages/details_screen.dart';
+import '../providers/trending_provider.dart';
 
 class TrendingTodayCard extends ConsumerWidget {
   const TrendingTodayCard({super.key});
@@ -54,10 +54,6 @@ class TrendingTodayCard extends ConsumerWidget {
                           errorWidget: (context, url, error) => const Icon(Icons.error),
                           fit: BoxFit.cover,
                         ),
-                        // child: Image.network(
-                        //   "$${trendingMovies[index].posterPath}",
-                        //   fit: BoxFit.cover,
-                        // ),
                       ),
                     ),
                     Positioned(

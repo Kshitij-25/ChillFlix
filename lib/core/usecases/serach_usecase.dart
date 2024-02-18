@@ -1,4 +1,4 @@
-import 'package:chillflix2/data/repository/search_repo.dart';
+import 'package:chillflix2/data/repositories/search_repo.dart';
 
 import '../../data/models/movies.dart';
 import '../../main.dart';
@@ -14,7 +14,7 @@ class SearchUseCaseImpl implements SearchUseCase {
   final SearchRepository _searchRepository;
 
   @override
-  Future<List<Movies>?>? multiSearch(query) {
+  Future<List<Movies>?>? multiSearch(query) async {
     try {
       return _searchRepository.multiSearch(query);
     } catch (e) {

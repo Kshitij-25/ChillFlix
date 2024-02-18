@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/usecases/serach_usecase.dart';
 import '../../data/models/movies.dart';
-import '../../data/repository/search_repo.dart';
+import '../../data/repositories/search_repo.dart';
 import '../../data/sources/search_data_source.dart';
 
 final searchDataSourceProvider = Provider<SearchDataSource>((ref) {
