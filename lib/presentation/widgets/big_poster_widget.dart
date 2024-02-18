@@ -81,7 +81,7 @@ class BigPosterWidget extends StatelessWidget {
                                         child: Center(
                                           child: Text(
                                             data.genres![index].name!,
-                                            style: GoogleFonts.roboto(fontSize: 13),
+                                            style: GoogleFonts.roboto(fontSize: 13, color: Colors.white),
                                           ),
                                         ),
                                       ),
@@ -90,21 +90,28 @@ class BigPosterWidget extends StatelessWidget {
                                 },
                               ),
                             ),
-
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Consumer(
                                   builder: (BuildContext context, WidgetRef ref, Widget? child) {
                                     return SizedBox(
-                                      height: 65,
+                                      height: 68,
                                       child: Column(
                                         children: [
                                           IconButton(
                                             onPressed: () {},
-                                            icon: const Icon(CupertinoIcons.add),
+                                            icon: const Icon(
+                                              CupertinoIcons.add,
+                                              color: Colors.white,
+                                            ),
                                           ),
-                                          const Text("My List")
+                                          Text(
+                                            "My List",
+                                            style: GoogleFonts.roboto(
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     );
@@ -113,14 +120,22 @@ class BigPosterWidget extends StatelessWidget {
                                 Consumer(
                                   builder: (BuildContext context, WidgetRef ref, Widget? child) {
                                     return SizedBox(
-                                      height: 65,
+                                      height: 68,
                                       child: Column(
                                         children: [
                                           IconButton(
                                             onPressed: () {},
-                                            icon: const Icon(CupertinoIcons.square_stack_fill),
+                                            icon: const Icon(
+                                              CupertinoIcons.square_stack_fill,
+                                              color: Colors.white,
+                                            ),
                                           ),
-                                          const Text("Watchlist")
+                                          Text(
+                                            "Watchlist",
+                                            style: GoogleFonts.roboto(
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     );
@@ -160,6 +175,9 @@ class BigPosterWidget extends StatelessWidget {
                             Text(
                               data.overview!,
                               textAlign: TextAlign.center,
+                              style: GoogleFonts.roboto(
+                                color: Colors.white,
+                              ),
                             ),
                           ],
                         ),

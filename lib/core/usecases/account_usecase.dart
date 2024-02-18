@@ -6,6 +6,7 @@ import '../error/failure.dart';
 
 abstract class AccountUseCase {
   Future<AccountDetails?> getAccountDetails();
+  Future<String?> addToFavorite(mediaType, mediaId, isFav);
 }
 
 class AccountUseCaseImpl implements AccountUseCase {
@@ -23,7 +24,23 @@ class AccountUseCaseImpl implements AccountUseCase {
       } else if (e is NetworkFailure) {
         throw NetworkFailure(networkFailureMessage: e.message);
       } else {
-        logger.e('SearchUseCase - multiSearch : $e');
+        logger.e('AccountUseCase - getAccountDetails : $e');
+      }
+    }
+    return null;
+  }
+
+  @override
+  Future<String?> addToFavorite(mediaType, mediaId, isFav) async {
+    try {
+      return _accountRepository.addToFavorite(mediaType, mediaId, isFav);
+    } catch (e) {
+      if (e is ServerFailure) {
+        throw ServerFailure(serverFailureMessage: e.message);
+      } else if (e is NetworkFailure) {
+        throw NetworkFailure(networkFailureMessage: e.message);
+      } else {
+        logger.e('AccountUseCase - addToFavorite : $e');
       }
     }
     return null;

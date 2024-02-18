@@ -1,10 +1,8 @@
 import 'package:chillflix2/core/utils/screen_util.dart';
-import 'package:chillflix2/data/sources/auth_data_source.dart';
 import 'package:chillflix2/main.dart';
 import 'package:chillflix2/presentation/pages/homepage.dart';
 import 'package:chillflix2/presentation/providers/account_details_provider.dart';
 import 'package:chillflix2/presentation/providers/auth_providers.dart';
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,7 +37,7 @@ class LoginScreen extends StatelessWidget {
             child: Container(
               height: 100,
               width: 100,
-              color: Colors.black,
+              color: Theme.of(context).brightness == Brightness.dark ? Colors.black : Colors.white,
             ),
           ),
         ),
@@ -47,7 +45,7 @@ class LoginScreen extends StatelessWidget {
           bottom: 0,
           child: Container(
             decoration: BoxDecoration(
-              color: FlexThemeData.dark().highlightColor,
+              color: ThemeData.dark().highlightColor,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20),
                 topRight: Radius.circular(20),
@@ -108,6 +106,11 @@ class LoginScreen extends StatelessWidget {
                           child: ElevatedButton(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                              shape: MaterialStateProperty.all<OutlinedBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
                             ),
                             onPressed: () async {
                               final loginResult = await ref.watch(loginProvider({

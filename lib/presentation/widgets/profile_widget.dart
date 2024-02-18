@@ -6,7 +6,7 @@ import '../../core/utils/screen_util.dart';
 import '../../main.dart';
 import '../pages/login.dart';
 import '../providers/auth_providers.dart';
-import 'section_container.dart';
+import '../providers/genre_list_provider.dart';
 
 class ProfileWidget extends StatelessWidget {
   ProfileWidget({super.key});
@@ -91,6 +91,11 @@ class ProfileWidget extends StatelessWidget {
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
                   ),
                   onPressed: () async {
                     var sessionId = prefs!.getString("sessionId");
@@ -98,6 +103,7 @@ class ProfileWidget extends StatelessWidget {
                     bool? status = await ref.watch(logoutProvider(sessionId!).future);
                     if (status == true) {
                       Navigator.of(context).pushReplacementNamed(LoginScreen.route);
+                      ref.read(activeGenreIndexProvider.notifier).state = 0;
                     }
                   },
                   child: Text(

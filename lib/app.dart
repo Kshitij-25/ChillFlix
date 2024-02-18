@@ -1,4 +1,3 @@
-import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import 'main.dart';
@@ -25,11 +24,12 @@ class MainApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      darkTheme: FlexThemeData.dark(
-        darkIsTrueBlack: true,
+      // darkTheme: ThemeData.dark(),
+      darkTheme: ThemeData(
+        colorScheme: const ColorScheme.dark(background: Colors.black, primary: Colors.white),
       ),
-      theme: FlexThemeData.light(
-        lightIsWhite: true,
+      theme: ThemeData(
+        colorScheme: const ColorScheme.light(background: Colors.white, primary: Colors.black),
       ),
       themeMode: ThemeMode.system,
       initialRoute: initialRoute,

@@ -9,4 +9,8 @@ class AccountRepository {
   Future<AccountDetails?> getAccountDetails() async {
     return _accountDataSource.getAccountDetails();
   }
+
+  Future<String?> addToFavorite(mediaType, mediaId, isFav) async {
+    return _accountDataSource.addToFavorite(mediaType, mediaId, isFav);
+  }
 }

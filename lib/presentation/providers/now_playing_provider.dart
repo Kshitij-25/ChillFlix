@@ -1,13 +1,12 @@
-import 'package:chillflix2/core/usecases/now_playing_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/usecases/movies_usecase.dart';
 import '../../data/models/movies.dart';
-import '../state_notifiers/now_playing_state_notifier.dart';
 import 'common_providers.dart';
 
-final nowPlayingUseCaseProvider = Provider<NowPlayingUseCaseImpl>((ref) {
+final nowPlayingUseCaseProvider = Provider<MoviesUseCase>((ref) {
   final nowPlayingRepository = ref.read(moviesDeatilsRepositoryProvider);
-  return NowPlayingUseCaseImpl(nowPlayingRepository, ref.read(nowPlayingStateNotifierProvider.notifier));
+  return MoviesUseCaseImpl(nowPlayingRepository);
 });
 
 final nowPlaying = FutureProvider.autoDispose<List<Movies>?>((ref) async {
