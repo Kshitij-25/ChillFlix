@@ -52,7 +52,7 @@ class PopularScreen extends ConsumerWidget {
   bodyWidget(context, ScrollController scrollController, AsyncValue<List<Movies>?> popularAsyncValue) {
     return popularAsyncValue.when(
       data: (popular) {
-        return customGridView(
+        return CustomGridView(
           scrollController: scrollController,
           data: popular,
         );

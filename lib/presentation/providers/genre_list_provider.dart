@@ -29,4 +29,4 @@ final genreListProvider = FutureProvider<List<GenreList>?>((ref) async {
 });
 
 // Define a provider to store the selected genre index
-final activeGenreIndexProvider = StateProvider<int?>((ref) => null);
+final activeGenreIndexProvider = StateProvider<int?>((ref) => 0);

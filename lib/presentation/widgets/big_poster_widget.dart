@@ -53,10 +53,10 @@ class BigPosterWidget extends StatelessWidget {
                               data.title!,
                               maxLines: 2,
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
+                              style: GoogleFonts.raleway(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 30,
+                                fontSize: 35,
                               ),
                             ),
                             SizedBox(
@@ -89,6 +89,40 @@ class BigPosterWidget extends StatelessWidget {
                                 },
                               ),
                             ),
+                            // const SizedBox(
+                            //   height: 10,
+                            // ),
+                            // Consumer(
+                            //   builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                            //     return SizedBox(
+                            //       height: 50,
+                            //       width: ScreenSize.width(context) * 0.7,
+                            //       child: ElevatedButton(
+                            //         style: ButtonStyle(
+                            //           backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                            //           shape: MaterialStateProperty.all<OutlinedBorder>(
+                            //             RoundedRectangleBorder(
+                            //               borderRadius: BorderRadius.circular(10),
+                            //             ),
+                            //           ),
+                            //         ),
+                            //         onPressed: () {
+
+                            //         },
+                            //         child: Text(
+                            //           "Play Trailer",
+                            //           style: GoogleFonts.raleway(
+                            //             fontWeight: FontWeight.w600,
+                            //             fontSize: 18,
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     );
+                            //   },
+                            // ),
+                            // const SizedBox(
+                            //   height: 10,
+                            // ),
                             Text(
                               data.overview!,
                               textAlign: TextAlign.center,

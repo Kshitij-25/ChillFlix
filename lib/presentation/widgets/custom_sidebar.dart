@@ -6,11 +6,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../data/models/genrelist.dart';
 import '../../main.dart';
 import '../providers/genre_list_provider.dart';
 
 class CustomSidebar extends ConsumerWidget {
-  const CustomSidebar({super.key});
+  CustomSidebar({super.key, this.genreListAsyncValue});
+
+  AsyncValue<List<GenreList>?>? genreListAsyncValue;
+  void Function()? onTap;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,7 +38,7 @@ class CustomSidebar extends ConsumerWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              ref.read(activeGenreIndexProvider.notifier).state = -1;
+              ref.read(activeGenreIndexProvider.notifier).state = 0;
             },
           ),
           IconButton(
@@ -43,7 +47,7 @@ class CustomSidebar extends ConsumerWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              ref.read(activeGenreIndexProvider.notifier).state = -1;
+              ref.read(activeGenreIndexProvider.notifier).state = 1;
             },
           ),
           IconButton(
@@ -57,11 +61,14 @@ class CustomSidebar extends ConsumerWidget {
               if (status == true) {
                 Navigator.of(context).pushReplacementNamed(LoginScreen.route);
               }
-              ref.read(activeGenreIndexProvider.notifier).state = -1;
+              ref.read(activeGenreIndexProvider.notifier).state = 2;
             },
           ),
           Expanded(
-            child: GenreListWidget(ref: ref),
+            child: GenreListWidget(
+              ref: ref,
+              genreListAsyncValue: genreListAsyncValue,
+            ),
           ),
         ],
       ),

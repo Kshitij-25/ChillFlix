@@ -35,4 +35,8 @@ class MoviesRepository {
   Future<List<VideosModel>?> getVideos(movieId) async {
     return _moviesRemoteDataSource.getVideos(movieId);
   }
+
+  Future<List<Movies>?> discoverMovies(genresId) async {
+    return _moviesRemoteDataSource.discoverMovies(genresId);
+  }
 }

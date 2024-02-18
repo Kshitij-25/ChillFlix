@@ -53,7 +53,7 @@ class NowPlayingScreen extends ConsumerWidget {
   bodyWidget(context, ScrollController scrollController, AsyncValue<List<Movies>?> nowPlayingAsyncValue) {
     return nowPlayingAsyncValue.when(
       data: (nowPlaying) {
-        return customGridView(
+        return CustomGridView(
           scrollController: scrollController,
           data: nowPlaying,
         );
