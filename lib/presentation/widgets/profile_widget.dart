@@ -30,7 +30,7 @@ class ProfileWidget extends StatelessWidget {
                   'Profile',
                   style: GoogleFonts.raleway(
                     fontSize: 27,
-                    color: Colors.red,
+                    color: Colors.red.shade900,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -100,11 +100,11 @@ class ProfileWidget extends StatelessWidget {
                   onPressed: () async {
                     var sessionId = prefs!.getString("sessionId");
                     print(sessionId);
-                    bool? status = await ref.watch(logoutProvider(sessionId!).future);
-                    if (status == true) {
-                      Navigator.of(context).pushReplacementNamed(LoginScreen.route);
-                      ref.read(activeGenreIndexProvider.notifier).state = 0;
-                    }
+                    // bool? status = await ref.watch(logoutProvider(sessionId!).future);
+                    // if (status == true) {
+                    //   Navigator.of(context).pushReplacementNamed(LoginScreen.route);
+                    //   ref.read(activeGenreIndexProvider.notifier).state = 0;
+                    // }
                   },
                   child: Text(
                     "LOGOUT",
