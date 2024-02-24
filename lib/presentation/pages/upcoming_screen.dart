@@ -41,7 +41,7 @@ class UpcomingScreen extends ConsumerWidget {
           "Upcoming Movies",
           style: GoogleFonts.raleway(
             fontSize: 27,
-            color: Colors.red,
+            color: Colors.red.shade900,
             fontWeight: FontWeight.bold,
           ),
         ),

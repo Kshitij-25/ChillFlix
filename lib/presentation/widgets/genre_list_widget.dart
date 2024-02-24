@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../data/models/genre_list.dart';
 import '../providers/genre_list_provider.dart';
@@ -34,7 +35,10 @@ class GenreListWidget extends StatelessWidget {
                       quarterTurns: -1,
                       child: Text(
                         genre.name!,
-                        style: const TextStyle(fontSize: 18),
+                        style: GoogleFonts.raleway(
+                          fontSize: index + 3 == activeGenreIndex ? 20 : 18,
+                          fontWeight: index + 3 == activeGenreIndex ? FontWeight.bold : null,
+                        ),
                       ),
                     ),
                   ),

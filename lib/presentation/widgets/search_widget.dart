@@ -22,7 +22,7 @@ class SearchWidget extends StatelessWidget {
               'Search',
               style: GoogleFonts.raleway(
                 fontSize: 27,
-                color: Colors.red,
+                color: Colors.red.shade900,
                 fontWeight: FontWeight.bold,
               ),
             ),

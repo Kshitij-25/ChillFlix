@@ -1,20 +1,19 @@
-import 'package:chillflix2/core/utils/app_utility.dart';
-import 'package:chillflix2/core/utils/screen_util.dart';
-import 'package:chillflix2/main.dart';
+import 'package:chillflix2/app.dart';
 import 'package:chillflix2/presentation/pages/homepage.dart';
-import 'package:chillflix2/presentation/pages/register_screen.dart';
-import 'package:chillflix2/presentation/providers/account_details_provider.dart';
-import 'package:chillflix2/presentation/providers/auth_providers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginScreen extends ConsumerWidget {
-  LoginScreen({super.key});
+import '../../core/utils/app_utility.dart';
+import '../../core/utils/screen_util.dart';
+import '../providers/auth_providers.dart';
 
-  static const route = "/loginScreen";
+class RegisterScreen extends ConsumerWidget {
+  RegisterScreen({super.key});
+
+  static const route = "/register";
 
   final _formKey = GlobalKey<FormState>();
 
@@ -91,6 +90,30 @@ class LoginScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      // controller: passwordCont,
+                      obscureText: authProvider.obscureConfirmPassword,
+                      initialValue: authProvider.password,
+                      onChanged: (value) => authProvider.password = value,
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        prefixIcon: const Icon(CupertinoIcons.lock_fill),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            authProvider.obscureConfirmPassword = !authProvider.obscureConfirmPassword;
+                          },
+                          icon: Icon(authProvider.obscureConfirmPassword ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill),
+                        ),
+                        hintText: "Confirm Password",
+                        label: const Text("Confirm Password"),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red.shade900),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
                       height: 40,
                     ),
                     Consumer(
@@ -100,7 +123,7 @@ class LoginScreen extends ConsumerWidget {
                           width: ScreenSize.width(context),
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(Colors.red.shade900),
+                              backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -110,34 +133,15 @@ class LoginScreen extends ConsumerWidget {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 try {
-                                  await authProvider.loginUser();
-                                  Navigator.of(context).pushReplacementNamed(HomePage.route);
+                                  await authProvider.registerUser();
+                                  Navigator.of(context).pushReplacementNamed(InitialPage.route);
                                 } catch (e) {
                                   AppUtility(context).error(e.toString());
                                 }
                               }
-                              // final loginResult = await ref.watch(loginProvider({
-                              //   "username": userNameCont.text,
-                              //   "password": passwordCont.text,
-                              // }).future);
-
-                              // final bool? status = loginResult;
-
-                              // if (status == true) {
-                              //   print("LOGIN STATUS: $status");
-                              //   userNameCont.clear();
-                              //   passwordCont.clear();
-                              //   Navigator.of(context).pushReplacementNamed(HomePage.route);
-
-                              //   final accountDetails = await ref.watch(accountDeatilsProvider.future);
-
-                              //   await prefs!.setString("NAME", accountDetails!.name!);
-                              //   await prefs!.setString("USERNAME", accountDetails.username!);
-                              //   await prefs!.setInt("ACCOUNT_ID", accountDetails.id!);
-                              // }
                             },
                             child: Text(
-                              "LOGIN",
+                              "REGISTER",
                               style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 18,
@@ -156,7 +160,6 @@ class LoginScreen extends ConsumerWidget {
                         const SizedBox(),
                         Consumer(
                           builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                            ValueNotifier userCredential = ValueNotifier('');
                             return SizedBox(
                               height: 55,
                               width: ScreenSize.width(context) * 0.93,
@@ -169,20 +172,13 @@ class LoginScreen extends ConsumerWidget {
                                     ),
                                   ),
                                 ),
-                                onPressed: () async {
-                                  try {
-                                    userCredential.value = await authProvider.loginWithGoogle();
-                                    Navigator.of(context).pushReplacementNamed(HomePage.route);
-                                  } catch (e) {
-                                    AppUtility(context).error(e.toString());
-                                  }
-                                },
+                                onPressed: () {},
                                 icon: const Icon(
                                   FontAwesomeIcons.google,
                                   color: Colors.black,
                                 ),
                                 label: Text(
-                                  "Login with Google",
+                                  "Register with Google",
                                   style: GoogleFonts.raleway(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 18,
@@ -191,31 +187,8 @@ class LoginScreen extends ConsumerWidget {
                                 ),
                               ),
                             );
-                            // IconButton.filled(
-                            //   padding: const EdgeInsets.all(25),
-                            //   onPressed: () {},
-                            //   icon: const Icon(FontAwesomeIcons.google),
-                            // );
                           },
                         ),
-                        // Consumer(
-                        //   builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                        //     return IconButton.filled(
-                        //       padding: const EdgeInsets.all(25),
-                        //       onPressed: () {},
-                        //       icon: const Icon(FontAwesomeIcons.facebook),
-                        //     );
-                        //   },
-                        // ),
-                        // Consumer(
-                        //   builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                        //     return IconButton.filled(
-                        //       padding: const EdgeInsets.all(25),
-                        //       onPressed: () {},
-                        //       icon: const Icon(FontAwesomeIcons.apple),
-                        //     );
-                        //   },
-                        // ),
                         const SizedBox(),
                       ],
                     ),
@@ -224,9 +197,9 @@ class LoginScreen extends ConsumerWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(RegisterScreen.route);
+                        Navigator.of(context).pop();
                       },
-                      child: const Text("New User? Register"),
+                      child: const Text("Already Registered? Login"),
                     ),
                   ],
                 ),

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/utils/screen_util.dart';
 import '../../data/models/genre_list.dart';
+import '../providers/auth_providers.dart';
 import '../providers/genre_list_provider.dart';
 import 'genre_list_widget.dart';
 
@@ -15,13 +16,14 @@ class CustomSidebar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authProvider = ref.watch(authChangeProvider);
     return Container(
       height: double.infinity,
       width: ScreenSize.width(context) * 0.12,
       padding: const EdgeInsets.symmetric(vertical: 5),
-      decoration: const BoxDecoration(
-        color: Colors.red,
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        color: Colors.red.shade900,
+        borderRadius: const BorderRadius.only(
           topRight: Radius.circular(25),
           bottomRight: Radius.circular(25),
         ),
@@ -50,6 +52,7 @@ class CustomSidebar extends ConsumerWidget {
               CupertinoIcons.person_solid,
             ),
             onPressed: () async {
+              authProvider.logout();
               ref.read(activeGenreIndexProvider.notifier).state = 2;
             },
           ),
