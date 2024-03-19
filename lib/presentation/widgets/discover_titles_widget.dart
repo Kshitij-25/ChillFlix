@@ -28,13 +28,10 @@ class DiscoverTitlesWidget extends StatelessWidget {
                 genreListAsyncValue!.value![activeGenreIndex! - 3].name!,
                 style: GoogleFonts.raleway(
                   fontSize: 27,
-                  color: Colors.red.shade900,
+                  color: Colors.red[900],
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
             ),
             CustomGridView(
               scrollController: scrollController,

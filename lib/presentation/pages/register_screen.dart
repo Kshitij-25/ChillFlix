@@ -1,14 +1,13 @@
-import 'package:chillflix2/app.dart';
-import 'package:chillflix2/presentation/pages/homepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/utils/app_utility.dart';
 import '../../core/utils/screen_util.dart';
 import '../providers/auth_providers.dart';
+import 'initial_screen.dart';
 
 class RegisterScreen extends ConsumerWidget {
   RegisterScreen({super.key});
@@ -20,13 +19,13 @@ class RegisterScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Colors.red.shade900,
+      backgroundColor: Colors.red[900],
       resizeToAvoidBottomInset: false,
       body: bodyWidget(context, ref),
     );
   }
 
-  bodyWidget(context, WidgetRef ref) {
+  bodyWidget(BuildContext context, WidgetRef ref) {
     final authProvider = ref.watch(authChangeProvider);
     return Stack(
       children: [
@@ -58,10 +57,29 @@ class RegisterScreen extends ConsumerWidget {
                       decoration: InputDecoration(
                         alignLabelWithHint: true,
                         prefixIcon: const Icon(CupertinoIcons.mail_solid),
+                        hintText: "Enter Username",
+                        label: const Text("Enter Username"),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red[900]!),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      // controller: userNameCont,
+                      keyboardType: TextInputType.emailAddress,
+                      initialValue: authProvider.email,
+                      onChanged: (value) => authProvider.email = value,
+                      validator: (value) => authProvider.emailValidate(value!),
+                      decoration: InputDecoration(
+                        alignLabelWithHint: true,
+                        prefixIcon: const Icon(CupertinoIcons.mail_solid),
                         hintText: "Enter Email",
                         label: const Text("Enter Email"),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red.shade900),
+                          borderSide: BorderSide(color: Colors.red[900]!),
                         ),
                       ),
                     ),
@@ -85,7 +103,7 @@ class RegisterScreen extends ConsumerWidget {
                         hintText: "Enter Password",
                         label: const Text("Enter Password"),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red.shade900),
+                          borderSide: BorderSide(color: Colors.red[900]!),
                         ),
                       ),
                     ),
@@ -109,7 +127,7 @@ class RegisterScreen extends ConsumerWidget {
                         hintText: "Confirm Password",
                         label: const Text("Confirm Password"),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red.shade900),
+                          borderSide: BorderSide(color: Colors.red[900]!),
                         ),
                       ),
                     ),
@@ -134,7 +152,7 @@ class RegisterScreen extends ConsumerWidget {
                               if (_formKey.currentState!.validate()) {
                                 try {
                                   await authProvider.registerUser();
-                                  Navigator.of(context).pushReplacementNamed(InitialPage.route);
+                                  context.go(InitialScreen.route);
                                 } catch (e) {
                                   AppUtility(context).error(e.toString());
                                 }
@@ -154,50 +172,50 @@ class RegisterScreen extends ConsumerWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const SizedBox(),
-                        Consumer(
-                          builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                            return SizedBox(
-                              height: 55,
-                              width: ScreenSize.width(context) * 0.93,
-                              child: ElevatedButton.icon(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
-                                ),
-                                onPressed: () {},
-                                icon: const Icon(
-                                  FontAwesomeIcons.google,
-                                  color: Colors.black,
-                                ),
-                                label: Text(
-                                  "Register with Google",
-                                  style: GoogleFonts.raleway(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                        const SizedBox(),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   children: [
+                    //     const SizedBox(),
+                    //     Consumer(
+                    //       builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                    //         return SizedBox(
+                    //           height: 55,
+                    //           width: ScreenSize.width(context) * 0.93,
+                    //           child: ElevatedButton.icon(
+                    //             style: ButtonStyle(
+                    //               backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                    //               shape: MaterialStateProperty.all<OutlinedBorder>(
+                    //                 RoundedRectangleBorder(
+                    //                   borderRadius: BorderRadius.circular(10),
+                    //                 ),
+                    //               ),
+                    //             ),
+                    //             onPressed: () {},
+                    //             icon: const Icon(
+                    //               FontAwesomeIcons.google,
+                    //               color: Colors.black,
+                    //             ),
+                    //             label: Text(
+                    //               "Register with Google",
+                    //               style: GoogleFonts.raleway(
+                    //                 fontWeight: FontWeight.w600,
+                    //                 fontSize: 18,
+                    //                 color: Colors.black,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         );
+                    //       },
+                    //     ),
+                    //     const SizedBox(),
+                    //   ],
+                    // ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        context.pop();
                       },
                       child: const Text("Already Registered? Login"),
                     ),

@@ -22,7 +22,7 @@ class CustomSidebar extends ConsumerWidget {
       width: ScreenSize.width(context) * 0.12,
       padding: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.red.shade900,
+        color: Colors.red[900],
         borderRadius: const BorderRadius.only(
           topRight: Radius.circular(25),
           bottomRight: Radius.circular(25),
@@ -52,7 +52,7 @@ class CustomSidebar extends ConsumerWidget {
               CupertinoIcons.person_solid,
             ),
             onPressed: () async {
-              authProvider.logout();
+              // authProvider.logout();
               ref.read(activeGenreIndexProvider.notifier).state = 2;
             },
           ),

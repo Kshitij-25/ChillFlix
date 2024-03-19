@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../pages/now_playing_screen.dart';
@@ -28,7 +29,7 @@ class HomeWidgets extends StatelessWidget {
                 'ChillFlix',
                 style: GoogleFonts.raleway(
                   fontSize: 27,
-                  color: Colors.red.shade900,
+                  color: Colors.red[900],
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -39,9 +40,8 @@ class HomeWidgets extends StatelessWidget {
                 title: "NOW PLAYING",
                 data: ref.watch(nowPlaying),
                 onPressed: () {
-                  Navigator.of(context).pushNamed(
+                  context.push(
                     NowPlayingScreen.route,
-                    arguments: ref.watch(nowPlaying),
                   );
                 },
               ),
@@ -51,10 +51,7 @@ class HomeWidgets extends StatelessWidget {
                 data: ref.watch(popular),
                 title: "POPULAR MOVIES",
                 onPressed: () {
-                  Navigator.of(context).pushNamed(
-                    PopularScreen.route,
-                    arguments: ref.watch(popular),
-                  );
+                  context.push(PopularScreen.route);
                 },
               ),
             ),
@@ -63,10 +60,7 @@ class HomeWidgets extends StatelessWidget {
                 data: ref.watch(upcomingMovies),
                 title: "UPCOMING MOVIES",
                 onPressed: () {
-                  Navigator.of(context).pushNamed(
-                    UpcomingScreen.route,
-                    arguments: ref.watch(upcomingMovies),
-                  );
+                  context.push(UpcomingScreen.route);
                 },
               ),
             ),

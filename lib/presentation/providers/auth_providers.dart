@@ -1,47 +1,18 @@
-// import 'package:chillflix2/core/usecases/auth_usecase.dart';
-// import 'package:chillflix2/data/repositories/auth_repo.dart';
-// import 'package:chillflix2/data/sources/auth_data_source.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// final authDataSourceProvider = Provider<AuthDataSource>((ref) {
-//   return AuthDataSource();
-// });
-
-// final authRepositoryProvider = Provider<AuthRepository>((ref) {
-//   final authDataSource = ref.read(authDataSourceProvider);
-//   return AuthRepository(authDataSource);
-// });
-
-// final authUseCaseProvider = FutureProvider<AuthUseCase>((ref) {
-//   final authRepository = ref.read(authRepositoryProvider);
-//   return AuthUseCaseImpl(authRepository);
-// });
-
-// final loginProvider = FutureProvider.family<bool?, Map<String, dynamic>>((ref, credentails) async {
-//   final authUseCase = await ref.read(authUseCaseProvider.future);
-//   var username = credentails['username'];
-//   var password = credentails['password'];
-//   return authUseCase.loginUser(username, password);
-// });
-
-// final logoutProvider = FutureProvider.family<bool?, String>((ref, sessionId) async {
-//   final authUseCase = await ref.read(authUseCaseProvider.future);
-//   return authUseCase.logoutUser(sessionId);
-// });
-
+import 'package:chillflix2/data/models/movies_details.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../data/models/movies.dart';
 import '../../main.dart';
 
-final authChangeProvider = ChangeNotifierProvider<AuthProvider>((ref) {
-  return AuthProvider();
-});
+final authChangeProvider = ChangeNotifierProvider<AuthProvider>((ref) => AuthProvider());
 
 class AuthProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   User? get user => _auth.currentUser;
 
@@ -106,7 +77,25 @@ class AuthProvider extends ChangeNotifier {
         email: email,
         password: password,
       );
+
+      // After successful login, check if the user document exists
+      final user = _auth.currentUser;
       _loading = false;
+      if (user != null) {
+        final userDocSnapshot = await _firestore.collection('users').doc(user.uid).get();
+        if (!userDocSnapshot.exists) {
+          // If user document doesn't exist, create it
+          await _firestore.collection('users').doc(user.uid).set({
+            'username': user.displayName ?? '',
+            'email': user.email ?? '',
+            // Add more initial user data as needed
+          });
+
+          // Create subcollections for liked_movies and watchlist
+          // await _createInitialMoviesCollection(user.uid, 'liked_movies');
+          // await _createInitialMoviesCollection(user.uid, 'watchlist');
+        }
+      }
     } on FirebaseAuthException catch (e) {
       print(e);
       loading = false;
@@ -134,7 +123,27 @@ class AuthProvider extends ChangeNotifier {
         idToken: googleAuth?.idToken,
       );
 
-      return await FirebaseAuth.instance.signInWithCredential(credential);
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      // After successful login, check if the user document exists
+      final user = _auth.currentUser;
+      print(user?.displayName);
+      _loading = false;
+      if (user != null) {
+        final userDocSnapshot = await _firestore.collection('users').doc(user.uid).get();
+        if (!userDocSnapshot.exists) {
+          // If user document doesn't exist, create it
+          await _firestore.collection('users').doc(user.uid).set({
+            'username': user.displayName ?? '',
+            'email': user.email ?? '',
+            // Add more initial user data as needed
+          });
+
+          // Create subcollections for liked_movies and watchlist
+          await _createInitialMoviesCollection(user.uid, 'my_list');
+          await _createInitialMoviesCollection(user.uid, 'watchlist');
+        }
+      }
+      return userCredential;
     } on Exception catch (e) {
       print('exception->$e');
     }
@@ -163,5 +172,42 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> logout() async {
     await _auth.signOut();
+  }
+
+  Future<void> _createInitialMoviesCollection(String userId, String collectionName) async {
+    final batch = _firestore.batch();
+    final dummyMovieData = MoviesDetails(
+      backdrop_path: '',
+      id: 0,
+      title: '',
+      original_title: '',
+      overview: '',
+      poster_path: '',
+      adult: false,
+      budget: 0,
+      genres: [],
+      homepage: '',
+      imdb_id: '',
+      original_language: '',
+      popularity: 0,
+      release_date: '',
+      revenue: 0,
+      runtime: 0,
+      status: '',
+      tagline: '',
+      video: false,
+      vote_average: 0,
+      vote_count: 0,
+      addedToMyList: false,
+      addedToWatchlist: false,
+    );
+    final dummyMovieDataMap = dummyMovieData.toJson();
+
+    final querySnapshot = await _firestore.collection('users').doc(userId).collection(collectionName).get();
+    if (querySnapshot.docs.isEmpty) {
+      // If collection is empty, add a dummy movie document
+      batch.set(_firestore.collection('users').doc(userId).collection(collectionName).doc('dummy'), dummyMovieDataMap);
+      await batch.commit();
+    }
   }
 }

@@ -4,9 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/utils/screen_util.dart';
 import '../../main.dart';
-import '../pages/login.dart';
-import '../providers/auth_providers.dart';
-import '../providers/genre_list_provider.dart';
 
 class ProfileWidget extends StatelessWidget {
   ProfileWidget({super.key});
@@ -30,7 +27,7 @@ class ProfileWidget extends StatelessWidget {
                   'Profile',
                   style: GoogleFonts.raleway(
                     fontSize: 27,
-                    color: Colors.red.shade900,
+                    color: Colors.red[900],
                     fontWeight: FontWeight.bold,
                   ),
                 ),

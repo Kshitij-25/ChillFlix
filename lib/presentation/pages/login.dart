@@ -1,14 +1,13 @@
 import 'package:chillflix2/core/utils/app_utility.dart';
 import 'package:chillflix2/core/utils/screen_util.dart';
-import 'package:chillflix2/main.dart';
 import 'package:chillflix2/presentation/pages/homepage.dart';
 import 'package:chillflix2/presentation/pages/register_screen.dart';
-import 'package:chillflix2/presentation/providers/account_details_provider.dart';
 import 'package:chillflix2/presentation/providers/auth_providers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends ConsumerWidget {
@@ -21,13 +20,13 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: Colors.red.shade900,
+      backgroundColor: Colors.red[900],
       resizeToAvoidBottomInset: false,
       body: bodyWidget(context, ref),
     );
   }
 
-  bodyWidget(context, WidgetRef ref) {
+  bodyWidget(BuildContext context, WidgetRef ref) {
     final authProvider = ref.watch(authChangeProvider);
     return Stack(
       children: [
@@ -62,7 +61,7 @@ class LoginScreen extends ConsumerWidget {
                         hintText: "Enter Email",
                         label: const Text("Enter Email"),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red.shade900),
+                          borderSide: BorderSide(color: Colors.red[900]!),
                         ),
                       ),
                     ),
@@ -86,7 +85,7 @@ class LoginScreen extends ConsumerWidget {
                         hintText: "Enter Password",
                         label: const Text("Enter Password"),
                         border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red.shade900),
+                          borderSide: BorderSide(color: Colors.red[900]!),
                         ),
                       ),
                     ),
@@ -100,7 +99,7 @@ class LoginScreen extends ConsumerWidget {
                           width: ScreenSize.width(context),
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(Colors.red.shade900),
+                              backgroundColor: MaterialStateProperty.all<Color>(Colors.red[900]!),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -111,7 +110,7 @@ class LoginScreen extends ConsumerWidget {
                               if (_formKey.currentState!.validate()) {
                                 try {
                                   await authProvider.loginUser();
-                                  Navigator.of(context).pushReplacementNamed(HomePage.route);
+                                  context.go(HomePage.route);
                                 } catch (e) {
                                   AppUtility(context).error(e.toString());
                                 }
@@ -172,7 +171,7 @@ class LoginScreen extends ConsumerWidget {
                                 onPressed: () async {
                                   try {
                                     userCredential.value = await authProvider.loginWithGoogle();
-                                    Navigator.of(context).pushReplacementNamed(HomePage.route);
+                                    context.go(HomePage.route);
                                   } catch (e) {
                                     AppUtility(context).error(e.toString());
                                   }
@@ -191,11 +190,6 @@ class LoginScreen extends ConsumerWidget {
                                 ),
                               ),
                             );
-                            // IconButton.filled(
-                            //   padding: const EdgeInsets.all(25),
-                            //   onPressed: () {},
-                            //   icon: const Icon(FontAwesomeIcons.google),
-                            // );
                           },
                         ),
                         // Consumer(
@@ -224,7 +218,7 @@ class LoginScreen extends ConsumerWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushNamed(RegisterScreen.route);
+                        context.push(RegisterScreen.route);
                       },
                       child: const Text("New User? Register"),
                     ),

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/utils/screen_util.dart';
 import '../../data/constants/api_constants.dart';
@@ -38,9 +39,9 @@ class TrendingTodayCard extends ConsumerWidget {
             itemBuilder: (context, index, realIndex) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.of(context).pushNamed(
+                  context.push(
                     DetailsScreen.route,
-                    arguments: trendingMovies[index].id,
+                    extra: trendingMovies[index].id,
                   );
                 },
                 child: Stack(

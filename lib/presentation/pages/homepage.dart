@@ -1,10 +1,9 @@
 import 'package:chillflix2/data/models/movies.dart';
-import 'package:chillflix2/presentation/providers/auth_providers.dart';
+import 'package:chillflix2/presentation/pages/profile_screen.dart';
 import 'package:chillflix2/presentation/providers/discover_providers.dart';
 import 'package:chillflix2/presentation/providers/search_providers.dart';
 import 'package:chillflix2/presentation/widgets/custom_sidebar.dart';
 import 'package:chillflix2/presentation/widgets/home_widgets.dart';
-import 'package:chillflix2/presentation/widgets/profile_widget.dart';
 import 'package:chillflix2/presentation/widgets/search_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -49,7 +48,7 @@ class HomePage extends StatelessWidget {
                           },
                         )
                       : activeGenreIndex == 2
-                          ? Container()
+                          ? const ProfileScreen()
                           : DiscoverTitlesWidget(
                               discoverMovies: discoverMovies,
                               genreListAsyncValue: genreListAsyncValue,

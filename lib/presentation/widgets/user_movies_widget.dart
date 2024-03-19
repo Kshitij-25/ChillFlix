@@ -1,17 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../data/constants/api_constants.dart';
-import '../../data/models/movies.dart';
+import '../../data/models/movies_details.dart';
 import '../pages/details_screen.dart';
 
-class SectionContainer extends ConsumerWidget {
-  SectionContainer({super.key, this.data, this.title, this.onPressed});
+class UserMoviesWidget extends ConsumerWidget {
+  UserMoviesWidget({super.key, required this.data, this.title, this.onPressed});
 
-  AsyncValue<List<Movies>?>? data;
+  AsyncValue<List<MoviesDetails>> data;
   String? title;
   void Function()? onPressed;
 
@@ -19,9 +18,8 @@ class SectionContainer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final dataAsyncValue = data;
 
-    return dataAsyncValue!.when(
+    return dataAsyncValue.when(
       data: (data) {
-        List<Movies>? sortedData = data!.where((element) => element.original_title != null).toList();
         return Column(
           children: [
             Row(
@@ -44,13 +42,13 @@ class SectionContainer extends ConsumerWidget {
               height: MediaQuery.of(context).size.width * 0.6,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: sortedData.length,
+                itemCount: data.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
                       context.push(
                         DetailsScreen.route,
-                        extra: sortedData[index].id,
+                        extra: data[index].id,
                       );
                     },
                     child: Container(
@@ -72,7 +70,7 @@ class SectionContainer extends ConsumerWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(15.0),
                               child: CachedNetworkImage(
-                                imageUrl: "${ApiConstants.BASE_IMAGE_URL}${sortedData[index].poster_path}",
+                                imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data[index].poster_path}",
                                 placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                                 errorWidget: (context, url, error) => const Icon(Icons.error),
                                 fit: BoxFit.cover,
@@ -106,7 +104,7 @@ class SectionContainer extends ConsumerWidget {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        sortedData[index].title!,
+                                        data[index].title ?? "",
                                         maxLines: 1,
                                         textAlign: TextAlign.center,
                                         style: const TextStyle(

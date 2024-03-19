@@ -36,12 +36,14 @@ class UpcomingScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        forceMaterialTransparency: true,
         centerTitle: true,
         title: Text(
           "Upcoming Movies",
           style: GoogleFonts.raleway(
             fontSize: 27,
-            color: Colors.red.shade900,
+            color: Colors.red[900],
             fontWeight: FontWeight.bold,
           ),
         ),
