@@ -13,7 +13,9 @@ abstract class AuthLocalDataSource {
 
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final _logger = Logger();
+  final Logger? _logger;
+
+  AuthLocalDataSourceImpl(this._logger);
 
   @override
   Future<bool> loginUser(email, password) async {
@@ -35,7 +37,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
         return Future.error(e.message ?? "");
       }
     } catch (e) {
-      _logger.e('AuthLocalDataSourceImpl - loginUser : $e');
+      _logger!.e('AuthLocalDataSourceImpl - loginUser : $e');
       return false;
     }
   }
@@ -57,7 +59,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
       await CreateUserCollection().createUserCollection();
       return true;
     } on Exception catch (e) {
-      _logger.e('AuthLocalDataSourceImpl - loginWithGoogle : $e');
+      _logger!.e('AuthLocalDataSourceImpl - loginWithGoogle : $e');
       return false;
     }
   }
@@ -82,7 +84,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
         return Future.error(e.message ?? "");
       }
     } catch (e) {
-      _logger.e('AuthLocalDataSourceImpl - registerUser : $e');
+      _logger!.e('AuthLocalDataSourceImpl - registerUser : $e');
       return false;
     }
   }

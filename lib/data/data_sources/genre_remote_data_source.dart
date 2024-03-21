@@ -10,8 +10,10 @@ abstract class GenreRemoteDataSource {
 }
 
 class GenreRemoteDataSourceImpl implements GenreRemoteDataSource {
-  final ApiClient client = ApiClient();
-  final _logger = Logger();
+  final ApiClient? _apiClient;
+  final Logger? _logger;
+
+  GenreRemoteDataSourceImpl(this._apiClient, this._logger);
 
   @override
   Future<List<GenreList>> getCombinedGenres() async {
@@ -22,13 +24,13 @@ class GenreRemoteDataSourceImpl implements GenreRemoteDataSource {
 
     try {
       // Fetch genres from API 1
-      Response? response1 = await client.getReq(url: movieGenreUrl);
+      Response? response1 = await _apiClient!.getReq(url: movieGenreUrl);
       List<dynamic> genres1 = response1!.data['genres'];
-      _logger.d("GETMOVIESGENRE URL===> $movieGenreUrl ====> $genres1");
+      _logger!.d("GETMOVIESGENRE URL===> $movieGenreUrl ====> $genres1");
       combinedGenres.addAll(genres1.map((genre) => GenreList.fromJson(genre)));
 
       // Fetch genres from API 2
-      Response? response2 = await client.getReq(url: tvGenreurl);
+      Response? response2 = await _apiClient.getReq(url: tvGenreurl);
       List<dynamic> genres2 = response2!.data['genres'];
       _logger.d("GETTVGENRE URL===> $tvGenreurl ====> $genres2");
       for (var genre in genres2) {
@@ -40,7 +42,7 @@ class GenreRemoteDataSourceImpl implements GenreRemoteDataSource {
 
       return combinedGenres;
     } catch (e) {
-      _logger.e('GenreRemoteDataSourceImpl - getCombinedGenres: $e');
+      _logger!.e('GenreRemoteDataSourceImpl - getCombinedGenres: $e');
       return [];
     }
   }

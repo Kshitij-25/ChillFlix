@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/models/movie_model.dart';
-import '../providers/upcoming_movies_provider.dart';
+import '../../data/models/movie_details.dart';
+import '../providers/myList_provider.dart';
 import '../widgets/custom_gridview.dart';
 
-class UpcomingScreen extends ConsumerWidget {
-  const UpcomingScreen({super.key});
+class MyListScreen extends ConsumerWidget {
+  const MyListScreen({super.key});
 
-  static const route = "/upcomingScreen";
+  static const route = "/myListScreen";
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ScrollController scrollController = ScrollController();
     // int page = 1;
     // final List<Movies>? nowPlaying = ModalRoute.of(context)?.settings.arguments as List<Movies>?;
-    final upcomingAsyncValue = ref.watch(upcomingMovieProvider);
+    final myListAsyncValue = ref.watch(myListProvider);
 
     // Listen to the scroll position and fetch new data when reaching the end
     // _scrollController.addListener(() {
@@ -40,7 +40,7 @@ class UpcomingScreen extends ConsumerWidget {
         forceMaterialTransparency: true,
         centerTitle: true,
         title: Text(
-          "Upcoming Movies",
+          "My List",
           style: GoogleFonts.raleway(
             fontSize: 27,
             color: Colors.red[900],
@@ -48,16 +48,16 @@ class UpcomingScreen extends ConsumerWidget {
           ),
         ),
       ),
-      body: bodyWidget(context, scrollController, upcomingAsyncValue),
+      body: bodyWidget(context, scrollController, myListAsyncValue),
     );
   }
 
-  bodyWidget(context, ScrollController scrollController, AsyncValue<List<MovieModel>?> upcomingAsyncValue) {
-    return upcomingAsyncValue.when(
-      data: (upcoming) {
+  bodyWidget(context, ScrollController scrollController, AsyncValue<List<MovieDetails>> myListAsyncValue) {
+    return myListAsyncValue.when(
+      data: (myList) {
         return CustomGridView(
           scrollController: scrollController,
-          data: upcoming,
+          otherData: myList,
         );
       },
       loading: () => const Center(child: CircularProgressIndicator.adaptive()),

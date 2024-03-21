@@ -1,3 +1,5 @@
+// ignore_for_file: library_prefixes
+
 import 'dart:async';
 import 'dart:io';
 
@@ -7,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '/data/di/get_it.dart' as getIt;
 
 import 'app.dart';
 import 'firebase_options.dart';
@@ -15,6 +18,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   unawaited(SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]));
+
+  unawaited(getIt.init());
 
   HttpOverrides.global = MyHttpOverrides();
 

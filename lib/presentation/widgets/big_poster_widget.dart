@@ -22,7 +22,7 @@ class BigPosterWidget extends StatelessWidget {
     this.firestoreService,
   });
   AsyncValue<MovieDetails?>? dataAsyncValue;
-  AuthProvider? user;
+  AuthNotifier? user;
   FirestoreService? firestoreService;
 
   @override

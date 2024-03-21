@@ -2,8 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tmdb_chillflix/common/screen_size.dart';
 
 class CustomSearchWidget extends StatelessWidget {
   CustomSearchWidget({super.key, this.onChanged});
@@ -13,50 +13,32 @@ class CustomSearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Text(
-              'Search',
-              style: GoogleFonts.raleway(
-                fontSize: 27,
-                color: Colors.red[900],
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Consumer(
-            builder: (context, WidgetRef ref, _) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Column(
-                  children: [
-                    SearchBar(
-                      autoFocus: true,
-                      controller: searchCont,
-                      hintText: "Search shows, movies, peoples...",
-                      leading: const Icon(CupertinoIcons.search),
-                      shape: MaterialStateProperty.all<OutlinedBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onChanged: onChanged,
-                    ),
-                  ],
+    return Consumer(
+      builder: (context, WidgetRef ref, _) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Column(
+            children: [
+              SearchBar(
+                constraints: BoxConstraints(
+                  maxWidth: ScreenSize.width(context) * 0.8,
+                  minHeight: 55,
                 ),
-              );
-            },
+                autoFocus: true,
+                // controller: searchCont,
+                hintText: "Search shows, movies, peoples...",
+                leading: const Icon(CupertinoIcons.search),
+                shape: MaterialStateProperty.all<OutlinedBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onChanged: onChanged,
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

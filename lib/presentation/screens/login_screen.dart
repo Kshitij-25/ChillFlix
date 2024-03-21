@@ -1,14 +1,17 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tmdb_chillflix/presentation/providers/auth_provider.dart';
 
 import '../../common/app_utility.dart';
 import '../../common/screen_size.dart';
 import '../change_notifier_providers/auth_change_notifier_provider.dart';
+import '../providers/auth_provider.dart';
+import '../providers/genre_provider.dart';
 import 'home_screen.dart';
 import 'register_screen.dart';
 
@@ -111,6 +114,7 @@ class LoginScreen extends ConsumerWidget {
                               if (_formKey.currentState!.validate()) {
                                 try {
                                   await authProvider.loginUser(authChangeProvider.email, authChangeProvider.password);
+                                  ref.read(activeGenreIndexProvider.notifier).state = 0;
                                   context.go(HomeScreen.route);
                                 } catch (e) {
                                   AppUtility(context).error(e.toString());
@@ -167,6 +171,7 @@ class LoginScreen extends ConsumerWidget {
                             onPressed: () async {
                               try {
                                 await authProvider.loginWithGoogle();
+                                ref.read(activeGenreIndexProvider.notifier).state = 0;
                                 context.go(HomeScreen.route);
                               } catch (e) {
                                 AppUtility(context).error(e.toString());

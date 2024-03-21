@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/models/movie_model.dart';
-import '../providers/upcoming_movies_provider.dart';
+import '../../data/models/movie_details.dart';
+import '../providers/watchList_provider.dart';
 import '../widgets/custom_gridview.dart';
 
-class UpcomingScreen extends ConsumerWidget {
-  const UpcomingScreen({super.key});
+class WatchListScreen extends ConsumerWidget {
+  const WatchListScreen({super.key});
 
-  static const route = "/upcomingScreen";
+  static const route = "/watchlistScreen";
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ScrollController scrollController = ScrollController();
     // int page = 1;
     // final List<Movies>? nowPlaying = ModalRoute.of(context)?.settings.arguments as List<Movies>?;
-    final upcomingAsyncValue = ref.watch(upcomingMovieProvider);
+    final watchlistAsyncValue = ref.watch(watchlistProvider);
 
     // Listen to the scroll position and fetch new data when reaching the end
     // _scrollController.addListener(() {
@@ -40,7 +40,7 @@ class UpcomingScreen extends ConsumerWidget {
         forceMaterialTransparency: true,
         centerTitle: true,
         title: Text(
-          "Upcoming Movies",
+          "WatchList",
           style: GoogleFonts.raleway(
             fontSize: 27,
             color: Colors.red[900],
@@ -48,16 +48,16 @@ class UpcomingScreen extends ConsumerWidget {
           ),
         ),
       ),
-      body: bodyWidget(context, scrollController, upcomingAsyncValue),
+      body: bodyWidget(context, scrollController, watchlistAsyncValue),
     );
   }
 
-  bodyWidget(context, ScrollController scrollController, AsyncValue<List<MovieModel>?> upcomingAsyncValue) {
-    return upcomingAsyncValue.when(
-      data: (upcoming) {
+  bodyWidget(context, ScrollController scrollController, AsyncValue<List<MovieDetails>?> watchlistAsyncValue) {
+    return watchlistAsyncValue.when(
+      data: (watchlist) {
         return CustomGridView(
           scrollController: scrollController,
-          data: upcoming,
+          otherData: watchlist,
         );
       },
       loading: () => const Center(child: CircularProgressIndicator.adaptive()),

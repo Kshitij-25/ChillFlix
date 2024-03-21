@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tmdb_chillflix/data/models/movie_details.dart';
 
+import '../../data/models/movie_details.dart';
 import 'movie_provider.dart';
 
 final moviesDetailsProvider = FutureProvider.family<MovieDetails, int>((ref, movieId) async {

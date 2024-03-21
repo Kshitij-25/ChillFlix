@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tmdb_chillflix/data/models/movie_model.dart';
 
+import '../../data/models/movie_model.dart';
 import 'movie_provider.dart';
 
 final multiSearchProvider = FutureProvider.family<List<MovieModel>?, String>((ref, query) async {
