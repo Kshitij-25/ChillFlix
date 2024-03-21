@@ -1,8 +1,10 @@
+// ignore_for_file: file_names
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tmdb_chillflix/presentation/change_notifier_providers/auth_change_notifier_provider.dart';
 
 import '../../data/models/movie_details.dart';
-import '../providers/firestore_service_provider.dart';
+import '../change_notifier_providers/auth_change_notifier_provider.dart';
+import 'firestore_service_provider.dart';
 
 final watchlistProvider = StreamProvider<List<MovieDetails>>((ref) {
   final firestore = ref.watch(firestoreProvider);

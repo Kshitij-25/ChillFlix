@@ -3,9 +3,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tmdb_chillflix/data/models/movie_model.dart';
 
 import '../../data/core/api_constants.dart';
+import '../../data/models/movie_details.dart';
+import '../../data/models/movie_model.dart';
 import '../screens/details_screen.dart';
 
 class CustomGridView extends StatelessWidget {
@@ -14,10 +15,12 @@ class CustomGridView extends StatelessWidget {
     this.scrollController,
     this.data,
     this.itemCount,
+    this.otherData,
   });
 
   ScrollController? scrollController;
   List<MovieModel>? data;
+  List<MovieDetails>? otherData;
   int? itemCount;
 
   @override
@@ -33,13 +36,13 @@ class CustomGridView extends StatelessWidget {
           crossAxisSpacing: 10.0,
           mainAxisSpacing: 10.0,
         ),
-        itemCount: itemCount ?? data?.length ?? 0,
+        itemCount: itemCount ?? data?.length ?? otherData?.length ?? 0,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
               context.push(
                 DetailsScreen.route,
-                extra: data![index].id,
+                extra: data?[index].id ?? otherData![index].id,
               );
             },
             child: Stack(
@@ -48,7 +51,7 @@ class CustomGridView extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15.0),
                     child: CachedNetworkImage(
-                      imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data![index].backdrop_path}",
+                      imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data?[index].backdrop_path ?? otherData?[index].backdrop_path}",
                       placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                       errorWidget: (context, url, error) => const Icon(Icons.error),
                       fit: BoxFit.cover,
@@ -82,7 +85,7 @@ class CustomGridView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
-                              data![index].title!,
+                              data?[index].title ?? otherData?[index].title ?? "",
                               maxLines: 1,
                               textAlign: TextAlign.center,
                               style: const TextStyle(

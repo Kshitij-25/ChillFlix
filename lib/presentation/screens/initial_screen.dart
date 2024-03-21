@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tmdb_chillflix/presentation/change_notifier_providers/auth_change_notifier_provider.dart';
-import 'package:tmdb_chillflix/presentation/screens/home_screen.dart';
 
+import '../change_notifier_providers/auth_change_notifier_provider.dart';
+import 'home_screen.dart';
 import 'login_screen.dart';
 
 class InitialScreen extends ConsumerWidget {

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tmdb_chillflix/data/models/movie_model.dart';
+import 'package:tmdb_chillflix/presentation/screens/search_screen.dart';
 
+import '../../data/models/movie_model.dart';
 import '../providers/discover_movie_provider.dart';
 import '../providers/genre_provider.dart';
 import '../providers/multi_search_provider.dart';
@@ -40,12 +41,7 @@ class HomeScreen extends StatelessWidget {
               activeGenreIndex == 0
                   ? const HomeWidget()
                   : activeGenreIndex == 1
-                      ? CustomSearchWidget(
-                          onChanged: (value) {
-                            print(value);
-                            ref.read(multiSearchProvider(value));
-                          },
-                        )
+                      ? SearchScreen()
                       : activeGenreIndex == 2
                           ? const ProfileScreen()
                           : DiscoverTitlesWidget(

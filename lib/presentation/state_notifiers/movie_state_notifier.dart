@@ -22,7 +22,7 @@ class MovieStateNotifier extends ChangeNotifier {
   void addToMyList(MovieDetails moviesDetails, String collectionName) {
     _myList.add(moviesDetails);
     notifyListeners();
-    _updateFirestoreMovieStatus(moviesDetails.id.toString(), true, false, collectionName);
+    _updateFirestoreMovieStatus(moviesDetails.id.toString(), true, false, collectionName, moviesDetails: moviesDetails);
   }
 
   void removeFromMyList(String movieId, String collectionName) {
@@ -34,7 +34,7 @@ class MovieStateNotifier extends ChangeNotifier {
   void addToWatchlist(MovieDetails moviesDetails, String collectionName) {
     _watchlist.add(moviesDetails);
     notifyListeners();
-    _updateFirestoreMovieStatus(moviesDetails.id.toString(), false, true, collectionName);
+    _updateFirestoreMovieStatus(moviesDetails.id.toString(), false, true, collectionName, moviesDetails: moviesDetails);
   }
 
   void removeFromWatchlist(String movieId, String collectionName) {
@@ -43,18 +43,30 @@ class MovieStateNotifier extends ChangeNotifier {
     _updateFirestoreMovieStatus(movieId, false, false, collectionName);
   }
 
-  Future<void> _updateFirestoreMovieStatus(String movieId, bool addedToMyList, bool addedToWatchlist, String collectionName) async {
-    final userUid = FirebaseAuth.instance.currentUser!.uid;
-    final docRef = firestore.collection('users').doc(userUid).collection(collectionName).doc(movieId);
+  Future<void> _updateFirestoreMovieStatus(String movieId, bool addedToMyList, bool addedToWatchlist, String collectionName,
+      {MovieDetails? moviesDetails}) async {
+    try {
+      final userUid = FirebaseAuth.instance.currentUser!.uid;
+      final docRef = firestore.collection('users').doc(userUid).collection(collectionName).doc(movieId);
 
-    //  / Update 'addedToMyList' in 'my_list' collection
-    await docRef.set({
-      'addedToMyList': addedToMyList,
-    }, SetOptions(merge: true));
+      // Check if the document already exists
+      final docSnapshot = await docRef.get();
+      if (!docSnapshot.exists) {
+        // Document does not exist, create a new one
+        await docRef.set(moviesDetails!.toJson());
+      }
 
-    // Update 'addedToWatchlist' in 'watchlist' collection
-    await docRef.set({
-      'addedToWatchlist': addedToWatchlist,
-    }, SetOptions(merge: true));
+      // Update the document with both 'addedToMyList' and 'addedToWatchlist' fields
+      await docRef.set({
+        'addedToMyList': addedToMyList,
+        'addedToWatchlist': addedToWatchlist,
+        // Add other movie details here if needed
+      }, SetOptions(merge: true));
+    } catch (e, stackTrace) {
+      debugPrint('Error updating Firestore: $e');
+      debugPrint('Stack Trace: $stackTrace');
+      // Handle errors if necessary
+      rethrow; // Re-throw the error to propagate it further if needed
+    }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tmdb_chillflix/data/models/movie_model.dart';
+
+import '../../data/models/movie_model.dart';
 
 class PopularStateNotifier extends StateNotifier<List<MovieModel>> {
   PopularStateNotifier() : super([]);

@@ -11,11 +11,13 @@ class DioRequestException implements Exception {
 }
 
 class ApiClient {
-  Dio dio = Dio();
+  final Dio _dio;
+
+  ApiClient(this._dio);
 
   Future<Response<dynamic>?> getReq({url, body}) async {
     try {
-      final response = await dio.get(
+      final response = await _dio.get(
         url,
         data: body,
       );
@@ -33,7 +35,7 @@ class ApiClient {
 
   Future<Response<dynamic>?> postReq({url, body}) async {
     try {
-      final response = await dio.post(
+      final response = await _dio.post(
         url,
         data: body,
       );
@@ -51,7 +53,7 @@ class ApiClient {
 
   Future<Response<dynamic>?> putReq({url, body}) async {
     try {
-      final response = await dio.put(
+      final response = await _dio.put(
         url,
         data: body,
       );
@@ -69,7 +71,7 @@ class ApiClient {
 
   Future<Response<dynamic>?> deleteReq({url, body}) async {
     try {
-      final response = await dio.delete(
+      final response = await _dio.delete(
         url,
         data: body,
       );

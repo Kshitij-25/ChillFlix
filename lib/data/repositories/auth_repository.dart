@@ -3,9 +3,9 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:tmdb_chillflix/data/data_sources/auth_local_data_source.dart';
 
 import '../core/app_error.dart';
+import '../data_sources/auth_local_data_source.dart';
 
 class AuthRepository {
   final AuthLocalDataSource _authLocalDataSource;

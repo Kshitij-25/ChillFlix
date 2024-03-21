@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tmdb_chillflix/presentation/providers/now_playing_provider.dart';
 
+import '../providers/now_playing_provider.dart';
 import '../providers/popular_provider.dart';
 import '../providers/upcoming_movies_provider.dart';
 import '../screens/now_playing_screen.dart';

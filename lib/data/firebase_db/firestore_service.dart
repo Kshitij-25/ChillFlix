@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../models/movie_details.dart';
 
@@ -16,17 +17,12 @@ class FirestoreService {
       } else {
         // Collection is not empty, check if it contains a dummy document
         final dummyDocSnapshot = querySnapshot.docs.firstWhere((doc) => doc.id == 'dummy');
-        if (dummyDocSnapshot != null) {
-          // Delete the dummy document
-          await dummyDocSnapshot.reference.delete();
-          await collectionRef.doc(moviesDetails.id.toString()).set(moviesDetails.toJson());
-        } else {
-          // Collection contains data but no dummy document, add the moviesDetails directly
-          await collectionRef.doc(moviesDetails.id.toString()).set(moviesDetails.toJson());
-        }
+        // Delete the dummy document
+        await dummyDocSnapshot.reference.delete();
+        await collectionRef.doc(moviesDetails.id.toString()).set(moviesDetails.toJson());
       }
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
   }
 
@@ -49,7 +45,7 @@ class FirestoreService {
         }
       }
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     }
   }
 }

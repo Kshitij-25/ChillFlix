@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final authChangeNotifierProvider = ChangeNotifierProvider<AuthProvider>((ref) => AuthProvider());
+final authChangeNotifierProvider = ChangeNotifierProvider<AuthNotifier>((ref) => AuthNotifier());
 
-class AuthProvider extends ChangeNotifier {
+class AuthNotifier extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   User? get user => _auth.currentUser;

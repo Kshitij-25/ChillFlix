@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,10 +7,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../change_notifier_providers/auth_change_notifier_provider.dart';
 import '../providers/auth_provider.dart';
-import '../widgets/myList_provider.dart';
+import '../providers/myList_provider.dart';
 import '../widgets/user_movies_widget.dart';
-import '../widgets/watchList_provider.dart';
+import '../providers/watchList_provider.dart';
 import 'initial_screen.dart';
+import 'my_list_screen.dart';
+import 'watchlist_screen.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -64,7 +68,7 @@ class ProfileScreen extends ConsumerWidget {
                         ),
                       ),
                       Text(
-                        authChangeProvider.email!,
+                        authChangeProvider.user!.email!,
                         style: const TextStyle(color: Colors.white70),
                       ),
                     ],
@@ -77,9 +81,9 @@ class ProfileScreen extends ConsumerWidget {
                 title: "My List",
                 data: ref.watch(myListProvider),
                 onPressed: () {
-                  // context.push(
-                  //   NowPlayingScreen.route,
-                  // );
+                  context.push(
+                    MyListScreen.route,
+                  );
                 },
               ),
             ),
@@ -88,19 +92,43 @@ class ProfileScreen extends ConsumerWidget {
                 title: "Watchlist",
                 data: ref.watch(watchlistProvider),
                 onPressed: () {
-                  // context.push(
-                  //   NowPlayingScreen.route,
-                  // );
+                  context.push(
+                    WatchListScreen.route,
+                  );
                 },
               ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await authProvider.logout();
-                context.pushReplacement(InitialScreen.route);
+            Consumer(
+              builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: SizedBox(
+                    height: 55,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.red[900]!),
+                        shape: MaterialStateProperty.all<OutlinedBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                      onPressed: () async {
+                        await authProvider.logout();
+                        context.pushReplacement(InitialScreen.route);
+                      },
+                      child: Text(
+                        "LOGOUT",
+                        style: GoogleFonts.raleway(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
               },
-              child: const Text("SignOut"),
-            )
+            ),
           ],
         ),
       ),

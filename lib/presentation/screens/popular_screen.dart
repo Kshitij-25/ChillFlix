@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tmdb_chillflix/data/models/movie_model.dart';
-import 'package:tmdb_chillflix/presentation/providers/popular_provider.dart';
 
+import '../../data/models/movie_model.dart';
+import '../providers/popular_provider.dart';
 import '../widgets/custom_gridview.dart';
 
 class PopularScreen extends ConsumerWidget {
@@ -14,7 +14,7 @@ class PopularScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ScrollController scrollController = ScrollController();
-    int page = 1;
+    // int page = 1;
     // final List<Movies>? nowPlaying = ModalRoute.of(context)?.settings.arguments as List<Movies>?;
     final popularAsyncValue = ref.watch(popularProvider);
 

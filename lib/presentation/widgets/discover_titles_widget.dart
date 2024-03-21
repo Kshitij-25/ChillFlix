@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tmdb_chillflix/data/models/movie_model.dart';
 
 import '../../data/models/genre_list.dart';
+import '../../data/models/movie_model.dart';
 import 'custom_gridview.dart';
 
 class DiscoverTitlesWidget extends StatelessWidget {
