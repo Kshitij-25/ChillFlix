@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,16 +49,6 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCgzYn6Gtz_Psysxu2KQaxekTx5K6gGhIQ',
-    appId: '1:635286634976:web:174527cd0047959d88eb85',
-    messagingSenderId: '635286634976',
-    projectId: 'chillflix-5e920',
-    authDomain: 'chillflix-5e920.firebaseapp.com',
-    storageBucket: 'chillflix-5e920.appspot.com',
-    measurementId: 'G-KD0J4XRPZN',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAMVXYfC7Etsdbix9rprNSrjLm9zFOCsu4',
     appId: '1:635286634976:android:f05d76b8aba5f24788eb85',
@@ -69,15 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'chillflix-5e920.appspot.com',
     iosClientId: '635286634976-8tep6795cp4pruf1qfo3ag1gllki6qpg.apps.googleusercontent.com',
     iosBundleId: 'com.kshitijcodecraft.chillflix',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyC9HD_JSFUsJECUdixZS32eGIgkqlbUvIU',
-    appId: '1:635286634976:ios:92ee694975bef56588eb85',
-    messagingSenderId: '635286634976',
-    projectId: 'chillflix-5e920',
-    storageBucket: 'chillflix-5e920.appspot.com',
-    iosClientId: '635286634976-i7vdpdpvr2obh911k43sc1ngv1147gn1.apps.googleusercontent.com',
-    iosBundleId: 'com.example.chillflix2.RunnerTests',
   );
 }

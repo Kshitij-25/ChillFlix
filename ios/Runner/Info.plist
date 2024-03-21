@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Chillflix2</string>
+	<string>Tmdb Chillflix</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>chillflix2</string>
+	<string>tmdb_chillflix</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -45,26 +45,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSAppTransportSecurity</key>
-  	<dict>
-    	<key>NSAllowsArbitraryLoads</key>
-    	<true/>
-  	</dict>
-	<!-- Put me in the [my_project]/ios/Runner/Info.plist file -->
-	<!-- Google Sign-in Section -->
-	<key>CFBundleURLTypes</key>
-	<array>
- 	<dict>
-  	<key>CFBundleTypeRole</key>
-  		<string>Editor</string>
-  	<key>CFBundleURLSchemes</key>
-  	<array>
-   	<!-- TODO Replace this value: -->
-   	<!-- Copied from GoogleService-Info.plist key REVERSED_CLIENT_ID -->
-   	<string>com.googleusercontent.apps.635286634976-8tep6795cp4pruf1qfo3ag1gllki6qpg</string>
-  	</array>
- 	</dict>
-	</array>
-	<!-- End of the Google Sign-in Section -->
 </dict>
 </plist>

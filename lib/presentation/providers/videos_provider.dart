@@ -1,15 +1,15 @@
-import 'package:chillflix2/core/usecases/videos_usecase.dart';
-import 'package:chillflix2/data/models/videos_model.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tmdb_chillflix/data/models/video_model.dart';
 
-import 'common_providers.dart';
+import 'movie_provider.dart';
 
-final videosUseCaseProvider = FutureProvider<VideosUseCase>((ref) {
-  final similarMovies = ref.read(moviesDeatilsRepositoryProvider);
-  return VideosUseCaseImpl(similarMovies);
-});
-
-final videosProvider = FutureProvider.family<List<VideosModel>?, int>((ref, moviesId) async {
-  final videosUseCase = await ref.read(videosUseCaseProvider.future);
-  return videosUseCase.getVideos(moviesId);
+final videosProvider = FutureProvider.family<List<VideoModel>, int>((ref, moviesId) async {
+  final moviesRepository = ref.read(movieRepositoryProvider);
+  final eitherVideossOrError = await moviesRepository.getVideos(moviesId);
+  return eitherVideossOrError!.fold(
+    (error) {
+      throw error; // Throw the error for Riverpod to handle
+    },
+    (videos) => videos!,
+  );
 });

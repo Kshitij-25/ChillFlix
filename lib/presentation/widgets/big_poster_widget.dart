@@ -1,21 +1,33 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/utils/screen_util.dart';
-import '../../data/constants/api_constants.dart';
-import '../../data/models/movies_details.dart';
+import '../../common/app_utility.dart';
+import '../../common/screen_size.dart';
+import '../../data/core/api_constants.dart';
+import '../../data/firebase_db/firestore_service.dart';
+import '../../data/models/movie_details.dart';
+import '../change_notifier_providers/auth_change_notifier_provider.dart';
+import '../state_notifiers/movie_state_notifier.dart';
 
 class BigPosterWidget extends StatelessWidget {
-  BigPosterWidget({super.key, this.dataAsyncValue});
-  AsyncValue<MoviesDetails?>? dataAsyncValue;
+  BigPosterWidget({
+    super.key,
+    this.dataAsyncValue,
+    this.user,
+    this.firestoreService,
+  });
+  AsyncValue<MovieDetails?>? dataAsyncValue;
+  AuthProvider? user;
+  FirestoreService? firestoreService;
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
+    var userId = user!.user!.uid;
     return dataAsyncValue!.when(
       data: (data) {
         return Column(
@@ -95,14 +107,26 @@ class BigPosterWidget extends StatelessWidget {
                               children: [
                                 Consumer(
                                   builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                                    final movieState = ref.watch(movieStateProvider);
+                                    final isInMyList = movieState.myList.any((m) => m.id == data.id);
                                     return SizedBox(
                                       height: 68,
                                       child: Column(
                                         children: [
                                           IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                              CupertinoIcons.add,
+                                            onPressed: () {
+                                              if (isInMyList != true) {
+                                                firestoreService!.addMovieToCollection(userId, "my_list", data);
+                                                movieState.addToMyList(data, 'my_list');
+                                                AppUtility(context).message("Added to My List");
+                                              } else {
+                                                firestoreService!.removeMovieFromCollection(userId, "my_list", data.id.toString());
+                                                movieState.removeFromMyList(data.id.toString(), 'my_list');
+                                                AppUtility(context).message("Removed from My List");
+                                              }
+                                            },
+                                            icon: Icon(
+                                              !isInMyList ? CupertinoIcons.add : CupertinoIcons.checkmark_circle_fill,
                                               color: Colors.white,
                                             ),
                                           ),
@@ -119,14 +143,26 @@ class BigPosterWidget extends StatelessWidget {
                                 ),
                                 Consumer(
                                   builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                                    final movieState = ref.watch(movieStateProvider);
+                                    final isInWatchlist = movieState.watchlist.any((m) => m.id == data.id);
                                     return SizedBox(
                                       height: 68,
                                       child: Column(
                                         children: [
                                           IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                              CupertinoIcons.square_stack_fill,
+                                            onPressed: () {
+                                              if (isInWatchlist != true) {
+                                                firestoreService!.addMovieToCollection(userId, "watchlist", data);
+                                                movieState.addToWatchlist(data, 'watchlist');
+                                                AppUtility(context).message("Added to Watchlist");
+                                              } else {
+                                                firestoreService!.removeMovieFromCollection(userId, "watchlist", data.id.toString());
+                                                movieState.removeFromWatchlist(data.id.toString(), 'watchlist');
+                                                AppUtility(context).message("Removed from Watchlist");
+                                              }
+                                            },
+                                            icon: Icon(
+                                              !isInWatchlist ? CupertinoIcons.square_stack : CupertinoIcons.square_stack_fill,
                                               color: Colors.white,
                                             ),
                                           ),

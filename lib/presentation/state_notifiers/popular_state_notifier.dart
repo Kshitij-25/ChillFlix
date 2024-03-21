@@ -1,15 +1,14 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tmdb_chillflix/data/models/movie_model.dart';
 
-import '../../data/models/movies.dart';
-
-class PopularStateNotifier extends StateNotifier<List<Movies>> {
+class PopularStateNotifier extends StateNotifier<List<MovieModel>> {
   PopularStateNotifier() : super([]);
 
-  void addData(List<Movies> newData) {
+  void addData(List<MovieModel> newData) {
     state = [...state, ...newData];
   }
 }
 
-final popularStateNotifierProvider = StateNotifierProvider<PopularStateNotifier, List<Movies>>((ref) {
+final popularStateNotifierProvider = StateNotifierProvider<PopularStateNotifier, List<MovieModel>>((ref) {
   return PopularStateNotifier();
 });

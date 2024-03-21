@@ -1,15 +1,15 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tmdb_chillflix/data/models/movie_model.dart';
 
-import '../../core/usecases/movies_usecase.dart';
-import '../../data/models/movies.dart';
-import 'common_providers.dart';
+import 'movie_provider.dart';
 
-final popularUseCaseProvider = Provider<MoviesUseCase>((ref) {
-  final popularRepository = ref.read(moviesDeatilsRepositoryProvider);
-  return MoviesUseCaseImpl(popularRepository);
-});
-
-final popular = FutureProvider.autoDispose<List<Movies>?>((ref) async {
-  final popularUseCase = ref.read(popularUseCaseProvider);
-  return popularUseCase.getPopular(1); // Initialize with page 1
+final popularProvider = FutureProvider<List<MovieModel>>((ref) async {
+  final moviesRepository = ref.read(movieRepositoryProvider);
+  final eitherPopularOrError = await moviesRepository.getPopular(1);
+  return eitherPopularOrError!.fold(
+    (error) {
+      throw error; // Throw the error for Riverpod to handle
+    },
+    (popular) => popular!,
+  );
 });

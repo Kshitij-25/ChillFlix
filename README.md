@@ -1,3 +1,3 @@
-# chillflix2
+# tmdb_chillflix
 
 A new Flutter project.

@@ -1,16 +1,18 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../core/utils/screen_util.dart';
-import '../../data/models/videos_model.dart';
+import '../../common/screen_size.dart';
+import '../../data/models/video_model.dart';
 
 class TrailerVideosWidget extends StatelessWidget {
   TrailerVideosWidget({super.key, this.videosAsyncValue});
 
-  AsyncValue<List<VideosModel>?>? videosAsyncValue;
+  AsyncValue<List<VideoModel>?>? videosAsyncValue;
 
   YoutubePlayerController? _youtubePlayerController;
 

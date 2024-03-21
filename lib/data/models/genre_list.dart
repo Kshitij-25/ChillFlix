@@ -1,7 +1,9 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'genrelist.freezed.dart';
-part 'genrelist.g.dart';
+part 'genre_list.freezed.dart';
+part 'genre_list.g.dart';
 
 @freezed
 class GenreList with _$GenreList {
