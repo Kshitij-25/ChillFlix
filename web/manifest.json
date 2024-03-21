@@ -1,6 +1,6 @@
 {
-    "name": "chillflix2",
-    "short_name": "chillflix2",
+    "name": "tmdb_chillflix",
+    "short_name": "tmdb_chillflix",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

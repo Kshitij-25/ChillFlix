@@ -1,15 +1,15 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tmdb_chillflix/data/models/movie_model.dart';
 
-import '../../core/usecases/movies_usecase.dart';
-import '../../data/models/movies.dart';
-import 'common_providers.dart';
+import 'movie_provider.dart';
 
-final nowPlayingUseCaseProvider = Provider<MoviesUseCase>((ref) {
-  final nowPlayingRepository = ref.read(moviesDeatilsRepositoryProvider);
-  return MoviesUseCaseImpl(nowPlayingRepository);
-});
-
-final nowPlaying = FutureProvider.autoDispose<List<Movies>?>((ref) async {
-  final nowPlayingUseCase = ref.read(nowPlayingUseCaseProvider);
-  return nowPlayingUseCase.getNowPlaying(1); // Initialize with page 1
+final nowPlayingProvider = FutureProvider<List<MovieModel>>((ref) async {
+  final moviesRepository = ref.read(movieRepositoryProvider);
+  final eitherNowPlayingOrError = await moviesRepository.getNowPlaying(1);
+  return eitherNowPlayingOrError!.fold(
+    (error) {
+      throw error; // Throw the error for Riverpod to handle
+    },
+    (nowPlaying) => nowPlaying!,
+  );
 });

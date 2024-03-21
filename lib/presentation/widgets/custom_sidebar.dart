@@ -1,11 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/utils/screen_util.dart';
+import '../../common/screen_size.dart';
 import '../../data/models/genre_list.dart';
-import '../providers/auth_providers.dart';
-import '../providers/genre_list_provider.dart';
+import '../providers/genre_provider.dart';
 import 'genre_list_widget.dart';
 
 class CustomSidebar extends ConsumerWidget {
@@ -16,7 +17,6 @@ class CustomSidebar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authProvider = ref.watch(authChangeProvider);
     return Container(
       height: double.infinity,
       width: ScreenSize.width(context) * 0.12,

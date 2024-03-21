@@ -1,15 +1,17 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/utils/app_utility.dart';
-import '../../core/utils/screen_util.dart';
-import '../../data/constants/api_constants.dart';
-import '../../data/models/movies_details.dart';
-import '../providers/auth_providers.dart';
-import '../providers/firestore_provider.dart';
+import '../../common/app_utility.dart';
+import '../../common/screen_size.dart';
+import '../../data/core/api_constants.dart';
+import '../../data/firebase_db/firestore_service.dart';
+import '../../data/models/movie_details.dart';
+import '../change_notifier_providers/auth_change_notifier_provider.dart';
 import '../state_notifiers/movie_state_notifier.dart';
 
 class BigPosterWidget extends StatelessWidget {
@@ -19,7 +21,7 @@ class BigPosterWidget extends StatelessWidget {
     this.user,
     this.firestoreService,
   });
-  AsyncValue<MoviesDetails?>? dataAsyncValue;
+  AsyncValue<MovieDetails?>? dataAsyncValue;
   AuthProvider? user;
   FirestoreService? firestoreService;
 

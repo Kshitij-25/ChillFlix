@@ -1,23 +1,25 @@
 // MovieStateNotifier class for managing local state
-import 'package:chillflix2/data/models/movies_details.dart';
+
+// MovieStateProvider for providing local state
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-// MovieStateProvider for providing local state
+import '../../data/models/movie_details.dart';
+
 final movieStateProvider = ChangeNotifierProvider((ref) => MovieStateNotifier());
 
 class MovieStateNotifier extends ChangeNotifier {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  List<MoviesDetails> _myList = [];
-  List<MoviesDetails> _watchlist = [];
+  final List<MovieDetails> _myList = [];
+  final List<MovieDetails> _watchlist = [];
 
-  List<MoviesDetails> get myList => _myList;
-  List<MoviesDetails> get watchlist => _watchlist;
+  List<MovieDetails> get myList => _myList;
+  List<MovieDetails> get watchlist => _watchlist;
 
-  void addToMyList(MoviesDetails moviesDetails, String collectionName) {
+  void addToMyList(MovieDetails moviesDetails, String collectionName) {
     _myList.add(moviesDetails);
     notifyListeners();
     _updateFirestoreMovieStatus(moviesDetails.id.toString(), true, false, collectionName);
@@ -29,7 +31,7 @@ class MovieStateNotifier extends ChangeNotifier {
     _updateFirestoreMovieStatus(movieId, false, false, collectionName);
   }
 
-  void addToWatchlist(MoviesDetails moviesDetails, String collectionName) {
+  void addToWatchlist(MovieDetails moviesDetails, String collectionName) {
     _watchlist.add(moviesDetails);
     notifyListeners();
     _updateFirestoreMovieStatus(moviesDetails.id.toString(), false, true, collectionName);

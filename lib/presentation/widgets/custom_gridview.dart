@@ -1,10 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tmdb_chillflix/data/models/movie_model.dart';
 
-import '../../data/constants/api_constants.dart';
-import '../../data/models/movies.dart';
-import '../pages/details_screen.dart';
+import '../../data/core/api_constants.dart';
+import '../screens/details_screen.dart';
 
 class CustomGridView extends StatelessWidget {
   CustomGridView({
@@ -15,7 +17,7 @@ class CustomGridView extends StatelessWidget {
   });
 
   ScrollController? scrollController;
-  List<Movies>? data;
+  List<MovieModel>? data;
   int? itemCount;
 
   @override

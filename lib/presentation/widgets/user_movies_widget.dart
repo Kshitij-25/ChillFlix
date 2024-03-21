@@ -1,16 +1,18 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../data/constants/api_constants.dart';
-import '../../data/models/movies_details.dart';
-import '../pages/details_screen.dart';
+import '../../data/core/api_constants.dart';
+import '../../data/models/movie_details.dart';
+import '../screens/details_screen.dart';
 
 class UserMoviesWidget extends ConsumerWidget {
   UserMoviesWidget({super.key, required this.data, this.title, this.onPressed});
 
-  AsyncValue<List<MoviesDetails>> data;
+  AsyncValue<List<MovieDetails>> data;
   String? title;
   void Function()? onPressed;
 

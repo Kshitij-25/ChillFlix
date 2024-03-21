@@ -1,9 +1,11 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/models/genre_list.dart';
-import '../providers/genre_list_provider.dart';
+import '../providers/genre_provider.dart';
 
 class GenreListWidget extends StatelessWidget {
   GenreListWidget({super.key, this.ref, this.genreListAsyncValue});

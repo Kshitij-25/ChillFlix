@@ -1,15 +1,15 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tmdb_chillflix/data/models/movie_model.dart';
 
-import '../../core/usecases/movies_usecase.dart';
-import '../../data/models/movies.dart';
-import 'common_providers.dart';
+import 'movie_provider.dart';
 
-final similarMoviesUseCaseProvider = FutureProvider<MoviesUseCase>((ref) {
-  final similarMovies = ref.read(moviesDeatilsRepositoryProvider);
-  return MoviesUseCaseImpl(similarMovies);
-});
-
-final similarMoviesProvider = FutureProvider.family<List<Movies>?, int>((ref, moviesId) async {
-  final similarMoviesUseCase = await ref.read(similarMoviesUseCaseProvider.future);
-  return similarMoviesUseCase.getSimilarMovies(moviesId);
+final similarMoviesProvider = FutureProvider.family<List<MovieModel>, int>((ref, moviesId) async {
+  final moviesRepository = ref.read(movieRepositoryProvider);
+  final eitherSimilarMovieOrError = await moviesRepository.getSimilarMovies(moviesId);
+  return eitherSimilarMovieOrError!.fold(
+    (error) {
+      throw error; // Throw the error for Riverpod to handle
+    },
+    (similarMovies) => similarMovies!,
+  );
 });
