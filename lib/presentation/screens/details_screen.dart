@@ -33,9 +33,9 @@ class DetailsScreen extends ConsumerWidget {
 
   bodyWidget(BuildContext context, WidgetRef ref) {
     // final id = ModalRoute.of(context)!.settings.arguments as int;
-    final detailsAsyncValue = ref.watch(moviesDetailsProvider(id!));
-    final similarMoviesAsyncValue = ref.watch(similarMoviesProvider(id!));
-    final videosAsyncValue = ref.watch(videosProvider(id!));
+    final detailsAsyncValue = ref.watch(moviesDetailsProvider(movieId: id!));
+    final similarMoviesAsyncValue = ref.watch(similarMoviesProvider(moviesId: id!));
+    final videosAsyncValue = ref.watch(videosProvider(moviesId: id!));
     final user = ref.read(authChangeNotifierProvider);
     final firestoreService = ref.watch(firestoreServiceProvider);
 

@@ -1,9 +1,12 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../data/models/movie_model.dart';
 import 'movie_provider.dart';
 
-final discoverMovieProvider = FutureProvider.family<List<MovieModel>, int>((ref, genresId) async {
+part 'discover_movie_provider.g.dart';
+
+@riverpod
+Future<List<MovieModel>> discoverMovie(DiscoverMovieRef ref, {required int genresId}) async {
   final moviesRepository = ref.read(movieRepositoryProvider);
   final eitherDiscoverMovieOrError = await moviesRepository.discoverMovies(genresId);
   return eitherDiscoverMovieOrError!.fold(
@@ -12,4 +15,4 @@ final discoverMovieProvider = FutureProvider.family<List<MovieModel>, int>((ref,
     },
     (discoverMovie) => discoverMovie!,
   );
-});
+}

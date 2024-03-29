@@ -1,9 +1,12 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../data/models/movie_model.dart';
 import 'movie_provider.dart';
 
-final upcomingMovieProvider = FutureProvider<List<MovieModel>>((ref) async {
+part 'upcoming_movies_provider.g.dart';
+
+@riverpod
+Future<List<MovieModel>> upcomingMovie(UpcomingMovieRef ref) async {
   final moviesRepository = ref.read(movieRepositoryProvider);
   final eitherUpcomingMovieOrError = await moviesRepository.getUpcomingMovies(1);
   return eitherUpcomingMovieOrError!.fold(
@@ -12,4 +15,4 @@ final upcomingMovieProvider = FutureProvider<List<MovieModel>>((ref) async {
     },
     (upcomingMovie) => upcomingMovie!,
   );
-});
+}

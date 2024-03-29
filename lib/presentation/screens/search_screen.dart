@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../common/screen_size.dart';
 import '../../data/models/movie_model.dart';
 import '../change_notifier_providers/search_change_notifier_provider.dart';
 import '../providers/multi_search_provider.dart';
@@ -17,10 +18,12 @@ class SearchScreen extends ConsumerWidget {
 
   List<MovieModel>? searchedMovies = [];
 
+  SearchScreen({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var searchNotifier = ref.watch(searchNotifierProvider);
-    final searchResultAsyncValue = ref.watch(multiSearchProvider(searchNotifier.query));
+    final searchResultAsyncValue = ref.watch(multiSearchProvider(query: searchNotifier.query));
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
@@ -49,18 +52,25 @@ class SearchScreen extends ConsumerWidget {
             ),
             // Use .when to handle the different states of the AsyncValue
             searchResultAsyncValue.when(
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ), // Show loading indicator
+              loading: () => SizedBox(
+                height: ScreenSize.height(context) * 0.75,
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Center(child: CircularProgressIndicator.adaptive()),
+                  ],
+                ),
+              ),
               error: (error, stackTrace) => Text('Error: $error'), // Show error message
               data: (searchedMovies) {
                 // Update the searchedMovies list when data is available
-                List<MovieModel>? validSearchedMovies = searchedMovies?.where((element) {
+                List<MovieModel>? validSearchedMovies = searchedMovies.where((element) {
                   // Check if title and backdrop_path are not empty strings
                   return element.title != null && element.backdrop_path != null;
                 }).toList();
 
-                this.searchedMovies = validSearchedMovies ?? [];
+                this.searchedMovies = validSearchedMovies;
                 return CustomGridView(
                   scrollController: scrollController,
                   data: this.searchedMovies,

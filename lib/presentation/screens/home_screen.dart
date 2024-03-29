@@ -5,8 +5,6 @@ import 'package:tmdb_chillflix/presentation/screens/search_screen.dart';
 import '../../data/models/movie_model.dart';
 import '../providers/discover_movie_provider.dart';
 import '../providers/genre_provider.dart';
-import '../providers/multi_search_provider.dart';
-import '../widgets/custom_search_widget.dart';
 import '../widgets/custom_sidebar.dart';
 import '../widgets/discover_titles_widget.dart';
 import '../widgets/home_widget.dart';
@@ -32,7 +30,7 @@ class HomeScreen extends StatelessWidget {
           final activeGenreIndex = ref.watch(activeGenreIndexProvider);
           AsyncValue<List<MovieModel>?>? discoverMovies;
           if (genreListAsyncValue.hasValue && activeGenreIndex != null && activeGenreIndex >= 3) {
-            discoverMovies = ref.watch(discoverMovieProvider(genreListAsyncValue.value![activeGenreIndex - 3].id!));
+            discoverMovies = ref.watch(discoverMovieProvider(genresId: genreListAsyncValue.value![activeGenreIndex - 3].id!));
           }
           return Row(
             crossAxisAlignment: CrossAxisAlignment.start,

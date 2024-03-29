@@ -1,9 +1,12 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../data/models/movie_model.dart';
 import 'movie_provider.dart';
 
-final multiSearchProvider = FutureProvider.family<List<MovieModel>?, String>((ref, query) async {
+part 'multi_search_provider.g.dart';
+
+@riverpod
+Future<List<MovieModel>> multiSearch(MultiSearchRef ref, {required String query}) async {
   final moviesRepository = ref.read(movieRepositoryProvider);
   final eitherMultiSearchOrError = await moviesRepository.multiSearch(query);
   return eitherMultiSearchOrError!.fold(
@@ -12,4 +15,4 @@ final multiSearchProvider = FutureProvider.family<List<MovieModel>?, String>((re
     },
     (multiSearch) => multiSearch!,
   );
-});
+}
