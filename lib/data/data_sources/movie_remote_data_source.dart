@@ -15,7 +15,7 @@ abstract class MovieRemoteDataSource {
   Future<MovieDetails?>? getMoviesDetails(movieId);
   Future<List<MovieModel>?>? getSimilarMovies(movieId);
   Future<List<VideoModel>?>? getVideos(movieId);
-  Future<List<MovieModel>?>? discoverMovies(genresId);
+  Future<List<MovieModel>?>? discoverMovies(genresId, page);
   Future<List<MovieModel>?>? multiSearch(query);
 }
 
@@ -26,9 +26,9 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   MovieRemoteDataSourceImpl(this._apiClient, this._logger);
 
   @override
-  Future<List<MovieModel>?>? discoverMovies(genresId) async {
+  Future<List<MovieModel>?>? discoverMovies(genresId, page) async {
     final url =
-        "${ApiConstants.BASE_URL}/discover/movie?include_adult=true&page=1&sort_by=popularity.desc&with_genres=$genresId&api_key=${ApiConstants.API_KEY}";
+        "${ApiConstants.BASE_URL}/discover/movie?include_adult=true&page=$page&sort_by=popularity.desc&with_genres=$genresId&api_key=${ApiConstants.API_KEY}";
 
     try {
       Response? response = await _apiClient!.getReq(
@@ -89,16 +89,16 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>?>? getNowPlaying(page) async {
-    final url = "${ApiConstants.BASE_URL}/movie/now_playing?api_key=${ApiConstants.API_KEY}&page=$page";
-
     try {
-      Response? response = await _apiClient!.getReq(
-        url: url,
+      Response? response = await _apiClient!.getUri(
+        apiKey: ApiConstants.API_KEY,
+        path: '3/movie/now_playing',
+        page: page,
       );
       if (response!.statusCode == 200) {
         List<dynamic> jsonList = response.data['results'];
         List<MovieModel> nowPlaying = jsonList.map((json) => MovieModel.fromJson(json)).toList();
-        _logger!.d("GETNOWPLAYING URL===> $url ====> $nowPlaying");
+        _logger!.d("GETNOWPLAYING URL===> url ====> $nowPlaying");
         return nowPlaying;
       } else {
         throw Exception(response.statusMessage);
@@ -111,16 +111,16 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>?>? getPopular(page) async {
-    final url = "${ApiConstants.BASE_URL}/movie/popular?api_key=${ApiConstants.API_KEY}&page=$page";
-
     try {
-      Response? response = await _apiClient!.getReq(
-        url: url,
+      Response? response = await _apiClient!.getUri(
+        apiKey: ApiConstants.API_KEY,
+        path: '3/movie/popular',
+        page: page,
       );
       if (response!.statusCode == 200) {
         List<dynamic> jsonList = response.data['results'];
         List<MovieModel> popular = jsonList.map((json) => MovieModel.fromJson(json)).toList();
-        _logger!.d("GETPOPULAR URL===> $url ====> $popular");
+        _logger!.d("GETPOPULAR URL===> url ====> $popular");
         return popular;
       } else {
         throw Exception(response.statusMessage);
@@ -155,16 +155,21 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>?>? getUpcomingMovies(page) async {
-    final url = "${ApiConstants.BASE_URL}/movie/upcoming?api_key=${ApiConstants.API_KEY}&page=$page";
+    // final url = "${ApiConstants.BASE_URL}/movie/upcoming?api_key=${ApiConstants.API_KEY}&page=$page";
 
     try {
-      Response? response = await _apiClient!.getReq(
-        url: url,
+      Response? response = await _apiClient!.getUri(
+        apiKey: ApiConstants.API_KEY,
+        path: '3/movie/upcoming',
+        page: page,
       );
+      // Response? response = await _apiClient!.getReq(
+      //   url: url,
+      // );
       if (response!.statusCode == 200) {
         List<dynamic> jsonList = response.data['results'];
         List<MovieModel> upcoming = jsonList.map((json) => MovieModel.fromJson(json)).toList();
-        _logger!.d("GETUPCOMING URL===> $url ====> $upcoming");
+        _logger!.d("GETUPCOMING URL===> url ====> $upcoming");
         return upcoming;
       } else {
         throw Exception(response.statusMessage);

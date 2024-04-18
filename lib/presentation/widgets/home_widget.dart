@@ -38,7 +38,7 @@ class HomeWidget extends StatelessWidget {
             Consumer(
               builder: (context, ref, child) => HorizontalList(
                 title: "NOW PLAYING",
-                data: ref.watch(nowPlayingProvider),
+                data: ref.watch(nowPlayingProvider(page: 1)),
                 onPressed: () {
                   context.push(NowPlayingScreen.route);
                 },
@@ -46,7 +46,7 @@ class HomeWidget extends StatelessWidget {
             ),
             Consumer(
               builder: (context, ref, child) => HorizontalList(
-                data: ref.watch(popularProvider),
+                data: ref.watch(popularProvider(page: 1)),
                 title: "POPULAR MOVIES",
                 onPressed: () {
                   context.push(PopularScreen.route);
@@ -55,7 +55,7 @@ class HomeWidget extends StatelessWidget {
             ),
             Consumer(
               builder: (context, ref, child) => HorizontalList(
-                data: ref.watch(upcomingMovieProvider),
+                data: ref.watch(upcomingMovieProvider(page: 1)),
                 title: "UPCOMING MOVIES",
                 onPressed: () {
                   context.push(UpcomingScreen.route);

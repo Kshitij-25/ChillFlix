@@ -11,7 +11,6 @@ import '../providers/similar_movies_provider.dart';
 import '../providers/videos_provider.dart';
 import '../widgets/big_poster_widget.dart';
 import '../widgets/similar_movies_widget.dart';
-import '../widgets/trailer_videos_widget.dart';
 
 class DetailsScreen extends ConsumerWidget {
   DetailsScreen({super.key, this.id});
@@ -51,11 +50,14 @@ class DetailsScreen extends ConsumerWidget {
                     user: user,
                     dataAsyncValue: detailsAsyncValue,
                     firestoreService: firestoreService,
+                    videosAsyncValue: videosAsyncValue,
                   ),
                   const TabBar(
+                    isScrollable: true,
+                    tabAlignment: TabAlignment.start,
                     tabs: [
                       Tab(text: 'More like this'),
-                      Tab(text: 'Trailers & more'),
+                      // Tab(text: 'Cast'),
                     ],
                   ),
                   SizedBox(
@@ -63,10 +65,10 @@ class DetailsScreen extends ConsumerWidget {
                     child: TabBarView(
                       children: [
                         SimilarMoviesWidget(similarMoviesAsyncValue: similarMoviesAsyncValue),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15.0),
-                          child: TrailerVideosWidget(videosAsyncValue: videosAsyncValue),
-                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        //   child: TrailerVideosWidget(videosAsyncValue: videosAsyncValue),
+                        // ),
                       ],
                     ),
                   ),

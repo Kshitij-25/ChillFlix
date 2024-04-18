@@ -71,9 +71,21 @@ class SearchScreen extends ConsumerWidget {
                 }).toList();
 
                 this.searchedMovies = validSearchedMovies;
-                return CustomGridView(
-                  scrollController: scrollController,
-                  data: this.searchedMovies,
+                return GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10.0,
+                    mainAxisSpacing: 10.0,
+                  ),
+                  itemCount: this.searchedMovies?.length,
+                  itemBuilder: (context, index) {
+                    return CustomGridView(
+                      data: this.searchedMovies?[index],
+                    );
+                  },
                 );
               },
             ),

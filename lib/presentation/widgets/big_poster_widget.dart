@@ -3,14 +3,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tmdb_chillflix/presentation/widgets/trailer_videos_widget.dart';
 
 import '../../common/app_utility.dart';
 import '../../common/screen_size.dart';
 import '../../data/core/api_constants.dart';
 import '../../data/firebase_db/firestore_service.dart';
 import '../../data/models/movie_details.dart';
+import '../../data/models/video_model.dart';
 import '../change_notifier_providers/auth_change_notifier_provider.dart';
 import '../state_notifiers/movie_state_notifier.dart';
 
@@ -20,10 +23,12 @@ class BigPosterWidget extends StatelessWidget {
     this.dataAsyncValue,
     this.user,
     this.firestoreService,
+    this.videosAsyncValue,
   });
   AsyncValue<MovieDetails?>? dataAsyncValue;
   AuthNotifier? user;
   FirestoreService? firestoreService;
+  AsyncValue<List<VideoModel>?>? videosAsyncValue;
 
   @override
   Widget build(BuildContext context) {
@@ -179,32 +184,57 @@ class BigPosterWidget extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            // Consumer(
-                            //   builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                            //     return SizedBox(
-                            //       height: 50,
-                            //       width: ScreenSize.width(context) * 0.7,
-                            //       child: ElevatedButton(
-                            //         style: ButtonStyle(
-                            //           backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                            //           shape: MaterialStateProperty.all<OutlinedBorder>(
-                            //             RoundedRectangleBorder(
-                            //               borderRadius: BorderRadius.circular(10),
-                            //             ),
-                            //           ),
-                            //         ),
-                            //         onPressed: () {},
-                            //         child: Text(
-                            //           "Play Trailer",
-                            //           style: GoogleFonts.raleway(
-                            //             fontWeight: FontWeight.w600,
-                            //             fontSize: 18,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //     );
-                            //   },
-                            // ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Consumer(
+                              builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                                return SizedBox(
+                                  height: 50,
+                                  width: ScreenSize.width(context) * 0.7,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      SystemChrome.setPreferredOrientations([
+                                        DeviceOrientation.landscapeRight,
+                                        DeviceOrientation.landscapeLeft,
+                                      ]).then((_) {
+                                        // Navigate to TrailerVideosWidget
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => TrailerVideosWidget(
+                                              videosAsyncValue: videosAsyncValue,
+                                            ),
+                                          ),
+                                        ).then((_) {
+                                          // Reset orientation after navigating back
+                                          SystemChrome.setPreferredOrientations([
+                                            DeviceOrientation.portraitUp,
+                                            DeviceOrientation.portraitDown,
+                                          ]);
+                                        });
+                                      });
+                                    },
+                                    child: Text(
+                                      "Play Trailer",
+                                      style: GoogleFonts.raleway(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
                             const SizedBox(
                               height: 10,
                             ),
