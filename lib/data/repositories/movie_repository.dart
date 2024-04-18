@@ -12,9 +12,9 @@ class MovieRepository {
   final MovieRemoteDataSource _movieRemoteDataSource;
   MovieRepository(this._movieRemoteDataSource);
 
-  Future<Either<AppError, List<MovieModel>?>>? discoverMovies(genresId) async {
+  Future<Either<AppError, List<MovieModel>?>>? discoverMovies(genresId, page) async {
     try {
-      final discoverMovies = await _movieRemoteDataSource.discoverMovies(genresId);
+      final discoverMovies = await _movieRemoteDataSource.discoverMovies(genresId, page);
       return Right(discoverMovies);
     } on SocketException {
       return const Left(AppError(AppErrorType.network));

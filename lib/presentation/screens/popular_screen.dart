@@ -1,38 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tmdb_chillflix/presentation/providers/popular_provider.dart';
 
-import '../../data/models/movie_model.dart';
-import '../providers/popular_provider.dart';
 import '../widgets/custom_gridview.dart';
+import 'details_screen.dart';
 
 class PopularScreen extends ConsumerWidget {
   const PopularScreen({super.key});
 
   static const route = "/popularScreen";
 
+  static const pageSize = 20;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ScrollController scrollController = ScrollController();
-    // int page = 1;
-    // final List<Movies>? nowPlaying = ModalRoute.of(context)?.settings.arguments as List<Movies>?;
-    final popularAsyncValue = ref.watch(popularProvider);
-
-    // Listen to the scroll position and fetch new data when reaching the end
-    // _scrollController.addListener(() {
-    //   if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-    //     page++;
-    //     ref.read(nowPlayingUseCaseProvider).getNowPlaying(page).then((newData) {
-    //       if (newData != null && newData.isNotEmpty) {
-    //         // Add the new data to the existing list
-    //         // nowPlaying?.addAll(newData);
-
-    //         // Update the state notifier
-    //         ref.read(nowPlayingStateNotifierProvider.notifier).addData(newData);
-    //       }
-    //     });
-    //   }
-    // });
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -47,21 +30,50 @@ class PopularScreen extends ConsumerWidget {
           ),
         ),
       ),
-      body: bodyWidget(context, scrollController, popularAsyncValue),
+      body: bodyWidget(context, ref),
     );
   }
 
-  bodyWidget(context, ScrollController scrollController, AsyncValue<List<MovieModel>?> popularAsyncValue) {
-    return popularAsyncValue.when(
-      data: (popular) {
-        return CustomGridView(
-          scrollController: scrollController,
-          data: popular,
+  bodyWidget(context, WidgetRef ref) {
+    return GridView.builder(
+      shrinkWrap: true,
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10.0,
+        mainAxisSpacing: 10.0,
+      ),
+      itemBuilder: (context, index) {
+        final page = index ~/ pageSize + 1;
+        final indexInPage = index % pageSize;
+
+        final popularAsyncValue = ref.watch(popularProvider(page: page));
+
+        return popularAsyncValue.when(
+          data: (popular) {
+            if (indexInPage >= popular.length) {
+              return null;
+            }
+            final movie = popular[indexInPage];
+            return GestureDetector(
+              onTap: () {
+                context.push(
+                  DetailsScreen.route,
+                  extra: movie.id,
+                );
+              },
+              child: CustomGridView(
+                data: movie,
+              ),
+            );
+          },
+          loading: () => const Center(
+            child: CircularProgressIndicator.adaptive(),
+          ),
+          error: (error, stackTrace) {
+            return Center(child: Text('Error: $error'));
+          },
         );
-      },
-      loading: () => const Center(child: CircularProgressIndicator.adaptive()),
-      error: (error, stackTrace) {
-        return Center(child: Text('Error: $error'));
       },
     );
   }

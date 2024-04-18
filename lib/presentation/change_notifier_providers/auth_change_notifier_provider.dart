@@ -14,16 +14,32 @@ class AuthNotifier extends ChangeNotifier {
   String _email = "";
   String get email => _email;
 
-  set email(email) {
+  set email(String email) {
     _email = email;
+    notifyListeners();
+  }
+
+  String _registerEmail = "";
+  String get registerEmail => _registerEmail;
+
+  set registerEmail(String registerEmail) {
+    _registerEmail = registerEmail;
     notifyListeners();
   }
 
   String _password = "";
   String get password => _password;
 
-  set password(password) {
+  set password(String password) {
     _password = password;
+    notifyListeners();
+  }
+
+  String _registerPassword = "";
+  String get registerPassword => _registerPassword;
+
+  set registerPassword(String registerPassword) {
+    _registerPassword = registerPassword;
     notifyListeners();
   }
 

@@ -8,11 +8,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../change_notifier_providers/auth_change_notifier_provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/myList_provider.dart';
-import '../widgets/user_movies_widget.dart';
 import '../providers/watchList_provider.dart';
+import '../widgets/user_movies_widget.dart';
 import 'initial_screen.dart';
-import 'my_list_screen.dart';
-import 'watchlist_screen.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -81,9 +79,9 @@ class ProfileScreen extends ConsumerWidget {
                 title: "My List",
                 data: ref.watch(myListProvider),
                 onPressed: () {
-                  context.push(
-                    MyListScreen.route,
-                  );
+                  // context.push(
+                  // MyListScreen.route,
+                  // );
                 },
               ),
             ),
@@ -92,9 +90,9 @@ class ProfileScreen extends ConsumerWidget {
                 title: "Watchlist",
                 data: ref.watch(watchlistProvider),
                 onPressed: () {
-                  context.push(
-                    WatchListScreen.route,
-                  );
+                  // context.push(
+                  //   WatchListScreen.route,
+                  // );
                 },
               ),
             ),

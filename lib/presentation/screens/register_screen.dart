@@ -55,27 +55,8 @@ class RegisterScreen extends ConsumerWidget {
                     TextFormField(
                       // controller: userNameCont,
                       keyboardType: TextInputType.emailAddress,
-                      initialValue: authChangeProvider.email,
-                      onChanged: (value) => authChangeProvider.email = value,
-                      validator: (value) => authChangeProvider.emailValidate(value!),
-                      decoration: InputDecoration(
-                        alignLabelWithHint: true,
-                        prefixIcon: const Icon(CupertinoIcons.mail_solid),
-                        hintText: "Enter Username",
-                        label: const Text("Enter Username"),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.red[900]!),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextFormField(
-                      // controller: userNameCont,
-                      keyboardType: TextInputType.emailAddress,
-                      initialValue: authChangeProvider.email,
-                      onChanged: (value) => authChangeProvider.email = value,
+                      initialValue: authChangeProvider.registerEmail,
+                      onChanged: (value) => authChangeProvider.registerEmail = value,
                       validator: (value) => authChangeProvider.emailValidate(value!),
                       decoration: InputDecoration(
                         alignLabelWithHint: true,
@@ -93,8 +74,8 @@ class RegisterScreen extends ConsumerWidget {
                     TextFormField(
                       // controller: passwordCont,
                       obscureText: authChangeProvider.obscurePassword,
-                      initialValue: authChangeProvider.password,
-                      onChanged: (value) => authChangeProvider.password = value,
+                      initialValue: authChangeProvider.registerPassword,
+                      onChanged: (value) => authChangeProvider.registerPassword = value,
                       decoration: InputDecoration(
                         alignLabelWithHint: true,
                         prefixIcon: const Icon(CupertinoIcons.lock_fill),
@@ -117,8 +98,8 @@ class RegisterScreen extends ConsumerWidget {
                     TextFormField(
                       // controller: passwordCont,
                       obscureText: authChangeProvider.obscureConfirmPassword,
-                      initialValue: authChangeProvider.password,
-                      onChanged: (value) => authChangeProvider.password = value,
+                      initialValue: authChangeProvider.confirmPassword,
+                      onChanged: (value) => authChangeProvider.confirmPassword = value,
                       decoration: InputDecoration(
                         alignLabelWithHint: true,
                         prefixIcon: const Icon(CupertinoIcons.lock_fill),
@@ -145,7 +126,7 @@ class RegisterScreen extends ConsumerWidget {
                           width: ScreenSize.width(context),
                           child: ElevatedButton(
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                              backgroundColor: MaterialStateProperty.all<Color>(Colors.red[900]!),
                               shape: MaterialStateProperty.all<OutlinedBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),

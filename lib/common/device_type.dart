@@ -13,7 +13,7 @@ DeviceType getDeviceType(BuildContext context) {
 
   if (screenWidth < 600) {
     return DeviceType.Mobile;
-  } else if (screenWidth >= 600 && screenWidth < 1024) {
+  } else if (screenWidth >= 600 && screenWidth < 1025) {
     return DeviceType.Tablet;
   } else {
     return DeviceType.Desktop;

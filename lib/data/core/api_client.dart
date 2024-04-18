@@ -33,6 +33,31 @@ class ApiClient {
     return null;
   }
 
+  Future<Response<dynamic>?> getUri({page, apiKey, path}) async {
+    try {
+      final uri = Uri(
+        scheme: 'https',
+        host: 'api.themoviedb.org',
+        path: path,
+        queryParameters: {
+          'api_key': apiKey,
+          'include_adult': 'true',
+          'page': '$page',
+        },
+      );
+      final response = await _dio.getUri(uri);
+
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        throw DioRequestException("HTTP error: ${response.statusCode}");
+      }
+    } catch (e) {
+      handleDioError(e);
+    }
+    return null;
+  }
+
   Future<Response<dynamic>?> postReq({url, body}) async {
     try {
       final response = await _dio.post(

@@ -6,9 +6,9 @@ import 'movie_provider.dart';
 part 'discover_movie_provider.g.dart';
 
 @riverpod
-Future<List<MovieModel>> discoverMovie(DiscoverMovieRef ref, {required int genresId}) async {
+Future<List<MovieModel>> discoverMovie(DiscoverMovieRef ref, {required int genresId, required int page}) async {
   final moviesRepository = ref.read(movieRepositoryProvider);
-  final eitherDiscoverMovieOrError = await moviesRepository.discoverMovies(genresId);
+  final eitherDiscoverMovieOrError = await moviesRepository.discoverMovies(genresId, page);
   return eitherDiscoverMovieOrError!.fold(
     (error) {
       throw error; // Throw the error for Riverpod to handle

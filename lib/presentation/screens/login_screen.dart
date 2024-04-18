@@ -6,6 +6,7 @@ import 'package:font_awesome_icon_class/font_awesome_icon_class.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tmdb_chillflix/common/device_type.dart';
 
 import '../../common/app_utility.dart';
 import '../../common/screen_size.dart';
@@ -24,10 +25,13 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      backgroundColor: Colors.red[900],
-      resizeToAvoidBottomInset: false,
-      body: bodyWidget(context, ref),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        backgroundColor: Colors.red[900],
+        resizeToAvoidBottomInset: false,
+        body: bodyWidget(context, ref),
+      ),
     );
   }
 
@@ -62,8 +66,20 @@ class LoginScreen extends ConsumerWidget {
                       validator: (value) => authChangeProvider.emailValidate(value!),
                       decoration: InputDecoration(
                         alignLabelWithHint: true,
-                        prefixIcon: const Icon(CupertinoIcons.mail_solid),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Icon(
+                            CupertinoIcons.mail_solid,
+                            size: getDeviceType(context) == DeviceType.Tablet ? 45 : 20,
+                          ),
+                        ),
                         hintText: "Enter Email",
+                        hintStyle: TextStyle(
+                          fontSize: getDeviceType(context) == DeviceType.Tablet ? 45 : 18,
+                        ),
+                        labelStyle: TextStyle(
+                          fontSize: getDeviceType(context) == DeviceType.Tablet ? 35 : 18,
+                        ),
                         label: const Text("Enter Email"),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red[900]!),
@@ -79,14 +95,32 @@ class LoginScreen extends ConsumerWidget {
                       onChanged: (value) => authChangeProvider.password = value,
                       decoration: InputDecoration(
                         alignLabelWithHint: true,
-                        prefixIcon: const Icon(CupertinoIcons.lock_fill),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: Icon(
+                            CupertinoIcons.lock_fill,
+                            size: getDeviceType(context) == DeviceType.Tablet ? 45 : 20,
+                          ),
+                        ),
                         suffixIcon: IconButton(
                           onPressed: () {
                             authChangeProvider.obscurePassword = !authChangeProvider.obscurePassword;
                           },
-                          icon: Icon(authChangeProvider.obscurePassword ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill),
+                          icon: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Icon(
+                              authChangeProvider.obscurePassword ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill,
+                              size: getDeviceType(context) == DeviceType.Tablet ? 45 : 20,
+                            ),
+                          ),
                         ),
                         hintText: "Enter Password",
+                        hintStyle: TextStyle(
+                          fontSize: getDeviceType(context) == DeviceType.Tablet ? 45 : 18,
+                        ),
+                        labelStyle: TextStyle(
+                          fontSize: getDeviceType(context) == DeviceType.Tablet ? 35 : 18,
+                        ),
                         label: const Text("Enter Password"),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.red[900]!),
@@ -99,7 +133,7 @@ class LoginScreen extends ConsumerWidget {
                     Consumer(
                       builder: (BuildContext context, WidgetRef ref, Widget? child) {
                         return SizedBox(
-                          height: 55,
+                          height: getDeviceType(context) == DeviceType.Tablet ? 90 : 55,
                           width: ScreenSize.width(context),
                           child: ElevatedButton(
                             style: ButtonStyle(
@@ -144,8 +178,8 @@ class LoginScreen extends ConsumerWidget {
                               "LOGIN",
                               style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
-                                fontSize: 18,
                               ),
+                              textScaler: TextScaler.linear(getDeviceType(context) == DeviceType.Tablet ? 2 : 1),
                             ),
                           ),
                         );
@@ -157,8 +191,8 @@ class LoginScreen extends ConsumerWidget {
                     Consumer(
                       builder: (BuildContext context, WidgetRef ref, Widget? child) {
                         return SizedBox(
-                          height: 55,
-                          width: ScreenSize.width(context) * 0.93,
+                          height: getDeviceType(context) == DeviceType.Tablet ? 90 : 55,
+                          width: ScreenSize.width(context),
                           child: ElevatedButton.icon(
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -177,17 +211,19 @@ class LoginScreen extends ConsumerWidget {
                                 AppUtility(context).error(e.toString());
                               }
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               FontAwesomeIcons.google,
                               color: Colors.black,
+                              size: getDeviceType(context) == DeviceType.Tablet ? 55 : 30,
                             ),
                             label: Text(
                               "Login with Google",
                               style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.w600,
-                                fontSize: 18,
+                                // fontSize: 18,
                                 color: Colors.black,
                               ),
+                              textScaler: TextScaler.linear(getDeviceType(context) == DeviceType.Tablet ? 2 : 1),
                             ),
                           ),
                         );
@@ -200,7 +236,10 @@ class LoginScreen extends ConsumerWidget {
                       onPressed: () {
                         context.push(RegisterScreen.route);
                       },
-                      child: const Text("New User? Register"),
+                      child: Text(
+                        "New User? Register",
+                        textScaler: TextScaler.linear(getDeviceType(context) == DeviceType.Tablet ? 2 : 1),
+                      ),
                     ),
                   ],
                 ),

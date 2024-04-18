@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
           final activeGenreIndex = ref.watch(activeGenreIndexProvider);
           AsyncValue<List<MovieModel>?>? discoverMovies;
           if (genreListAsyncValue.hasValue && activeGenreIndex != null && activeGenreIndex >= 3) {
-            discoverMovies = ref.watch(discoverMovieProvider(genresId: genreListAsyncValue.value![activeGenreIndex - 3].id!));
+            discoverMovies = ref.watch(discoverMovieProvider(genresId: genreListAsyncValue.value![activeGenreIndex - 3].id!, page: 1));
           }
           return Row(
             crossAxisAlignment: CrossAxisAlignment.start,
