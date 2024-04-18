@@ -22,11 +22,11 @@ final router = GoRouter(
     ),
     GoRoute(
       path: LoginScreen.route,
-      builder: (context, state) => LoginScreen(),
+      builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
       path: RegisterScreen.route,
-      builder: (context, state) => RegisterScreen(),
+      builder: (context, state) => const RegisterScreen(),
     ),
     GoRoute(
       path: HomeScreen.route,

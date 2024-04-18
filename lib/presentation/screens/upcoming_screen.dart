@@ -16,8 +16,6 @@ class UpcomingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ScrollController scrollController = ScrollController();
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

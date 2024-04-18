@@ -13,6 +13,6 @@ class InitialScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authChangeProvider = ref.watch(authChangeNotifierProvider);
-    return authChangeProvider.user != null ? const HomeScreen() : LoginScreen();
+    return authChangeProvider.user != null ? const HomeScreen() : const LoginScreen();
   }
 }
