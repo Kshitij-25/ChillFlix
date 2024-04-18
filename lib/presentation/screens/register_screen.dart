@@ -13,11 +13,11 @@ import '../providers/auth_provider.dart';
 import 'initial_screen.dart';
 
 class RegisterScreen extends ConsumerWidget {
-  RegisterScreen({super.key});
+  const RegisterScreen({super.key});
 
   static const route = "/register";
 
-  final _formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
