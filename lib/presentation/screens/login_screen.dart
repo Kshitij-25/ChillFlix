@@ -17,21 +17,18 @@ import 'home_screen.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends ConsumerWidget {
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   static const route = "/loginScreen";
 
-  final _formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        backgroundColor: Colors.red[900],
-        resizeToAvoidBottomInset: false,
-        body: bodyWidget(context, ref),
-      ),
+    return Scaffold(
+      backgroundColor: Colors.red[900],
+      resizeToAvoidBottomInset: false,
+      body: bodyWidget(context, ref),
     );
   }
 
