@@ -23,43 +23,41 @@ class TrailerVideosWidget extends StatelessWidget {
         autoPlay: true,
         mute: true,
         forceHD: true,
-        useHybridComposition: true,
+        hideThumbnail: true,
         disableDragSeek: true,
         showLiveFullscreenButton: true,
       ),
     );
     return Scaffold(
-      body: SizedBox(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: YoutubePlayerBuilder(
-            player: YoutubePlayer(
-              topActions: [
-                IconButton(
-                  onPressed: () {
-                    context.pop();
-                  },
-                  icon: const Icon(
-                    CupertinoIcons.back,
-                    color: Colors.white,
-                  ),
-                )
-              ],
-              controller: _youtubePlayerController!,
-              aspectRatio: 16 / 9,
-              showVideoProgressIndicator: true,
-            ),
-            builder: (context, player) {
-              return Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: player,
-                  ),
-                ],
-              );
-            },
+      body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 65, vertical: 40),
+        child: YoutubePlayerBuilder(
+          player: YoutubePlayer(
+            topActions: [
+              IconButton(
+                onPressed: () {
+                  context.pop();
+                },
+                icon: const Icon(
+                  CupertinoIcons.back,
+                  color: Colors.white,
+                ),
+              )
+            ],
+            controller: _youtubePlayerController!,
+            aspectRatio: 16 / 9,
+            showVideoProgressIndicator: true,
           ),
+          builder: (context, player) {
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: player,
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
