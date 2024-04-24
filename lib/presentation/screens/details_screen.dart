@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tmdb_chillflix/common/screen_size.dart';
 
-import '../../common/screen_size.dart';
 import '../change_notifier_providers/auth_change_notifier_provider.dart';
 import '../providers/firestore_service_provider.dart';
 import '../providers/movie_details_provider.dart';
@@ -52,26 +52,56 @@ class DetailsScreen extends ConsumerWidget {
                     firestoreService: firestoreService,
                     videosAsyncValue: videosAsyncValue,
                   ),
-                  const TabBar(
-                    isScrollable: true,
-                    tabAlignment: TabAlignment.start,
-                    tabs: [
-                      Tab(text: 'More like this'),
-                      // Tab(text: 'Cast'),
+                  Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Text("More like this"),
+                          ],
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Container(
+                          height: 3,
+                          width: ScreenSize.width(context) * 0.26,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: ScreenSize.width(context),
+                        child: SimilarMoviesWidget(similarMoviesAsyncValue: similarMoviesAsyncValue),
+                      )
                     ],
-                  ),
-                  SizedBox(
-                    height: ScreenSize.width(context) + kTextTabBarHeight,
-                    child: TabBarView(
-                      children: [
-                        SimilarMoviesWidget(similarMoviesAsyncValue: similarMoviesAsyncValue),
-                        // Padding(
-                        //   padding: const EdgeInsets.symmetric(vertical: 15.0),
-                        //   child: TrailerVideosWidget(videosAsyncValue: videosAsyncValue),
-                        // ),
-                      ],
-                    ),
-                  ),
+                  )
+                  // const TabBar(
+                  //   isScrollable: true,
+                  //   tabAlignment: TabAlignment.start,
+                  //   tabs: [
+                  //     Tab(text: 'More like this'),
+                  //     Tab(text: ''),
+                  //   ],
+                  // ),
+                  // SizedBox(
+                  //   height: ScreenSize.width(context) + kTextTabBarHeight,
+                  //   child: TabBarView(
+                  //     children: [
+                  //       SimilarMoviesWidget(similarMoviesAsyncValue: similarMoviesAsyncValue),
+                  //       const SizedBox.shrink(),
+                  //       // Padding(
+                  //       //   padding: const EdgeInsets.symmetric(vertical: 15.0),
+                  //       //   child: TrailerVideosWidget(videosAsyncValue: videosAsyncValue),
+                  //       // ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
             ),
