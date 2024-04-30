@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tmdb_chillflix/common/screen_size.dart';
 
@@ -23,6 +24,7 @@ class DetailsScreen extends ConsumerWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.transparent,
         forceMaterialTransparency: true,
       ),
@@ -54,11 +56,16 @@ class DetailsScreen extends ConsumerWidget {
                   ),
                   Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            Text("More like this"),
+                            Text(
+                              "More like this",
+                              style: GoogleFonts.raleway(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -67,9 +74,9 @@ class DetailsScreen extends ConsumerWidget {
                         child: Container(
                           height: 3,
                           width: ScreenSize.width(context) * 0.26,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(10),
                             ),
                           ),

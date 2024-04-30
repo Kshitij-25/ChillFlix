@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/core/api_constants.dart';
@@ -30,7 +31,7 @@ class UserMoviesWidget extends ConsumerWidget {
                   padding: const EdgeInsets.only(left: 15),
                   child: Text(
                     title!,
-                    style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.raleway(fontSize: 19, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Spacer(),

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,6 +11,7 @@ import '../change_notifier_providers/search_change_notifier_provider.dart';
 import '../providers/multi_search_provider.dart';
 import '../widgets/custom_gridview.dart';
 import '../widgets/custom_search_widget.dart';
+import 'details_screen.dart';
 
 class SearchScreen extends ConsumerWidget {
   static const route = "/SearchScreen";
@@ -82,8 +84,16 @@ class SearchScreen extends ConsumerWidget {
                   ),
                   itemCount: this.searchedMovies?.length,
                   itemBuilder: (context, index) {
-                    return CustomGridView(
-                      data: this.searchedMovies?[index],
+                    return GestureDetector(
+                      onTap: () {
+                        context.push(
+                          DetailsScreen.route,
+                          extra: this.searchedMovies?[index].id,
+                        );
+                      },
+                      child: CustomGridView(
+                        data: this.searchedMovies?[index],
+                      ),
                     );
                   },
                 );

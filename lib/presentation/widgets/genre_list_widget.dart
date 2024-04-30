@@ -38,6 +38,7 @@ class GenreListWidget extends StatelessWidget {
                       child: Text(
                         genre.name!,
                         style: GoogleFonts.raleway(
+                          color: Colors.white,
                           fontSize: index + 3 == activeGenreIndex ? 20 : 18,
                           fontWeight: index + 3 == activeGenreIndex ? FontWeight.bold : null,
                         ),

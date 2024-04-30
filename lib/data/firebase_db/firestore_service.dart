@@ -48,4 +48,15 @@ class FirestoreService {
       debugPrint(e.toString());
     }
   }
+
+  Future<bool> checkMovieStatusInCollection(String userId, String collectionName, String movieId) async {
+    try {
+      final docSnapshot = await _firestore.collection('users').doc(userId).collection(collectionName).doc(movieId).get();
+
+      return docSnapshot.exists;
+    } catch (e) {
+      debugPrint(e.toString());
+      return false; // Return false if an error occurs
+    }
+  }
 }

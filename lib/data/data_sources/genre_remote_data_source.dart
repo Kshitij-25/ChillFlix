@@ -29,16 +29,16 @@ class GenreRemoteDataSourceImpl implements GenreRemoteDataSource {
       _logger!.d("GETMOVIESGENRE URL===> $movieGenreUrl ====> $genres1");
       combinedGenres.addAll(genres1.map((genre) => GenreList.fromJson(genre)));
 
-      // Fetch genres from API 2
-      Response? response2 = await _apiClient.getReq(url: tvGenreurl);
-      List<dynamic> genres2 = response2!.data['genres'];
-      _logger.d("GETTVGENRE URL===> $tvGenreurl ====> $genres2");
-      for (var genre in genres2) {
-        // Check if a genre with the same name already exists, if not, add it to combinedGenres
-        if (!combinedGenres.any((existingGenre) => existingGenre.name == genre['name'])) {
-          combinedGenres.add(GenreList.fromJson(genre));
-        }
-      }
+      // // Fetch genres from API 2
+      // Response? response2 = await _apiClient.getReq(url: tvGenreurl);
+      // List<dynamic> genres2 = response2!.data['genres'];
+      // _logger.d("GETTVGENRE URL===> $tvGenreurl ====> $genres2");
+      // for (var genre in genres2) {
+      //   // Check if a genre with the same name already exists, if not, add it to combinedGenres
+      //   if (!combinedGenres.any((existingGenre) => existingGenre.name == genre['name'])) {
+      //     combinedGenres.add(GenreList.fromJson(genre));
+      //   }
+      // }
 
       return combinedGenres;
     } catch (e) {
