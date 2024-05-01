@@ -41,13 +41,13 @@ class ProfileScreen extends ConsumerWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CircleAvatar(
                     backgroundColor: Colors.red[900],
-                    radius: 60,
+                    radius: 50,
                     child: Text(
                       authChangeProvider.user!.displayName![0],
                       style: GoogleFonts.raleway(

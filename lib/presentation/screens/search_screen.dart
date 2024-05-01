@@ -69,7 +69,7 @@ class SearchScreen extends ConsumerWidget {
                 // Update the searchedMovies list when data is available
                 List<MovieModel>? validSearchedMovies = searchedMovies.where((element) {
                   // Check if title and backdrop_path are not empty strings
-                  return element.title != null && element.backdrop_path != null;
+                  return element.title != null && element.backdropPath != null;
                 }).toList();
 
                 this.searchedMovies = validSearchedMovies;

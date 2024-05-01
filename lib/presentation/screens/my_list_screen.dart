@@ -41,6 +41,7 @@ class MyListScreen extends ConsumerWidget {
         crossAxisSpacing: 10.0,
         mainAxisSpacing: 10.0,
       ),
+      itemCount: ref.watch(myListProvider).value?.length ?? 0,
       itemBuilder: (context, index) {
         final myListAsyncValue = ref.watch(myListProvider);
 

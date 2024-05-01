@@ -41,8 +41,6 @@ Future<MovieDetails> moviesDetails(MoviesDetailsRef ref, {required int movieId})
         addedToMyList: myListStatus,
         addedToWatchlist: watchlistStatus,
       );
-      print(updatedMovieDetails.addedToMyList);
-      print(updatedMovieDetails.addedToWatchlist);
       return updatedMovieDetails;
     },
   );

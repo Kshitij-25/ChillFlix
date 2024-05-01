@@ -20,6 +20,7 @@ class GenreRemoteDataSourceImpl implements GenreRemoteDataSource {
     List<GenreList> combinedGenres = [];
 
     final movieGenreUrl = "${ApiConstants.BASE_URL}/genre/movie/list?api_key=${ApiConstants.API_KEY}";
+    // ignore: unused_local_variable
     final tvGenreurl = "${ApiConstants.BASE_URL}/genre/tv/list?api_key=${ApiConstants.API_KEY}";
 
     try {

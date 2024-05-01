@@ -27,7 +27,7 @@ class CustomGridView extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
               child: CachedNetworkImage(
-                imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data?.backdrop_path ?? otherData?.backdrop_path}",
+                imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data?.backdropPath ?? otherData?.backdropPath}",
                 placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
                 fit: BoxFit.cover,

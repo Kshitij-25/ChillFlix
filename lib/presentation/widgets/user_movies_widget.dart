@@ -73,7 +73,7 @@ class UserMoviesWidget extends ConsumerWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(15.0),
                               child: CachedNetworkImage(
-                                imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data[index].poster_path}",
+                                imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data[index].posterPath}",
                                 placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                                 errorWidget: (context, url, error) => const Icon(Icons.error),
                                 fit: BoxFit.cover,

@@ -22,25 +22,27 @@ class HorizontalList extends ConsumerWidget {
 
     return dataAsyncValue!.when(
       data: (data) {
-        List<MovieModel>? sortedData = data!.where((element) => element.original_title != null).toList();
+        List<MovieModel>? sortedData = data!.where((element) => element.originalTitle != null).toList();
         return Column(
           children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: Text(
-                    title!,
-                    style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.arrow_forward_ios),
-                  onPressed: onPressed,
-                ),
-              ],
-            ),
+            title != null
+                ? Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Text(
+                          title!,
+                          style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      const Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.arrow_forward_ios),
+                        onPressed: onPressed,
+                      ),
+                    ],
+                  )
+                : const SizedBox.shrink(),
             SizedBox(
               height: MediaQuery.of(context).size.width * 0.6,
               child: ListView.builder(
@@ -73,7 +75,7 @@ class HorizontalList extends ConsumerWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(15.0),
                               child: CachedNetworkImage(
-                                imageUrl: "${ApiConstants.BASE_IMAGE_URL}${sortedData[index].poster_path}",
+                                imageUrl: "${ApiConstants.BASE_IMAGE_URL}${sortedData[index].posterPath}",
                                 placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                                 errorWidget: (context, url, error) => const Icon(Icons.error),
                                 fit: BoxFit.cover,
@@ -135,22 +137,24 @@ class HorizontalList extends ConsumerWidget {
       loading: () {
         return Column(
           children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 15),
-                  child: Text(
-                    title!,
-                    style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.arrow_forward_ios),
-                  onPressed: onPressed,
-                ),
-              ],
-            ),
+            title != null
+                ? Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Text(
+                          title!,
+                          style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      const Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.arrow_forward_ios),
+                        onPressed: onPressed,
+                      ),
+                    ],
+                  )
+                : const SizedBox.shrink(),
             SizedBox(
               height: MediaQuery.of(context).size.width * 0.6,
               child: const Center(
