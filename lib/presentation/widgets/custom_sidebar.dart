@@ -34,6 +34,7 @@ class CustomSidebar extends ConsumerWidget {
           IconButton(
             icon: const Icon(
               CupertinoIcons.home,
+              color: Colors.white,
             ),
             onPressed: () {
               ref.read(activeGenreIndexProvider.notifier).state = 0;
@@ -42,6 +43,7 @@ class CustomSidebar extends ConsumerWidget {
           IconButton(
             icon: const Icon(
               CupertinoIcons.search,
+              color: Colors.white,
             ),
             onPressed: () {
               ref.read(activeGenreIndexProvider.notifier).state = 1;
@@ -50,6 +52,7 @@ class CustomSidebar extends ConsumerWidget {
           IconButton(
             icon: const Icon(
               CupertinoIcons.person_solid,
+              color: Colors.white,
             ),
             onPressed: () async {
               // authProvider.logout();

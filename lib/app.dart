@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
         colorScheme: const ColorScheme.dark(background: Colors.black, primary: Colors.white),
       ),
       theme: ThemeData(
-        colorScheme: const ColorScheme.light(background: Colors.white, primary: Colors.black),
+        colorScheme: ColorScheme.light(background: Colors.grey[300]!, primary: Colors.black),
       ),
       themeMode: ThemeMode.system,
       routerConfig: router,

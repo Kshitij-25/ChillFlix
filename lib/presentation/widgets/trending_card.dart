@@ -19,7 +19,7 @@ class TrendingCard extends ConsumerWidget {
 
     return movieAsyncValue.when(
       data: (movie) {
-        List<MovieModel>? trendingMovies = movie.where((element) => element.original_title != null).toList();
+        List<MovieModel>? trendingMovies = movie.where((element) => element.originalTitle != null).toList();
         return Container(
           height: ScreenSize.height(context) * 0.55,
           width: ScreenSize.width(context),
@@ -50,7 +50,7 @@ class TrendingCard extends ConsumerWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: CachedNetworkImage(
-                          imageUrl: "${ApiConstants.BASE_IMAGE_URL}${trendingMovies[index].poster_path}",
+                          imageUrl: "${ApiConstants.BASE_IMAGE_URL}${trendingMovies[index].posterPath}",
                           placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                           errorWidget: (context, url, error) => const Icon(Icons.error),
                           fit: BoxFit.cover,

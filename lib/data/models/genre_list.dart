@@ -8,8 +8,8 @@ part 'genre_list.g.dart';
 @freezed
 class GenreList with _$GenreList {
   factory GenreList({
-    int? id,
-    String? name,
+    @JsonKey(name: "id") int? id,
+    @JsonKey(name: "name") String? name,
   }) = _GenreList;
 
   factory GenreList.fromJson(Map<String, dynamic> json) => _$GenreListFromJson(json);

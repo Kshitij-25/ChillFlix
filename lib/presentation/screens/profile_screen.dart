@@ -11,6 +11,8 @@ import '../providers/myList_provider.dart';
 import '../providers/watchList_provider.dart';
 import '../widgets/user_movies_widget.dart';
 import 'initial_screen.dart';
+import 'my_list_screen.dart';
+import 'watchlist_screen.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -39,13 +41,13 @@ class ProfileScreen extends ConsumerWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   CircleAvatar(
                     backgroundColor: Colors.red[900],
-                    radius: 60,
+                    radius: 50,
                     child: Text(
                       authChangeProvider.user!.displayName![0],
                       style: GoogleFonts.raleway(
@@ -62,12 +64,11 @@ class ProfileScreen extends ConsumerWidget {
                         style: GoogleFonts.raleway(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
                         ),
                       ),
                       Text(
                         authChangeProvider.user!.email!,
-                        style: const TextStyle(color: Colors.white70),
+                        style: GoogleFonts.raleway(),
                       ),
                     ],
                   )
@@ -79,9 +80,9 @@ class ProfileScreen extends ConsumerWidget {
                 title: "My List",
                 data: ref.watch(myListProvider),
                 onPressed: () {
-                  // context.push(
-                  // MyListScreen.route,
-                  // );
+                  context.push(
+                    MyListScreen.route,
+                  );
                 },
               ),
             ),
@@ -90,9 +91,9 @@ class ProfileScreen extends ConsumerWidget {
                 title: "Watchlist",
                 data: ref.watch(watchlistProvider),
                 onPressed: () {
-                  // context.push(
-                  //   WatchListScreen.route,
-                  // );
+                  context.push(
+                    WatchListScreen.route,
+                  );
                 },
               ),
             ),
@@ -101,7 +102,7 @@ class ProfileScreen extends ConsumerWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: SizedBox(
-                    height: 55,
+                    height: 60,
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(Colors.red[900]!),
@@ -118,7 +119,8 @@ class ProfileScreen extends ConsumerWidget {
                       child: Text(
                         "LOGOUT",
                         style: GoogleFonts.raleway(
-                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
                       ),

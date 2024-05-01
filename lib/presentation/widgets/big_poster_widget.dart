@@ -40,7 +40,7 @@ class BigPosterWidget extends StatelessWidget {
             Stack(
               children: [
                 CachedNetworkImage(
-                  imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data!.poster_path}",
+                  imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data!.posterPath}",
                   placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit: BoxFit.cover,
@@ -131,7 +131,7 @@ class BigPosterWidget extends StatelessWidget {
                                               }
                                             },
                                             icon: Icon(
-                                              !isInMyList ? CupertinoIcons.add : CupertinoIcons.checkmark_circle_fill,
+                                              !isInMyList && !data.addedToMyList! ? CupertinoIcons.add : CupertinoIcons.checkmark_circle_fill,
                                               color: Colors.white,
                                             ),
                                           ),
@@ -167,7 +167,9 @@ class BigPosterWidget extends StatelessWidget {
                                               }
                                             },
                                             icon: Icon(
-                                              !isInWatchlist ? CupertinoIcons.square_stack : CupertinoIcons.square_stack_fill,
+                                              !isInWatchlist && !data.addedToWatchlist!
+                                                  ? CupertinoIcons.square_stack
+                                                  : CupertinoIcons.square_stack_fill,
                                               color: Colors.white,
                                             ),
                                           ),

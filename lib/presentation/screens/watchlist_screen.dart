@@ -41,6 +41,7 @@ class WatchListScreen extends ConsumerWidget {
         crossAxisSpacing: 10.0,
         mainAxisSpacing: 10.0,
       ),
+      itemCount: ref.watch(watchlistProvider).value?.length ?? 0,
       itemBuilder: (context, index) {
         final watchListAsyncValue = ref.watch(watchlistProvider);
 

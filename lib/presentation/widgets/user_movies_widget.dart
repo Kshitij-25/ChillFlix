@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/core/api_constants.dart';
@@ -30,7 +31,7 @@ class UserMoviesWidget extends ConsumerWidget {
                   padding: const EdgeInsets.only(left: 15),
                   child: Text(
                     title!,
-                    style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                    style: GoogleFonts.raleway(fontSize: 19, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Spacer(),
@@ -72,7 +73,7 @@ class UserMoviesWidget extends ConsumerWidget {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(15.0),
                               child: CachedNetworkImage(
-                                imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data[index].poster_path}",
+                                imageUrl: "${ApiConstants.BASE_IMAGE_URL}${data[index].posterPath}",
                                 placeholder: (context, url) => const Center(child: CircularProgressIndicator.adaptive()),
                                 errorWidget: (context, url, error) => const Icon(Icons.error),
                                 fit: BoxFit.cover,
