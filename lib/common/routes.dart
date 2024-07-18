@@ -10,12 +10,18 @@ import '../presentation/screens/popular_screen.dart';
 import '../presentation/screens/profile_screen.dart';
 import '../presentation/screens/register_screen.dart';
 import '../presentation/screens/search_screen.dart';
+import '../presentation/screens/splash_screen.dart';
 import '../presentation/screens/upcoming_screen.dart';
 import '../presentation/screens/watchlist_screen.dart';
 
 final router = GoRouter(
-  initialLocation: InitialScreen.route,
+  // initialLocation: InitialScreen.route,
+  initialLocation: SplashScreen.route,
   routes: [
+    GoRoute(
+      path: SplashScreen.route,
+      builder: (context, state) => const SplashScreen(),
+    ),
     GoRoute(
       path: InitialScreen.route,
       builder: (context, state) => const InitialScreen(),

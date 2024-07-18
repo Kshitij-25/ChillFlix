@@ -139,14 +139,20 @@ class LoginScreen extends ConsumerWidget {
                       height: getDeviceType(context) == DeviceType.Tablet ? 90 : 60,
                       width: ScreenSize.width(context),
                       child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStateProperty.all<Color>(Colors.red[900]!),
-                          shape: WidgetStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+                        // style: ButtonStyle(
+                        //   backgroundColor: WidgetStateProperty.all<Color>(Colors.red[900]!),
+                        //   shape: WidgetStateProperty.all<OutlinedBorder>(
+                        //     RoundedRectangleBorder(
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //   ),
+                        // ),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             try {
