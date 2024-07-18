@@ -140,8 +140,8 @@ class LoginScreen extends ConsumerWidget {
                       width: ScreenSize.width(context),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.red[900]!),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                          backgroundColor: WidgetStateProperty.all<Color>(Colors.red[900]!),
+                          shape: WidgetStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -197,8 +197,8 @@ class LoginScreen extends ConsumerWidget {
                       width: ScreenSize.width(context),
                       child: ElevatedButton.icon(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                          backgroundColor: WidgetStateProperty.all<Color>(Colors.white),
+                          shape: WidgetStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -240,8 +240,22 @@ class LoginScreen extends ConsumerWidget {
                         style: GoogleFonts.raleway(),
                       ),
                       const SizedBox(width: 4),
-                      GestureDetector(
-                        onTap: () => context.push(RegisterScreen.route),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     context.push(RegisterScreen.route);
+                      //   },
+                      //   child: Text(
+                      //     'Register now',
+                      //     style: GoogleFonts.raleway(
+                      //       color: Colors.blue,
+                      //       fontWeight: FontWeight.bold,
+                      //     ),
+                      //   ),
+                      // ),
+                      TextButton(
+                        onPressed: () {
+                          context.push(RegisterScreen.route);
+                        },
                         child: Text(
                           'Register now',
                           style: GoogleFonts.raleway(

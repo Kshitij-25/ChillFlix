@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target, depend_on_referenced_packages
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'cast_model.dart';

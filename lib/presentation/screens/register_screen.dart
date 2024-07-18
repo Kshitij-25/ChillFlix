@@ -130,8 +130,8 @@ class RegisterScreen extends ConsumerWidget {
                       width: ScreenSize.width(context),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.red[900]!),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
+                          backgroundColor: WidgetStateProperty.all<Color>(Colors.red[900]!),
+                          shape: WidgetStateProperty.all<OutlinedBorder>(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -173,8 +173,20 @@ class RegisterScreen extends ConsumerWidget {
                         style: GoogleFonts.raleway(),
                       ),
                       const SizedBox(width: 4),
-                      GestureDetector(
-                        onTap: () => context.pop(),
+                      // GestureDetector(
+                      //   onTap: () => context.pop(),
+                      //   child: Text(
+                      //     'Login now',
+                      //     style: GoogleFonts.raleway(
+                      //       color: Colors.blue,
+                      //       fontWeight: FontWeight.bold,
+                      //     ),
+                      //   ),
+                      // ),
+                      TextButton(
+                        onPressed: () {
+                          context.pop();
+                        },
                         child: Text(
                           'Login now',
                           style: GoogleFonts.raleway(
